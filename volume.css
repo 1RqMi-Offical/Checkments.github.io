@@ -1,0 +1,23 @@
+input[type="range"]::-moz-range-thumb {
+    height: 15px;
+    width: 15px;
+    background: #34db34;
+    border-radius: 50%;
+    border: none;
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+    background: #34db34;
+}
+
+input[type="range"]::-moz-range-progress {
+    background-color: #34db34;
+}
+
+input[type="range"]::-ms-fill-lower {
+    background-color: #34db34;
+}
+
+input[type="range"]::-ms-fill-upper {
+    background-color: #34db34;
+}

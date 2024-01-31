@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="selectors.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="box.css">
+    <link rel="stylesheet" href="createType.css">
+    <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="volume.css">
+</head>
+
+<body>
+    <div class="nav">
+        <div class="title">
+            <h3>Checkments</h3> <span><i class="fa-regular fa-calendar-days"></i></span>
+        </div>
+        <div class="navlinks">
+            <ul class="nav-ul">
+                <li class="dropdown m-link">Settings <ul class="drop d-one">
+                        <ul class="category">
+                            <span class="type">Apperance</span>
+                            <label class="mode labe" id="x">Mode <input type="checkbox" name="x" id="toggledark"
+                                    class="toggle-checkbox"></label>
+                            <label class="vol labe" id="y">Sound » <div class="val"></div><input type="range" min="0"
+                                    max="100" value="50" name="y" id="toggledark" class="sound">
+
+                            </label>
+                        </ul>
+                        <ul class="category">
+                            <span class="type">Main settings</span>
+                            <li>Reset savings</li>
+                            <li class="create">Create Type</li>
+                            <li>Overview</li>
+                            <li>Rollete Tasks <span class="new">» new</span></li>
+                        </ul>
+                        <ul class="category">
+                            <span class="type">Points </span>
+                            <li class="reset">Reset</li>
+                            <li class="addition">Add</li>
+                            <li class="remove">Remove</li>
+
+                        </ul>
+                    </ul>
+                </li>
+                <li class="dropdown  m-link">Timing<ul class="drop d-two">
+                        <ul class="category">
+                            <span class="type">Type</span>
+                            <li class="active type-btn ty-y">Yearly</li>
+                            <li class="type-btn ty-m">Monthly</li>
+                            <li class="t-2 type-btn ty-w">Weekly</li>
+                        </ul>
+                    </ul>
+                </li>
+                <li class="m-link uncheckall">Uncheck All</li>
+                <li class="m-link">Home</li>
+                <li class="dropdown m-link">Role »<span class="role sp-style">Ⅰ</span>
+                    <ul class="drop d-two">
+                        <ul class="category roles">
+                            <span class="type">Tiers</span>
+                            <li class="active" status="unlocked" role="Ⅰ" pointed="0">Ⅰ <span>
+                                    <i class="fa-solid fa-lock"></i>
+                                    <i class="fa-solid fa-key"></i>
+                                    » 100
+                                    <i class="fa-solid fa-coins"></i></span></li>
+                            <li status="locked" role="ⅠⅠ" pointed="200">ⅠⅠ<span>
+                                    <i class="fa-solid fa-lock"></i>
+                                    <i class="fa-solid fa-key"></i>
+                                    » 200
+                                    <i class="fa-solid fa-coins"></i></span></li>
+                            <li status="locked" role="ⅠⅠⅠ" pointed="300">ⅠⅠⅠ<span>
+                                    <i class="fa-solid fa-lock"></i>
+                                    <i class="fa-solid fa-key"></i>
+                                    » 300
+                                    <i class="fa-solid fa-coins"></i></span></li>
+                            <li status="locked" role="Ⅳ" pointed="600">Ⅳ<span>
+                                    <i class="fa-solid fa-lock"></i>
+                                    <i class="fa-solid fa-key"></i>
+                                    » 600
+                                    <i class="fa-solid fa-coins"></i></span></li>
+                            <li status="locked" role="Ⅴ" pointed="900">Ⅴ<span>
+                                    <i class="fa-solid fa-lock"></i>
+                                    <i class="fa-solid fa-key"></i>
+                                    » 900
+                                    <i class="fa-solid fa-coins"></i></span></li>
+                            <li status="locked" role="ⅤⅠ" pointed="1200">ⅤⅠ<span>
+                                    <i class="fa-solid fa-lock"></i>
+                                    <i class="fa-solid fa-key"></i>
+                                    » 1200
+                                    <i class="fa-solid fa-coins"></i></span></li>
+                            <li status="locked" role="ⅤⅠⅠ" pointed="1500">ⅤⅠⅠ<span>
+                                    <i class="fa-solid fa-lock"></i>
+                                    <i class="fa-solid fa-key"></i>
+                                    »
+                                    1500 <i class="fa-solid fa-coins"></i></span></li>
+                            <li status="locked" role="ⅤⅠⅠⅠ" pointed="2000">ⅤⅠⅠⅠ<span>
+                                    <i class="fa-solid fa-lock"></i>
+                                    <i class="fa-solid fa-key"></i>
+                                    »
+                                    2000 <i class="fa-solid fa-coins"></i></span></li>
+                            <li status="locked" role="ⅠⅩ" pointed="2500">ⅠⅩ<span>
+                                    <i class="fa-solid fa-lock"></i>
+                                    <i class="fa-solid fa-key"></i>
+                                    » 2500
+                                    <i class="fa-solid fa-coins"></i></span></li>
+                            <li class="legend" status="locked" role="Ⅹ" card="rainbow" pointed="5000">Ⅹ<span>
+                                    <i class="fa-solid fa-lock"></i>
+                                    <i class="fa-solid fa-key"></i>
+                                    » 5000
+                                    <i class="fa-solid fa-coins"></i></span></li>
+                        </ul>
+                    </ul>
+                </li>
+                <div class="pts">Points »<span class="pts-num sp-style">0</span></div>
+            </ul>
+        </div>
+    </div>
+    <div class="box" id="box">
+    </div>
+    <div class="createType" style="opacity: 1; display: flex;">
+        <div class="inputs t-cont"><span class="title">Create</span>
+            <div class="in-put-cont ">
+                <label for="" class="t-title-label tlabel">Title</label>
+                <input type="text" name="" id="" class="t-in t-t" placeholder="Studying...">
+            </div>
+            <div class="in-put-cont t-half-small">
+                <label for="" class=" tlabel">Expire</label>
+                <input type="number" name="" id="" class="t-in center t-exp" min="1" value="1" placeholder="5">
+            </div>
+            <div class="in-put-cont t-half-big unit">
+                <label for="" class=" tlabel">Unit</label>
+                <div class="selector unit t-title-place">
+                    <div class="placeholder" unit="hr">Hours</div>
+                    <ul class="option-cont">
+                        <li class="option" unit="sec">Seconds</li>
+                        <li class="option" unit="min">Minutes</li>
+                        <li class="option active" unit="hr">Hours</li>
+                        <li class="option" unit="d">Days</li>
+                        <li class="option" unit="mo">Months</li>
+                        <li class="option" unit="yr">Years</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="in-put-cont t-half-big unit">
+                <label for="" class=" tlabel">Background</label>
+                <div class="selector t-title-place">
+                    <div class="placeholder">Transparent</div>
+                    <ul class=" option-cont">
+                        <li class="option active">Transparent</li>
+                        <li class="option">Study</li>
+                        <li class="option">Work</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="in-put-cont t-half-small">
+                <label for="" class=" tlabel">Row</label>
+                <input type="number" name="" id="" class="t-in center t-row" min="1" value="2" placeholder="5">
+            </div>
+            <div class="in-put-cont t-half-small">
+                <label for="" class=" tlabel">Column</label>
+                <input type="number" name="" id="" class="t-in center t-column" min="1" value="2" placeholder="5">
+            </div>
+            <div class="in-put-cont t-half-medium">
+                <label for="" class=" tlabel">Checked</label>
+                <input type="number" name="" id="" class="t-in center t-checked" min="1" placeholder="5">
+            </div>
+            <div class="in-put-cont t-disabled">
+                <label for="" class="t-title-label tlabel ">Note</label>
+                <input type="text" name="" id="" class="t-in t-note" placeholder="Note...">
+            </div>
+            <div class="in-put-cont t-disabled " style="user-select: none;">
+                <label for="" class=" tlabel">Type of Boxex</label>
+                <div class="selector typeBoxes t-title-place">
+                    <div class="placeholder">Numbers</div>
+                    <ul class="option-cont">
+                        <li class="option" num="1">soon</li>
+                        <li class="option active" num="2">soon</li>
+                        <li class="option" num="3">soon</li>
+                    </ul>
+                </div>
+            </div>
+            <button class="createTypePreview t-btn-p ">Preview</button>
+            <button class="createTypeBox t-btn-p ">Create</button>
+        </div>
+        <div class="preview t-cont"><span class="title">Preview</span></div>
+    </div>
+    <footer>
+        <div class="name">Checkments</div>
+
+        <div class="foot-container">
+            <div class="foot-cont">
+                <div class="c-name">Informations</div>
+                <div class="author">Thank you for using my service <i class="fa-solid fa-heart"></i></div>
+                <div class="author">Developed By » <span class="a-name">1RqMi,</span></div>
+                <div class="author-discord">Discord/Help » <span class="dis-name">1r_q. <i
+                            class="fa-brands fa-discord"></i></span> </div>
+                <div class="">The purpose of this project is to assist you in keeping your tasks visible
+                    and experiencing a sense of achievement. </div>
+                <div class="important">You may encounter several bugs as the website is not yet completed.</div>
+            </div>
+            <div class="foot-cont">
+                <div class="c-name">Help / FAQ</div>
+                <div class="question">How can I create a Type?</div>
+                <div class="reply">Navigate to Settings, then Main Settings, and choose Create Type. </div>
+
+                <div class="question">How do I reset points?</div>
+                <div class="reply">Navigate to Settings, then Points, and select Reset. </div>
+
+                <div class="question">How can I upgrade my role?</div>
+                <div class="reply">By completing more tasks.</div>
+
+
+            </div>
+            <div class="foot-cont">
+                <div class="c-name">News</div>
+                <div class="question">Time remaining</div>
+                <div class="reply">Before: Timer reset on each page refresh.</div>
+                <div class="reply">After: Flexible timer—close and return, it continues counting down for your check
+                    type.</div>
+                <div class="question">Emojis</div>
+
+
+
+            </div>
+        </div>
+    </footer>
+    <script src="TypeMenu.js"></script>
+    <script src="count.js"></script>
+    <script src="points.js"></script>
+    <script src="addType.js"></script>
+    <script src="selectors.js"></script>
+
+</body>
+
+</html>

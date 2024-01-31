@@ -1,0 +1,213 @@
+.createType {
+    border: 1px solid rgba(255, 255, 255, 0.123);
+    width: 80%;
+    height: max-content;
+    padding: 30px;
+
+    border-radius: 5px;
+    margin: 105px auto;
+    display: flex !important;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    transition: 1s;
+    position: relative;
+
+}
+
+
+
+.createType .t-cont {
+    height: max-content;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    border: 1px solid rgba(255, 255, 255, 0.123);
+    width: calc(50% - 40px);
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.075);
+    border-radius: 5px;
+    padding-top: 35px;
+    gap: 10px;
+
+}
+
+.createType .t-cont span.title {
+    position: absolute;
+    background-color: rgb(46, 46, 46);
+    border: 1px solid rgba(255, 255, 255, 0.123);
+    width: max-content;
+    height: max-content;
+    border-radius: 5px;
+    padding: 10px 20px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: rgb(163, 163, 163);
+    top: 0;
+    left: 0;
+    transform: translate(10%, -50%);
+}
+
+.createType .preview {}
+
+.createType .t-cont .t-in.center {
+    text-align: center;
+
+}
+
+.createType .t-cont .t-in {
+
+    width: 100%;
+    height: 40px;
+    font-size: 18px;
+    border-radius: 0;
+    background-color: transparent;
+    border: none;
+    border-left: none;
+    padding: 5px 5px;
+    color: white;
+    outline: none;
+
+}
+
+.createType .t-cont .in-put-cont {
+    display: flex;
+    align-items: center;
+    height: calc(400px/6 - 20px);
+    width: 100%;
+    padding: 1px;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    border: 1px rgb(133, 133, 133) solid;
+    border-radius: 3px;
+
+}
+
+.createType .t-cont .in-put-cont.t-half-medium {
+    min-width: calc(30% - 10px);
+    width: calc(50% - 10px);
+}
+
+.createType .t-cont .in-put-cont.t-half-small {
+    min-width: calc(30% - 10px);
+    width: calc(50% - 10px);
+}
+
+.createType .t-cont .in-put-cont.t-half-big {
+    min-width: calc(30% - 10px);
+    width: calc(50% - 10px);
+
+}
+
+.createType .t-cont .tlabel {
+    font-size: 16px;
+    color: white;
+    border-radius: 0;
+    position: relative;
+    background-color: rgb(58, 58, 58);
+    height: 100%;
+    width: max-content;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: none;
+    white-space: nowrap;
+    z-index: -1;
+}
+
+select {
+    padding: 8px;
+    font-size: 16px;
+
+}
+
+/* Style the selected option */
+option:checked {
+    background-color: var(--pink);
+    color: black;
+    font-weight: 600;
+
+}
+
+option {
+    background-color: rgba(0, 0, 0, 0.205);
+    background-image: none;
+    color: white;
+    padding: 7px !important;
+    height: 50px;
+    backdrop-filter: blur(5px);
+    user-select: none;
+}
+
+.t-disabled.in-put-cont {
+    opacity: 0.2;
+    user-select: none;
+    pointer-events: none;
+}
+
+.createType .t-cont .t-btn-p.createTypePreview {
+    background-color: rgba(0, 217, 255, 0.137);
+}
+
+.createType .t-cont .t-btn-p {
+
+    background-color: rgba(0, 255, 0, 0.137);
+    border: none;
+    outline: none;
+    height: 50px;
+    color: white;
+    width: 48%;
+    transition: 0.5s;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.137);
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0);
+}
+
+.createType .t-cont .t-btn-p:hover {
+    background-color: rgba(0, 255, 0, 0.596);
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.466);
+    letter-spacing: 1px;
+
+}
+
+.createType .t-cont .t-btn-p.createTypePreview:hover {
+    background-color: rgb(0, 217, 255);
+
+}
+
+@media only screen and (max-width: 950px) {
+
+
+
+    .createType {
+        flex-wrap: wrap;
+        height: auto;
+        gap: 35px 0;
+
+    }
+
+    .createType .t-cont {
+        width: 100%;
+    }
+
+    .createType .t-cont .in-put-cont.t-half-medium {
+        width: calc(50% - 10px);
+
+    }
+
+    .createType .t-cont .in-put-cont.t-half-small {
+        width: calc(50% - 10px);
+
+    }
+
+    .createType .t-cont .in-put-cont.t-half-big {
+        width: calc(50% - 10px);
+
+    }
+
+}

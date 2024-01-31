@@ -1,0 +1,474 @@
+.box {
+    border: 1px solid rgba(255, 255, 255, 0.123);
+    width: 80%;
+    min-height: 20px;
+    height: auto;
+    padding: 30px;
+
+    margin: 0 auto;
+    border-radius: 5px;
+    margin-top: 155px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 10px;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    transition: 0.5s;
+    position: relative;
+    overflow: hidden;
+}
+
+.box.removeal {
+
+    z-index: -1;
+    height: 0;
+    margin-top: 0;
+    filter: blur(15px);
+    opacity: 0;
+    padding: 0 30px;
+
+
+}
+
+.t-type {
+    position: relative;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.048);
+    padding: 15px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px 0px;
+    overflow: visible;
+
+
+}
+
+.preview .t-type::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 10px;
+    /* Adjust the width as needed */
+}
+
+.preview .t-type::-webkit-scrollbar-thumb {
+    background-color: #2c2c2c;
+    /* Color of the thumb */
+    border-radius: 5px;
+    /* Border radius of the thumb */
+}
+
+.preview .t-type::-webkit-scrollbar-track {
+    background-color: #f1f1f100;
+    /* Color of the track */
+}
+
+/* Optional: Hide the scrollbar when not hovered */
+.preview .t-type:hover::-webkit-scrollbar-thumb {
+    background-color: #ffffff;
+}
+
+.preview .t-type:hover::-webkit-scrollbar-track {
+    background-color: #1f1f1f;
+}
+
+.preview .t-type {
+    width: 100%;
+    height: 100%;
+
+    overflow-y: scroll;
+}
+
+.isUp {
+
+    background-color: rgba(255, 0, 0, 0.212) !important;
+
+}
+
+
+.t-type .t-cont-t {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.205);
+}
+
+.t-type .t-cont-t .t-title {
+    position: relative;
+
+
+    font-weight: 700;
+
+    color: white;
+    background-color: rgba(255, 255, 255, 0.233);
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-image: linear-gradient(to left, rgba(0, 0, 0, 0.336), rgba(0, 0, 0, 0));
+
+    width: calc(100%);
+    padding: 10px 10px;
+    font-size: 25px !important;
+
+
+}
+
+
+
+.t-type .t-title .t-schedule {
+
+    border: 1px rgba(255, 255, 255, 0.199) solid;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+    gap: 10px;
+}
+
+.t-type .t-title .t-schedule .t-schedule-t {
+    background-color: rgba(255, 255, 255, 0.233);
+    border: 1px rgba(255, 255, 255, 0.199) solid;
+    display: inline-block;
+    padding: 5px;
+
+}
+
+.t-type .boxesCont {
+
+    position: relative;
+    max-width: calc(100%);
+    border-radius: 3px;
+
+    width: max-content;
+
+    border: 1px solid rgba(255, 255, 255, 0.226);
+    background-color: rgba(255, 255, 255, 0.055);
+
+    display: grid;
+
+
+
+    gap: 5px;
+    padding: 20px;
+}
+
+.t-type.isUp .boxesCont {
+    opacity: 0.7;
+    user-select: none;
+    pointer-events: none;
+    background-color: rgba(255, 255, 255, 0.295);
+}
+
+.t-type .boxesCont .t-Box-checked {
+    background-color: rgb(0, 255, 0) !important;
+}
+
+.t-type .boxesCont .t-Box {
+
+
+    border: 1px solid rgba(255, 255, 255, 0.226);
+    background-color: rgba(255, 255, 255, 0.13);
+    border-radius: 3px;
+    width: 40px;
+    height: 40px;
+
+
+    opacity: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+    cursor: pointer;
+    color: white;
+
+    user-select: none;
+
+
+}
+
+.t-type .boxesCont:hover .t-Box {
+    opacity: 0.8;
+}
+
+.t-type .boxesCont:hover .t-Box:hover {
+    border: 1px solid rgb(0, 255, 21);
+    box-shadow: 0 0 3px 1px rgba(0, 255, 0, 0.301);
+    opacity: 1;
+    background-color: rgb(32, 32, 32);
+    text-shadow: 0 0 5px rgb(0, 0, 0);
+
+}
+
+.t-Box.animate-colors {
+
+    animation: coloring 0.5s linear 1;
+
+
+
+}
+
+@keyframes coloring {
+
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+
+}
+
+.t-timer {
+    padding: 10px;
+    width: 100%;
+    height: max-content;
+    background-color: rgba(255, 255, 255, 0.048);
+    color: white;
+    font-weight: 500;
+
+}
+
+.custom-element {
+    position: absolute;
+    min-height: 60px;
+    width: 300px;
+    background-color: rgba(0, 0, 0, 0.212);
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.288);
+    backdrop-filter: blur(7px);
+    display: flex;
+    background-image: linear-gradient(to left, rgba(255, 255, 255, 0.062), rgba(255, 255, 255, 0));
+
+    padding: 10px;
+
+}
+
+.custom-element .in {
+    background-color: #1f1f1f2c;
+    padding: 10px;
+    border: #ffffff13 1px solid;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    width: 100%;
+    height: max-content;
+    border-radius: 5px;
+    gap: 10px 0;
+}
+
+.menuCategory {
+    width: 100%;
+    height: max-content;
+    background-color: #3b3b3b80;
+    padding: 10px;
+    font-weight: 700;
+
+    color: white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+
+}
+
+.menuCategory i {
+    transition: 0.3s;
+}
+
+.menuCategory:hover i {
+    transform: rotate(-90deg);
+}
+
+.menuCategory * {
+    font-size: 20px;
+}
+
+.deletion {
+    background-color: #3b3b3b80;
+    border-radius: 3px;
+    outline: none;
+    border: rgb(43, 43, 43) 1px solid;
+    transition: 0.5s;
+    color: white;
+    padding: 5px 10px;
+    width: max-content;
+    height: max-content;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+.deletion:hover {
+    background-color: rgb(161, 0, 0);
+    border: rgb(80, 0, 0) 1px solid;
+}
+
+.t-btn {
+
+    height: 40px;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.178);
+
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.5s;
+    height: 0;
+    overflow: hidden;
+
+}
+
+.t-btn[finished=true] {
+
+
+    height: 40px !important;
+    border: 1px solid rgba(255, 255, 255, 0.158);
+
+
+
+}
+
+.t-btn[finished=true]:hover {
+
+    background-color: rgba(255, 255, 255, 0.082);
+    letter-spacing: 1px;
+    border: rgba(102, 102, 102, 0) 1px solid;
+
+
+}
+
+.t-title .date {
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    border: rgba(34, 34, 34, 0) 1px solid;
+}
+
+.hoverUp {
+    position: relative;
+
+}
+
+.hoverUp::before {
+    content: "Ending Date";
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    padding: 5px;
+    width: max-content;
+    transform: translate(-50%, 0%);
+    background-color: rgb(110, 110, 110);
+    border-radius: 5px;
+    transition: 0.3s;
+    display: flex;
+    font-size: 16px;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+}
+
+.hoverUp::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: calc(50%);
+    transform: translate(-50%, -0px);
+    width: 0px;
+    height: 0px;
+    opacity: 0;
+    border: black 10px solid;
+    border-color: rgb(110, 110, 110) transparent transparent transparent;
+    transition: 0.3s;
+}
+
+.hoverUp:hover::before {
+    top: calc(-50% - 10px);
+    color: white;
+    opacity: 1;
+}
+
+.hoverUp:hover::after {
+    opacity: 1;
+    transform: translate(-50%, -10px);
+}
+
+.t-title .date:hover {
+
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.479);
+
+}
+
+.sad,
+.happy {
+    position: relative;
+}
+
+.sad::before,
+.happy::before {
+    content: "";
+    background-image: url("angry.png");
+    background-position: 50% 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    border-radius: 50px;
+    animation: sadd 1s linear infinite alternate-reverse;
+    box-shadow: 0 0 15px 1px black;
+    transition: 0.3s;
+    z-index: 50;
+
+}
+
+.happy::before {
+    background-image: url("happy.png");
+
+    left: 100%;
+
+}
+
+.sad:hover::before,
+.happy:hover::before {
+    scale: 1.2;
+}
+
+@keyframes sadd {
+    0% {
+        transform: translate(-50%, -50%) scale(1.05) rotate(3deg);
+
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1) rotate(-5deg);
+        opacity: 0.5;
+    }
+
+}
+
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--bc);
+}

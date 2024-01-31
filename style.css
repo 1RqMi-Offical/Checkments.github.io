@@ -1,0 +1,659 @@
+body {
+    background-color: var(--bc);
+}
+
+* {
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+    --bc: rgb(13, 12, 17);
+    --bc-light: rgb(29, 27, 36);
+    --bc-btns-light: rgb(31, 30, 36);
+    --pink: rgb(26, 22, 34);
+    --btn-active: rgb(104, 87, 136);
+    --nav: rgba(18, 16, 22, 0.568);
+    --border: rgb(107, 87, 151);
+
+}
+
+
+.turnof {
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    background-color: rgba(255, 255, 255, 0.082);
+    border-radius: 10px;
+    font-size: 70px;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-image: linear-gradient(to left, rgba(0, 0, 0, 0.342), rgba(0, 0, 0, 0));
+    padding: 20px 40px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.turnof:hover {
+    padding-left: 30px;
+    transform: translate(-50%, -50%) scale(1.2);
+}
+
+
+.nav {
+    position: relative;
+    width: 100%;
+
+    background-color: var(--nav);
+    object-fit: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: 250px;
+}
+
+.nav::after {
+    background-image: url(bc.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+}
+
+.nav::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100%);
+    background-color: var(--nav);
+    z-index: 0;
+}
+
+.nav .navlinks {
+    width: 100%;
+    height: 50px;
+    background-color: var(--pink);
+    position: absolute;
+    bottom: -50px;
+
+}
+
+.navbar-fixed {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    z-index: 800;
+}
+
+ul {
+    list-style: none;
+    list-style-type: none;
+}
+
+.nav .navlinks .nav-ul {
+
+    display: flex;
+    flex-wrap: nowrap;
+    width: 80%;
+    margin: 0 auto;
+
+
+    color: white;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    font-weight: 700;
+    padding: 0;
+
+}
+
+.nav .navlinks .nav-ul .m-link {
+    transition: 0.3s;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0);
+    height: 100%;
+    width: fit-content;
+    padding: 0 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin: 0 10px; */
+    border: rgba(183, 0, 255, 0) 2px solid;
+}
+
+.nav .navlinks .nav-ul:hover .m-link {
+    opacity: 0.9;
+}
+
+.nav .navlinks .nav-ul:hover .m-link:hover {
+    opacity: 1;
+}
+
+.nav .navlinks .nav-ul .m-link:hover {
+    background-color: rgba(255, 255, 255, 0.185);
+    opacity: 0.8;
+    border: var(--border) 2px solid;
+}
+
+.dropdown {
+    position: relative;
+    padding-right: 30px !important;
+    z-index: 800;
+}
+
+.dropdown::before {
+    position: absolute;
+    content: "";
+    width: 0px;
+    height: 0px;
+    border: solid 7px white;
+    border-color: transparent transparent transparent white;
+    left: 100%;
+    top: 50%;
+    transform: translate(-175%, -50%);
+    transition: 0.2s;
+}
+
+.dropdown:hover::before {
+    transform: translate(-175%, -25%) rotate(90deg);
+    z-index: 5;
+    border-color: transparent transparent transparent white;
+}
+
+.dropdown::after {
+    content: "";
+    width: 100%;
+    height: 20px;
+    position: absolute;
+    top: 100%;
+    display: none;
+    background-color: rgba(0, 255, 255, 0);
+}
+
+.dropdown .drop {
+    position: absolute;
+    top: 100%;
+    background-color: var(--pink);
+    margin: 0px 0;
+    background-image: linear-gradient(to top, rgba(255, 255, 255, 0.116), rgba(0, 0, 0, 0));
+    display: none;
+
+    opacity: 0;
+    width: 300px;
+    left: 0;
+
+
+
+
+
+    transition: 0.2s;
+    border: var(--border) 2px solid;
+    flex-direction: column;
+}
+
+.dropdown .drop::before {}
+
+.dropdown .drop .category:hover>span:not(.category li span) {
+    opacity: 1;
+}
+
+.dropdown .drop .category>span:not(.category li span) {
+
+    padding: 5px;
+    margin: 10px 0;
+    width: 100%;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.363), rgba(0, 0, 0, 0));
+    border-radius: 0 50 50px 0px;
+    padding-left: 10px;
+    border-left: rgba(255, 255, 255, 0.486) 3px solid;
+    position: absolute;
+    display: block;
+    top: -15px;
+    left: 0;
+    transform: translate(0, -100%);
+    opacity: 0.6;
+    transition: 0.4s;
+}
+
+.dropdown .drop .category li {
+    padding: 7px 0;
+    color: rgba(255, 255, 255, 0.767);
+    transition: 0.3s;
+    margin-left: 10px;
+    border: 1px solid rgba(255, 255, 255, 0);
+    border-radius: 2px;
+    padding-left: 3px;
+    user-select: none;
+    position: relative;
+
+    font-weight: 400;
+
+}
+
+.dropdown .drop .category li.addition,
+.dropdown .drop .category li.remove {
+    overflow: hidden;
+}
+
+.dropdown .drop .category li.addition::before,
+.dropdown .drop .category li.remove::before {
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translate(0, -50%);
+    opacity: 0;
+    transition: 0.4s;
+    transition-timing-function: cubic-bezier(0, .69, .41, 1.72);
+}
+
+.dropdown .drop .category li.addition::before {
+    content: "+10";
+    color: rgb(0, 255, 0);
+}
+
+.dropdown .drop .category li.remove::before {
+    content: "-10";
+    color: red;
+}
+
+.dropdown .drop .category li.addition:hover::before,
+.dropdown .drop .category li.remove:hover::before {
+    right: 15px;
+    opacity: 1;
+
+}
+
+.dropdown .drop .category li.addition:hover:active::before,
+.dropdown .drop .category li.remove:hover:active::before {
+
+    transform: translate(0, -50%) scale(1.5);
+    opacity: 1;
+    text-shadow: 0 0 15px white;
+    right: -100px;
+
+}
+
+.nav .navlinks .pts {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    right: 10%;
+    top: 50%;
+    transform: translate(0, -50%);
+    background-color: rgba(0, 0, 0, 0.24);
+    height: 100%;
+
+    padding: 0px 30px;
+
+
+}
+
+.sp-style {
+    padding: 5px 10px;
+    background-color: rgba(0, 0, 0, 0.274);
+    border: 1px solid rgba(255, 255, 255, 0.192);
+    border-radius: 5px;
+    margin: 0 5px;
+}
+
+
+
+
+
+.dropdown .drop .category li:active {
+    background-color: rgba(255, 255, 255, 0.301);
+    border: 1px solid rgba(255, 255, 255, 0.856);
+}
+
+.dropdown:hover .drop .category li:hover {
+    padding-left: 10px;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.301);
+
+
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.363), rgba(0, 0, 0, 0));
+}
+
+.dropdown:hover::after {
+    display: block;
+}
+
+.dropdown:hover .drop {
+    display: flex;
+    opacity: 1;
+    margin: 20px 0;
+    padding: 10px;
+    animation: dropdown 0.15s linear 1;
+}
+
+@keyframes dropdown {
+    0% {
+        height: 0;
+        opacity: 0;
+        margin: 0px 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    100% {
+        opacity: 1;
+        margin: 20px 0;
+        padding: 10px;
+        overflow: hidden;
+    }
+
+}
+
+.dropdown:hover .drop.d-one {
+
+    height: var(--height-one);
+}
+
+.dropdown:hover .drop.d-two {
+
+    height: var(--height-two);
+}
+
+.dropdown:hover .drop .category:hover {
+    background-color: rgba(255, 255, 255, 0.123);
+
+
+}
+
+.dropdown:hover .drop .category {
+    opacity: 1;
+
+}
+
+.dropdown .drop .category {
+    width: 100%;
+    margin: 5px 0;
+    background-color: rgba(0, 0, 0, 0.123);
+    border: 1px solid rgba(255, 255, 255, 0.185);
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 35px;
+    position: relative;
+    transition: 0.2s;
+    transition-delay: 0.15s;
+}
+
+.dropdown .drop .category li:hover:active {
+
+    padding-left: 5px;
+
+}
+
+.dropdown .drop .category li span {
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translate(0, -50%);
+    display: inline-block;
+    height: 100%;
+    padding: 0 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--btn-active);
+    font-weight: 600;
+    border: rgba(66, 0, 141, 0.247) 1px solid;
+    color: rgb(255, 255, 255);
+    opacity: 1;
+    overflow: hidden;
+}
+
+.dropdown .drop .category li span::before {
+    content: "This feature added from a while, explore it!";
+    color: white;
+    position: absolute;
+    background-color: var(--pink);
+
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.055), rgba(255, 255, 255, 0.068), rgba(255, 255, 255, 0));
+    border: 1px solid var(--border);
+
+    padding: 10px;
+    border-radius: 3px;
+    width: max-content;
+    left: 70px;
+    top: 50%;
+    font-size: 16px;
+    font-weight: 400;
+    transform: translate(0, -50%);
+    height: max-content;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+
+.dropdown .drop .category li span.new:hover {
+    overflow: visible;
+}
+
+.dropdown .drop .category li span.new:hover::before {
+    opacity: 1;
+}
+
+.title {
+    width: 80%;
+    height: 250px;
+    color: rgb(219, 219, 219);
+    display: flex;
+    justify-content: space-between;
+    padding: 40px;
+    margin: 0 auto;
+    align-items: center;
+    z-index: 1;
+}
+
+.title h3 {
+    font-size: 30px;
+}
+
+.title span i {
+    font-size: 40px;
+}
+
+.dropdown .drop .category li.active {
+    color: white !important;
+    background-color: var(--btn-active);
+
+}
+
+.zero {
+    height: 0;
+}
+
+
+.labe {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: 0.3s;
+    cursor: pointer;
+    z-index: 4;
+    margin: 10px 0;
+}
+
+
+.labe:hover {
+    color: rgba(255, 255, 255, 0.712);
+}
+
+
+.toggle-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+
+    width: 43px;
+    height: 23px;
+    background-color: var(--btn-active);
+    background-image: linear-gradient(to left, rgba(0, 0, 0, 0.493), rgba(0, 0, 0, 0));
+    border: 1px solid rgba(255, 255, 255, 0.281);
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+
+}
+
+/* Style the slider (thumb) inside the checkbox */
+.toggle-checkbox::before {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    border-radius: 50%;
+    top: 50%;
+    left: 3px;
+    transform: translate(0, -50%);
+    transition: 0.3s;
+}
+
+/* When the checkbox is checked, move the slider to the right */
+.toggle-checkbox:checked::before {
+    transform: translate(-100%, -50%);
+    left: calc(100% - 3px);
+}
+
+.dropdown .drop .category.roles li span:hover {
+    opacity: 1;
+}
+
+.dropdown .drop .category.roles li:hover span {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.dropdown .drop .category.roles li[status="locked"] span,
+.dropdown .drop .category.roles li[status="locked"] {
+
+    opacity: 0.3 !important;
+
+}
+
+.dropdown .drop .category.roles li span {
+    width: 85%;
+    background-color: transparent;
+    background-image: linear-gradient(to left, rgb(72, 47, 185), rgba(118, 47, 185, 0));
+    border: none;
+    opacity: 0.7;
+    justify-content: flex-end;
+
+}
+
+li[status="locked"] .fa-key {
+    display: none;
+}
+
+li[status="unlocked"] .fa-key {
+    padding: 5px;
+}
+
+li[status="locked"] .fa-lock {
+    padding: 5px;
+}
+
+li[status="unlocked"] .fa-lock {
+
+    display: none;
+
+}
+
+.fa-coins {
+
+    padding: 5px;
+}
+
+
+
+
+li[status="unlocked"][card="rainbow"] span {}
+
+li[status="unlocked"][card="rainbow"].active::after {
+
+    background-color: var(--btn-active) !important;
+    opacity: 1;
+
+}
+
+li[status="unlocked"][card="rainbow"] {
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+    padding: 10px;
+
+}
+
+li[status="unlocked"][card="rainbow"]::after {
+    position: absolute;
+    content: "";
+    width: calc(100% - 3px);
+    height: calc(100% - 3px);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    background-color: #2f1d4c;
+
+}
+
+.category li[status="unlocked"][card="rainbow"]::before {
+    position: absolute;
+    content: "";
+    width: 250px;
+    height: 250px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-image: conic-gradient(red,
+            orange,
+            yellow,
+            green,
+            blue,
+            indigo,
+            violet);
+    z-index: -2;
+    animation: rotation 3s linear infinite;
+    transform-origin: 50%;
+    filter: blur(5px);
+}
+
+.category:hover {
+
+    background-color: rgba(0, 0, 0, 0.24) !important;
+
+}
+
+@keyframes rotation {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.sound {}
