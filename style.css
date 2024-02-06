@@ -134,6 +134,7 @@ ul {
     justify-content: center;
     /* margin: 0 10px; */
     border: rgba(183, 0, 255, 0) 2px solid;
+    font-size: calc(0.2vw + 14px);
 }
 
 .nav .navlinks .nav-ul:hover .m-link {
@@ -657,3 +658,11 @@ li[status="unlocked"][card="rainbow"]::after {
 }
 
 .sound {}
+
+
+@media only screen and (max-width: 600px) {
+
+    .nav .navlinks .nav-ul {
+        flex-direction: column;
+    }
+}

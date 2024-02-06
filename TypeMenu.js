@@ -22,12 +22,12 @@ let typeMenu = function (customElement) {
 
 window.onload = function () {
     if (!localStorage.getItem("name")) {
-        location.href = "/checkments.github.io/login.html"
+        location.href = "/login.html"
 
     }
     let homebtn = document.querySelector(".m-link.home");
     homebtn.addEventListener("click", e => {
-        location.href = "/checkments.github.io/index.html";
+        location.href = "/index.html";
     })
 };
 

@@ -94,18 +94,56 @@
 
 .isUp {
 
-    background-color: rgba(255, 0, 0, 0.212) !important;
-    background-image: linear-gradient(45deg, rgba(0, 0, 0, 0), rgba(255, 0, 0, 0.158), rgba(0, 0, 0, 0), rgba(31, 0, 0, 0.322), rgba(255, 0, 0, 0.158));
-    border: 1px rgb(255, 0, 0) solid;
-    box-shadow: 0 0 5px 1px red;
+    background-color: rgba(82, 0, 0, 0.212);
+    border: 1px rgb(192, 0, 0) solid;
+    box-shadow: 0 0 5px 1px rgba(255, 0, 0, 0.37);
 
-    animation: circles 0.7s ease-in-out 1;
+    animation: circles 0.5s ease-in-out 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.isUp::after {
+    content: "";
+    width: 200%;
+    height: 100%;
+    background-image: linear-gradient(45deg, transparent,
+            transparent,
+            rgba(0, 0, 0, 0),
+            rgba(31, 0, 0, 0.322),
+            rgba(255, 0, 0, 0), rgba(0, 0, 0, 0),
+            rgba(255, 0, 0, 0.158),
+            rgba(0, 0, 0, 0),
+            rgba(31, 0, 0, 0.322),
+            transparent);
+    animation: mover 10s linear infinite;
+    background-repeat: repeat;
+    background-size: 50% 100%;
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    z-index: 400;
+    z-index: -100;
+    filter: blur(50px);
+}
+
+@keyframes mover {
+    0% {
+        transform: translate(0%, 0);
+    }
+
+    100% {
+        transform: translate(-50%, 0);
+    }
 }
 
 @keyframes circles {
     0% {
         clip-path: circle(10% at 50% 0%);
         box-shadow: 0 0 50px 1px red;
+        background-color: red;
     }
 
     100% {
@@ -137,7 +175,7 @@
 
     width: calc(100%);
     padding: 10px 10px;
-    font-size: 25px !important;
+    font-size: calc(0.7vw + 15px);
 
 
 }
@@ -344,7 +382,7 @@
 
     color: white;
     font-weight: 600;
-    font-size: 20px;
+    font-size: calc(0.7vw + 10px);
     border-radius: 5px;
     cursor: pointer;
     transition: 0.5s;
@@ -358,8 +396,6 @@
 
     height: 40px !important;
     border: 1px solid rgba(255, 255, 255, 0.158);
-
-
 
 }
 
@@ -451,7 +487,7 @@
     width: 25px;
     height: 25px;
     opacity: 1;
-    transform: translate(-50%, -50%);
+    transform: translate(100%, 100%);
     border-radius: 50px;
     animation: sadd 1s linear infinite alternate-reverse;
     box-shadow: 0 0 15px 1px black;
@@ -474,13 +510,13 @@
 
 @keyframes sadd {
     0% {
-        transform: translate(-50%, -50%) scale(1.05) rotate(3deg);
+        transform: translate(50%, 25%) scale(1.05) rotate(3deg);
 
     }
 
     100% {
-        transform: translate(-50%, -50%) scale(1) rotate(-5deg);
-        opacity: 0.5;
+        transform: translate(50%, 25%) scale(1) rotate(-5deg);
+        filter: contrast(1.5);
     }
 
 }
@@ -497,4 +533,20 @@
 
 ::-webkit-scrollbar-track {
     background-color: var(--bc);
+}
+
+@media only screen and (max-width: 300px) {
+    .box {
+        padding: 5px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    .t-type .boxesCont {
+        width: min-content !important;
+        grid-template-columns: repeat(auto-fit, 40px) !important;
+        grid-template-rows: auto !important;
+    }
+
 }

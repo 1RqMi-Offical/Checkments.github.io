@@ -4,17 +4,17 @@ let back = document.querySelector(".container .back")
 overviewBtn.addEventListener("click", e => {
 
     console.log(location.pathname)
-    if (location.pathname == "/checkments.github.io/index.html") {
+    if (location.pathname == "/index.html") {
 
         console.log("GO overview")
-        location.href = "/checkments.github.io/overview.html"
+        location.href = "/overview.html"
     } else {
         console.log("GO check")
-        location.href = "/checkments.github.io/index.html"
+        location.href = "/index.html"
     }
 
 })
 
 back.addEventListener("click", e => {
-    location.href = "/checkments.github.io/index.html"
+    location.href = "/index.html"
 })
