@@ -59,7 +59,7 @@ body {
 }
 
 .nav::after {
-    background-image: url("bc.jpg");
+    background-image: url(bc.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50%;

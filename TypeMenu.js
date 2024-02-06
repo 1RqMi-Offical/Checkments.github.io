@@ -19,3 +19,15 @@ let typeMenu = function (customElement) {
     let type = event.target.parent;
     console.log(type)
 }
+
+window.onload = function () {
+    if (!localStorage.getItem("name")) {
+        location.href = "/login.html"
+
+    }
+    let homebtn = document.querySelector(".m-link.home");
+    homebtn.addEventListener("click", e => {
+        location.href = "/index.html";
+    })
+};
+

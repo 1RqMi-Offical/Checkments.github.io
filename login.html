@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
+
+</head>
+
+<body>
+    <div class="container">
+
+
+        <div class="login">
+            <h1>Welcome to Checkments</h1>
+            <label id="text">Please type your username!</label>
+            <input type="text" class="tname" name="text" placeholder="Joe" id="">
+            <div class="btns"> <button class="enter">Enter</button>
+                <button class="guest">Continue as a Guest</button>
+            </div>
+
+        </div>
+
+        <div class="img"><img src="bc.jpg" alt=""></div>
+    </div>
+
+    <script>
+        let enter = document.querySelector(".enter")
+        let guest = document.querySelector(".guest")
+        let name = document.querySelector(".tname")
+        enter.addEventListener("click", e => {
+            if (name.value.length > 0) {
+
+
+                localStorage.setItem("name", name.value)
+                location.href = "/index.html"
+            } else {
+                return
+            }
+        });
+        guest.addEventListener("click", e => {
+            localStorage.setItem("name", "guest")
+            location.href = "/index.html"
+        });
+    </script>
+</body>
+
+</html>

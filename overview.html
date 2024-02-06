@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="createType.css">
     <link rel="stylesheet" href="footer.css">
     <link rel="stylesheet" href="volume.css">
+    <link rel="stylesheet" href="overview.css">
 </head>
 
 <body>
@@ -121,74 +122,32 @@
             </ul>
         </div>
     </div>
-    <div class="box" id="box">
-    </div>
-    <div class="createType" style="opacity: 1; display: flex;">
-        <div class="inputs t-cont"><span class="title">Create</span>
-            <div class="in-put-cont ">
-                <label for="" class="t-title-label tlabel">Title</label>
-                <input type="text" name="" id="" class="t-in t-t" placeholder="Studying...">
-            </div>
-            <div class="in-put-cont t-half-small">
-                <label for="" class=" tlabel">Expire</label>
-                <input type="number" name="" id="" class="t-in center t-exp" min="1" value="1" placeholder="5">
-            </div>
-            <div class="in-put-cont t-half-big unit">
-                <label for="" class=" tlabel">Unit</label>
-                <div class="selector unit t-title-place">
-                    <div class="placeholder" unit="hr">Hours</div>
-                    <ul class="option-cont">
-                        <li class="option" unit="sec">Seconds</li>
-                        <li class="option" unit="min">Minutes</li>
-                        <li class="option active" unit="hr">Hours</li>
-                        <li class="option" unit="d">Days</li>
-                        <li class="option" unit="mo">Months</li>
-                        <li class="option" unit="yr">Years</li>
-                    </ul>
+    <div class="sec-overview">
+
+        <div class="container">
+            <div class="back">«</div>
+            <div class="aligner">
+                <div class="ca ca1">
+                    <div class="header">Overview/Settings</div>
+                    <div class="line">
+                        <label class="line-label" for="use">Joined Date</label>
+                        <span class="s-style">2024/6/2</span>
+                    </div>
+                    <div class="line">
+                        <label class="line-label" for="use">Change background</label>
+                        <button class="btn">Edit</button>
+                    </div>
+                </div>
+                <div class="ca ca2">
+                    <div class="header">Profile</div>
+                    <div class="line">
+                        <label class="line-label" for="use">Username</label>
+                        <button class="btn">Edit</button>
+                    </div>
                 </div>
             </div>
-            <div class="in-put-cont t-half-big unit">
-                <label for="" class=" tlabel">Background</label>
-                <div class="selector t-title-place">
-                    <div class="placeholder">Transparent</div>
-                    <ul class=" option-cont">
-                        <li class="option active">Transparent</li>
-                        <li class="option">Study</li>
-                        <li class="option">Work</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="in-put-cont t-half-small">
-                <label for="" class=" tlabel">Row</label>
-                <input type="number" name="" id="" class="t-in center t-row" min="1" value="2" placeholder="5">
-            </div>
-            <div class="in-put-cont t-half-small">
-                <label for="" class=" tlabel">Column</label>
-                <input type="number" name="" id="" class="t-in center t-column" min="1" value="2" placeholder="5">
-            </div>
-            <div class="in-put-cont t-half-medium">
-                <label for="" class=" tlabel">Checked</label>
-                <input type="number" name="" id="" class="t-in center t-checked" min="1" placeholder="5">
-            </div>
-            <div class="in-put-cont t-disabled">
-                <label for="" class="t-title-label tlabel ">Note</label>
-                <input type="text" name="" id="" class="t-in t-note" placeholder="Note...">
-            </div>
-            <div class="in-put-cont t-disabled " style="user-select: none;">
-                <label for="" class=" tlabel">Type of Boxex</label>
-                <div class="selector typeBoxes t-title-place">
-                    <div class="placeholder">Numbers</div>
-                    <ul class="option-cont">
-                        <li class="option" num="1">soon</li>
-                        <li class="option active" num="2">soon</li>
-                        <li class="option" num="3">soon</li>
-                    </ul>
-                </div>
-            </div>
-            <button class="createTypePreview t-btn-p ">Preview</button>
-            <button class="createTypeBox t-btn-p ">Create</button>
         </div>
-        <div class="preview t-cont"><span class="title">Preview</span></div>
+
     </div>
     <footer>
         <div class="name">Checkments</div>
@@ -233,7 +192,6 @@
     <script src="TypeMenu.js"></script>
     <script src="count.js"></script>
     <script src="points.js"></script>
-    <script src="addType.js"></script>
     <script src="selectors.js"></script>
     <script src="overview.js"></script>
 

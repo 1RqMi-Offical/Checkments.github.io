@@ -5,6 +5,9 @@ let setUpSelector = function (container) {
     let optionCont = document.querySelector(`.${container}.selector .option-cont`);
     let options = document.querySelectorAll(`.${container}.selector .option-cont .option`);
 
+    if (!placeholder) {
+        return
+    }
     let animateUnit = function (element, ele) {
 
         let eleText = element.textContent.split("");
@@ -37,6 +40,9 @@ let setUpSelector = function (container) {
         })
 
     })
+    if (!placeholder) {
+        return
+    }
     placeholder.addEventListener("click", e => {
 
         for (let x = 0; x < options.length; x++) {
