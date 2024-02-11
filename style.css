@@ -15,8 +15,10 @@ body {
     --bc-btns-light: rgb(31, 30, 36);
     --pink: rgb(26, 22, 34);
     --btn-active: rgb(104, 87, 136);
+    --btn-new: rgba(255, 255, 255, 0.075);
     --nav: rgba(18, 16, 22, 0.568);
-    --border: rgb(107, 87, 151);
+    --border: rgb(183, 121, 255);
+    --fill: rgb(48, 36, 68);
 
 }
 
@@ -124,25 +126,26 @@ ul {
 .nav .navlinks .nav-ul .m-link {
     transition: 0.3s;
     cursor: pointer;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(61, 57, 68, 0.116);
     height: 100%;
     width: fit-content;
-    padding: 0 20px;
+    padding: 0 10px;
 
     display: flex;
     align-items: center;
     justify-content: center;
     /* margin: 0 10px; */
     border: rgba(183, 0, 255, 0) 2px solid;
-    font-size: calc(0.2vw + 14px);
+    font-size: calc(0.15vw + 14px);
 }
 
 .nav .navlinks .nav-ul:hover .m-link {
-    opacity: 0.9;
+    opacity: 0.5;
 }
 
 .nav .navlinks .nav-ul:hover .m-link:hover {
     opacity: 1;
+    background-color: var(--fill);
 }
 
 .nav .navlinks .nav-ul .m-link:hover {
@@ -415,7 +418,7 @@ ul {
     justify-content: center;
     align-items: center;
 
-    background-color: var(--btn-active);
+    background-color: var(--btn-new);
     font-weight: 600;
     border: rgba(66, 0, 141, 0.247) 1px solid;
     color: rgb(255, 255, 255);

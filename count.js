@@ -224,6 +224,21 @@ function secondsToDate(seconds) {
 
     return date;
 }
+let animates = function (element, speed) {
+
+    let eleText = element.textContent.split("");
+
+    element.textContent = "";
+    let chars = 0;
+    eleText.forEach(char => {
+        chars++;
+        setTimeout(function () {
+            element.textContent = element.textContent + `${char}`;
+        }, chars * speed);
+
+
+    })
+}
 let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, datesec, dateTimer, tELE, ElementContainer, id, bgs) {
 
     let TypeEle = document.createElement("div");
@@ -282,21 +297,7 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
     let currentDate = new Date();
 
     TypeTitleDate.textContent = `${currentDate.getFullYear()}/${currentDate.getMonth() + 1}/${currentDate.getDate()}`;
-    let animates = function (element, speed) {
 
-        let eleText = element.textContent.split("");
-
-        element.textContent = "";
-        let chars = 0;
-        eleText.forEach(char => {
-            chars++;
-            setTimeout(function () {
-                element.textContent = element.textContent + `${char}`;
-            }, chars * speed);
-
-
-        })
-    }
 
     let intervalId;
     let finishedBtn = document.createElement("button")
@@ -753,6 +754,7 @@ let updateRoles = function () {
     let roleText = document.querySelector(".dropdown span.role")
     let tiers = document.querySelectorAll(".category.roles li")
     let unlockedTiers = []
+
     for (let x = 0; x < tiers.length; x++) {
         tiers[x].setAttribute("status", "locked")
 
@@ -766,15 +768,29 @@ let updateRoles = function () {
     }
 
     for (let q = 0; q < tiers.length; q++) {
-        tiers[q].classList.remove("active")
+
+
         for (let unt = 0; unt < unlockedTiers.length; unt++) {
 
             if (tiers[q].getAttribute("role") == unlockedTiers[unt]) {
                 tiers[q].setAttribute("status", "unlocked")
+
                 if (tiers[q].getAttribute("role") == unlockedTiers[unlockedTiers.length - 1]) {
+                    if (tiers[q].classList.contains("active")) {
+                        return
+                    }
+                    let rAudio = new Audio("role.mp3")
+                    rAudio.volume = volume;
+                    rAudio.play();
+
+                    tiers.forEach(e => { e.classList.remove("active") })
                     tiers[q].classList.add("active")
 
                     roleText.textContent = unlockedTiers[unlockedTiers.length - 1]
+                    roleText.addEventListener("animationend", v => { roleText.style.removeProperty("animation") })
+                    roleText.style.animation = "rolemove 0.5s linear 1";
+
+                    animates(roleText, 100)
 
                     return
                 }
