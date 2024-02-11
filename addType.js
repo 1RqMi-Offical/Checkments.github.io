@@ -6,6 +6,7 @@ let Urow = document.querySelector(".createType .in-put-cont .t-row");
 let Ucolumn = document.querySelector(".createType .in-put-cont .t-column");
 let Uexpire = document.querySelector(".createType .in-put-cont .t-exp");
 let Uunit = document.querySelector(".createType .in-put-cont .unit.selector .placeholder");
+let bground = document.querySelector(".createType .in-put-cont .bground.selector .placeholder");
 let Uchecked = document.querySelector(".createType .in-put-cont .t-checked");
 
 Upreview.addEventListener("click", e => {
@@ -16,19 +17,41 @@ Upreview.addEventListener("click", e => {
     let typeColumn = +Ucolumn.value;
     let typeRow = +Urow.value;
     let typeChecked = []
+    let currDate = new Date();
+    let timeval;
 
-    for (let x = 0; x < Uchecked.value; x++) {
-        typeChecked.push(x);
-        console.log("what? " + typeChecked)
+    let bgs = bground.textContent.toLocaleLowerCase();
+
+    if (!Uunit.getAttribute("unit")) {
+        timeval = +Uexpire.value;
+    } else if (Uunit.getAttribute("unit") == "sec") {
+        timeval = Uexpire.value;
+    } else if (Uunit.getAttribute("unit") == "min") {
+        timeval = Uexpire.value * 60;
+    } else if (Uunit.getAttribute("unit") == "hr") {
+        timeval = Uexpire.value * 60 * 60;
+    } else if (Uunit.getAttribute("unit") == "d") {
+        timeval = Uexpire.value * 60 * 60 * 24;
+    } else if (Uunit.getAttribute("unit") == "mo") {
+        timeval = Uexpire.value * 60 * 60 * 24 * 30;
+    } else if (Uunit.getAttribute("unit") == "yr") {
+        timeval = Uexpire.value * 60 * 60 * 24 * 30 * 12;
     }
 
-    let typeSchedule = JSON.parse(`["0${Uunit.getAttribute("unit")}","${Uexpire.value}${Uunit.getAttribute("unit")}"]`);
 
-    console.log(typeSchedule)
+    currDate.setSeconds(currDate.getSeconds() + (+timeval))
+    let datesec = currDate.getTime();
+    console.log(" fucking : " + currDate)
+    console.log(" fucking v: " + Uexpire.value)
+    let dateTimer = Uexpire.value;
 
-    createElementBox(typeTitle, typeColumn, typeRow, typeChecked, typeSchedule, 0, preview)
 
 
+
+    let id = generateRandomId();
+
+    createElementBox(typeTitle, typeColumn, typeRow, typeChecked, datesec, dateTimer, 0, preview, id, bgs)
+    updateSettingsMenu()
 })
 
 Ucreate.addEventListener("click", e => {
@@ -45,6 +68,8 @@ Ucreate.addEventListener("click", e => {
     let typeChecked = []
     let currDate = new Date();
     let timeval;
+    let id = generateRandomId();
+    let bgs = bground.textContent.toLocaleLowerCase();
     if (!Uunit.getAttribute("unit")) {
         timeval = +Uexpire.value;
     } else if (Uunit.getAttribute("unit") == "sec") {
@@ -71,13 +96,14 @@ Ucreate.addEventListener("click", e => {
 
 
     if (localStorage.getItem("tLength").length <= 2) {
-        localStorage.setItem("tLength", `["${typeTitle}"]`);
+        localStorage.setItem("tLength", `["${id}"]`);
 
     } else {
         updateLength = localStorage.getItem("tLength").slice(1, localStorage.getItem("tLength").length - 1);
-        localStorage.setItem("tLength", `[${updateLength}, "${typeTitle}"]`);
+        localStorage.setItem("tLength", `[${updateLength}, "${id}"]`);
     }
-
+    let tlx = JSON.parse(localStorage.getItem("tLength"))
+    console.log("tlx" + tlx.length)
     for (let x = 0; x < Uchecked.value; x++) {
         typeChecked.push(x);
         console.log("what? " + typeChecked)
@@ -85,13 +111,19 @@ Ucreate.addEventListener("click", e => {
 
 
     if (typeTitle == "") typeTitle = "No title";
+    if (bground.getAttribute("link")) {
 
-    localStorage.setItem(`types${typeTitle}`, `["${typeTitle}",${typeColumn},${typeRow},"[${typeChecked}]", "${datesec}", "${dateTimer}"]`)
-    let id = generateRandomId();
-    createElementBox(typeTitle, typeColumn, typeRow, typeChecked, datesec, dateTimer, 0, box, id)
+        if ((bground.getAttribute("link")).includes("https")) {
+            bgs = bground.getAttribute("link");
+        }
+    }
+    localStorage.setItem(`types${id}`, `["${typeTitle}",${typeColumn},${typeRow},"[${typeChecked}]", "${datesec}", "${dateTimer}","${id}","${bgs}"]`)
+
+    createElementBox(typeTitle, typeColumn, typeRow, typeChecked, datesec, dateTimer, tlx.length - 1, box, id, bgs)
+    updateSettingsMenu()
     typesReStyle();
     window.scrollTo({
-        top: document.querySelector(`div[type-name-element="${id}"]`).offsetTop,
+        top: document.querySelector(`div[type-name-element="${id}"]`).offsetTop - 30,
         behavior: 'smooth'
     });
 

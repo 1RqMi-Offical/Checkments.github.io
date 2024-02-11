@@ -179,6 +179,35 @@ let typesReStyle = function () {
 
 
 }
+let clearType = function (id, intervalId) {
+    let elx = document.querySelector(`.t-type[type-name-element="${id}"]`);
+    elx.style.height = `${elx.offsetHeight}px`;
+    intervalId = elx.getAttribute("interval");
+    clearInterval(intervalId)
+    localStorage.removeItem(`types${id}`)
+
+
+    let arr = JSON.parse(localStorage.getItem("tLength"));
+
+    let indexToRemove = arr.indexOf(`${id}`);
+
+    if (indexToRemove !== -1) {
+        // Remove the element at the found index
+        arr.splice(indexToRemove, 1);
+    }
+
+
+    let newArray = arr.map(function (element) {
+        return "\"" + element + "\"";
+    });
+
+
+
+    localStorage.setItem("tLength", `[${newArray}]`)
+    setTimeout(function () { elx.classList.add("removeal"); }, 100)
+
+
+}
 let generateRandomId = function () {
     const baseId = 'randomId';
     const randomString = Math.random().toString(36).substring(2, 8); // Generates a random string
@@ -195,7 +224,7 @@ function secondsToDate(seconds) {
 
     return date;
 }
-let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, datesec, dateTimer, tELE, ElementContainer, id, prev) {
+let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, datesec, dateTimer, tELE, ElementContainer, id, bgs) {
 
     let TypeEle = document.createElement("div");
     TypeEle.classList.add(`t-type`)
@@ -209,7 +238,9 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
     let TypeTitleCont = document.createElement("div");
     TypeTitleCont.classList.add("t-cont-t")
 
+
     let TypeTitleEle = document.createElement("div");
+
 
 
     let TypeTitlePEle = document.createElement("h3");
@@ -293,9 +324,12 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
 
             animates(scheduleTimer, 20)
             TypeTitleDate.textContent = `${isDate.getFullYear()}/${isDate.getMonth() + 1}/${isDate.getDate()}`;
+
+
             intervalId = setInterval(() => {
                 updateTimer(+scheduleTimer.getAttribute("timeDifference"), scheduleTimer, intervalId, tELE, typeChecked)
             }, 1000);
+            TypeEle.setAttribute("interval", intervalId)
         }
 
 
@@ -315,37 +349,52 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
 
     finishedBtn.addEventListener("click", e => {
 
-        localStorage.removeItem(`types${typeTitle}`)
-
-        let arr = JSON.parse(localStorage.getItem("tLength"));
-
-        let indexToRemove = arr.indexOf(`${typeTitle}`);
-
-        if (indexToRemove !== -1) {
-            // Remove the element at the found index
-            arr.splice(indexToRemove, 1);
-        }
-
-
-        let newArray = arr.map(function (element) {
-            return "\"" + element + "\"";
-        });
-
-
-        localStorage.setItem("tLength", `[${newArray}]`)
-
-
-        location.reload()
+        clearType(id, intervalId)
 
     })
 
+    document.addEventListener('contextmenu', function (event) {
+        // Prevent the default right-click menu
 
+
+
+        // Check if the target element has the class "t-type"
+        if (event.target.classList.contains('t-type')) {
+
+            if (document.querySelector(".custom-element")) {
+                document.body.removeChild(document.querySelector(".custom-element"))
+                openMenu = false;
+            }
+            // Create a new element  
+            if (openMenu) return;
+            event.preventDefault();
+            let id = event.target.getAttribute("type-name-element")
+            var customElement = document.createElement('div');
+            typeMenu(customElement, event, id, intervalId);
+
+            // Append the element to the body
+            document.body.appendChild(customElement);
+        }
+    });
 
 
 
 
 
     TypeTitleEle.classList.add("t-title")
+    TypeTitleSchedule.innerHTML = `
+    
+        <div class="t-settings-list">
+            <ul class="t-s-list">
+                <li class="t-s-item del"><i class="fa-solid fa-trash"></i></li>
+                <li class="t-s-item edit"><i class="fa-solid fa-pen-to-square"></i></li>
+                <li class="t-s-item check"><i class="fa-regular fa-circle-check"></i></li>
+                <li class="t-s-item pause"><i class="fa-regular fa-circle-pause"></i></li>
+                <li class="t-s-item important"><i class="fa-solid fa-star"></i></li>
+            </ul>
+        </div>
+        <i class="fa-solid fa-sliders t-s"></i>
+    `;
     TypeTitleSchedule.classList.add("t-schedule")
     TypeTitlePEle.textContent = typeTitle;
 
@@ -362,7 +411,7 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
     TypeBoxesEle.classList.add("boxesCont")
 
     TypeBoxesEle.style.gridTemplateColumns = `repeat(${Number.parseInt(typeColumn)}, 1fr)`;
-    TypeBoxesEle.style.gridTemplateRows = `repeat(${Number.parseInt(typeRow)}, 1fr)`;
+
 
 
 
@@ -472,12 +521,13 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
             typeChecked = JSON.parse(typeChecked);
             datesec = Number.parseInt(types[tELE][4]);
             dateTimer = Number.parseInt(types[tELE][5]);
+            let id = (types[tELE][6]);
+            let bgs = (types[tELE][7]);
+            let updatedArray = [`"${typeTitle}"`, typeColumn, typeRow, `"[${typeChecked}]"`, `"${datesec}"`, `"${dateTimer}", "${id}", "${bgs}"`]
 
-            let updatedArray = [`"${typeTitle}"`, typeColumn, typeRow, `"[${typeChecked}]"`, `"${datesec}"`, `"${dateTimer}"`]
 
 
-
-            localStorage.setItem(`types${typesLength[tELE]}`, `[${updatedArray}]`)
+            localStorage.setItem(`types${id}`, `[${updatedArray}]`)
 
 
 
@@ -490,17 +540,29 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
 
 
         })
+
         TypeBoxesEle.appendChild(tBox);
-        tBox.style.animationDelay = `${b / 25}s`
-        setTimeout(function () { tBox.classList.add("animate-colors"); }, 100)
 
+        tBox.style.display = "none"
+        setTimeout(function () {
+            tBox.classList.add("animate-colors");
+            tBox.addEventListener("animationend", e => {
 
-        tBox.addEventListener("animationend", e => {
+                tBox.classList.remove("animate-colors")
+                tBox.style.opacity = `1`
+                tBox.style.display = `flex`
 
-            tBox.classList.remove("animate-colors")
-            tBox.style.opacity = `1`
+            })
+            const newHeight = TypeBoxesEle.scrollHeight;
 
-        })
+            // Apply the new height with a transition
+            TypeBoxesEle.style.height = newHeight + 'px';
+
+            if (b == (typeRow * typeColumn) - 1) {
+                TypeBoxesEle.style.height = `max-content`;
+            }
+        }, (10 + (b / 8)) * b)
+
 
 
 
@@ -523,6 +585,19 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
     TypeEle.appendChild(finishedBtn);
 
     ElementContainer.appendChild(TypeEle)
+    if (bgs != "transparent") {
+
+        if (!bgs.toString().includes("https")) {
+            TypeTitleEle.classList.add(bgs + "bc", "bc")
+        } else {
+            console.log("Bxxx")
+            TypeTitleEle.classList.add("bc")
+            TypeTitleEle.style.backgroundImage = `linear-gradient(to top, rgba(0, 0, 0, 0.733), rgba(0, 0, 0, 0)), url(${bgs})`
+        }
+
+
+    }
+
 
 }
 let checktypes = function () {
@@ -564,8 +639,10 @@ let checktypes = function () {
             let typeChecked = JSON.parse(types[tELE][3]);
             let dateSec = Number.parseInt(types[tELE][4]);
             let dateTimer = Number.parseInt(types[tELE][5]);
+            let id = (types[tELE][6]);
+            let bgs = (types[tELE][7]);
 
-            createElementBox(typeTitle, typeColumn, typeRow, typeChecked, dateSec, dateTimer, tELE, box, generateRandomId(), dateSec)
+            createElementBox(typeTitle, typeColumn, typeRow, typeChecked, dateSec, dateTimer, tELE, box, id, bgs)
 
 
 
@@ -638,8 +715,10 @@ window.addEventListener("DOMContentLoaded", e => {
             let typeChecked = `[]`;
             let datesec = Number.parseInt(types[y][4]);
             let dateTimer = Number.parseInt(types[y][5]);
+            let id = (types[tELE][6]);
+            let bgs = (types[tELE][7]);
             typeChecked = JSON.parse(typeChecked);
-            let updatedArray = [`"${typeTitle}"`, typeColumn, typeRow, `"[${typeChecked}]"`, `"${datesec}"`, `"${dateTimer}"`]
+            let updatedArray = [`"${typeTitle}"`, typeColumn, typeRow, `"[${typeChecked}]"`, `"${datesec}"`, `"${dateTimer}", "${id}, "${bgs}"`]
 
             localStorage.setItem(`types${typesLength[y]}`, `[${updatedArray}]`)
 
@@ -655,7 +734,7 @@ window.addEventListener("DOMContentLoaded", e => {
 
 
     })
-    let openMenu = false
+
     document.addEventListener('click', e => {
 
         if (openMenu) {
@@ -664,33 +743,12 @@ window.addEventListener("DOMContentLoaded", e => {
 
         }
     })
-    document.addEventListener('contextmenu', function (event) {
-        // Prevent the default right-click menu
 
-
-
-        // Check if the target element has the class "t-type"
-        if (event.target.classList.contains('t-type')) {
-
-            if (document.querySelector(".custom-element")) {
-                document.body.removeChild(document.querySelector(".custom-element"))
-                openMenu = false;
-            }
-            // Create a new element  
-            if (openMenu) return;
-            event.preventDefault();
-            var customElement = document.createElement('div');
-            typeMenu(customElement);
-
-            // Append the element to the body
-            document.body.appendChild(customElement);
-        }
-    });
 
 
 
 })
-
+let openMenu = false
 let updateRoles = function () {
     let roleText = document.querySelector(".dropdown span.role")
     let tiers = document.querySelectorAll(".category.roles li")
@@ -797,9 +855,13 @@ function updateTimer(timeDifference, element, intervalId, tELE, ordered) {
     let typeChecked = `[${ordered}]`;
     let datesec = Number.parseInt(types[tELE][4])
     typeChecked = JSON.parse(typeChecked);
-    let updatedArray = [`"${typeTitle}"`, typeColumn, typeRow, `"[${typeChecked}]"`, `"${datesec}"`, `"${timeDifference / 1000}"`]
+    let id = (types[tELE][6]);
+    let bgs = (types[tELE][7]);
+    let updatedArray = [`"${typeTitle}"`, typeColumn, typeRow, `"[${typeChecked}]"`, `"${datesec}"`, `"${timeDifference / 1000}", "${id}", "${bgs}"`]
 
-    localStorage.setItem(`types${typesLength[tELE]}`, `[${updatedArray}]`)
+    intervalId = document.querySelector(`.t-type[type-name-element=${id}]`).getAttribute("interval")
+
+    localStorage.setItem(`types${id}`, `[${updatedArray}]`)
 
 
     // Update the timer display

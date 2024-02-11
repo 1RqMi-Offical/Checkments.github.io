@@ -9,10 +9,12 @@ let setUpSelector = function (container) {
         return
     }
     let animateUnit = function (element, ele) {
-
-        let eleText = element.textContent.split("");
-        ele.textContent = "";
+        console.log(element.textContent.toString().replaceAll(" ", "").replaceAll(/\n/g, ""))
+        let eleText = element.textContent.toString().replaceAll(" ", "").replaceAll(/\n/g, "").split("");
+        ele.textContent = ""; let c = 0;
         eleText.forEach(char => {
+            c++;
+
             setTimeout(function () {
                 ele.innerHTML = ele.innerHTML.replace(`<span style="color: gray; transition: 0.3s; padding: 5px;">`, "")
                 ele.innerHTML = ele.innerHTML.replace(`</span>`, "")
@@ -23,7 +25,9 @@ let setUpSelector = function (container) {
                     ele.innerHTML = ele.innerHTML.replace(`</span>`, "")
 
                 }
-            }, eleText.indexOf(char) * 70);
+
+
+            }, c * 70);
 
 
         })
@@ -32,10 +36,32 @@ let setUpSelector = function (container) {
 
         element.addEventListener("click", e => {
 
-            animateUnit(element, placeholder)
+            if ((element.textContent.includes(placeholder.textContent))) {
+                if ((!element.querySelector("input"))) {
+                    return
+                }
 
+            }
+            options.forEach(e => { e.classList.remove("active") })
+            element.classList.add("active");
             placeholder.setAttribute("unit", element.getAttribute("unit"))
             optionCont.style.display = "none";
+            if (element.querySelector("input")) {
+
+                let inpt = element.querySelector("input");
+                element.setAttribute("link", inpt.value.toString());
+                placeholder.setAttribute("link", inpt.value.toString());
+                if ((element.textContent.includes(placeholder.textContent))) {
+                    return
+                }
+            }
+
+
+            animateUnit(element, placeholder)
+
+
+
+
 
         })
 
@@ -47,18 +73,20 @@ let setUpSelector = function (container) {
 
         for (let x = 0; x < options.length; x++) {
             options[x].classList.remove("active")
-            if (placeholder.textContent == options[x].textContent) {
-                if (x == options.length - 1) x = -1;
+            if (placeholder.textContent.toString().replaceAll(" ", "").replaceAll(/\n/g, "") == options[x].textContent.toString().replaceAll(" ", "").replaceAll(/\n/g, "")) {
+                if (x >= options.length - 1) x = -1;
                 animateUnit(options[x + 1], placeholder)
                 placeholder.setAttribute("unit", options[x + 1].getAttribute("unit"))
+                options[x + 1].classList.add("active")
                 return
             }
 
         }
-        console.log("Yez")
+
 
     });
 }
 
 setUpSelector("unit")
+setUpSelector("bground")
 setUpSelector("typeBoxes")
