@@ -110,7 +110,8 @@ ul {
     display: none;
     height: 100%;
     font-weight: 600;
-    display: flex;
+    width: max-content;
+    display: none;
     justify-content: flex-start;
     align-items: center;
     color: white;
