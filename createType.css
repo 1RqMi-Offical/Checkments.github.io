@@ -14,7 +14,20 @@
 
 }
 
+@media only screen and (max-width: 600px) {
 
+    .createType,
+    .box {
+        padding: 5px;
+        width: 98%;
+        border-color: rgba(255, 255, 255, 0.041);
+    }
+
+    .nav .navlinks .nav-ul {
+        width: 98%;
+    }
+
+}
 
 .createType .t-cont {
     height: max-content;

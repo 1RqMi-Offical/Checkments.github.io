@@ -179,7 +179,7 @@ let typesReStyle = function () {
 
 
 }
-let clearType = function (id, intervalId) {
+let clearType = function (id) {
     let elx = document.querySelector(`.t-type[type-name-element="${id}"]`);
     elx.style.height = `${elx.offsetHeight}px`;
     intervalId = elx.getAttribute("interval");
@@ -209,7 +209,7 @@ let clearType = function (id, intervalId) {
 
 }
 let generateRandomId = function () {
-    const baseId = 'randomId';
+    const baseId = 'task';
     const randomString = Math.random().toString(36).substring(2, 8); // Generates a random string
 
     const randomId = baseId + '-' + randomString;
@@ -239,7 +239,15 @@ let animates = function (element, speed) {
 
     })
 }
+if (!localStorage.getItem("important")) {
+    localStorage.setItem("important", `[]`)
+}
 let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, datesec, dateTimer, tELE, ElementContainer, id, bgs) {
+
+    let important;
+    if (localStorage.getItem("important").includes(id)) {
+        important = true;
+    }
 
     let TypeEle = document.createElement("div");
     TypeEle.classList.add(`t-type`)
@@ -252,6 +260,14 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
 
     let TypeTitleCont = document.createElement("div");
     TypeTitleCont.classList.add("t-cont-t")
+
+    if (important) {
+        TypeEle.classList.add("important")
+        let impEle = document.createElement("div")
+        impEle.classList.add("t-imp")
+        impEle.textContent = "Important"
+        TypeTitleCont.appendChild(impEle)
+    }
 
 
     let TypeTitleEle = document.createElement("div");
@@ -391,11 +407,12 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
                 <li class="t-s-item edit"><i class="fa-solid fa-pen-to-square"></i></li>
                 <li class="t-s-item check"><i class="fa-regular fa-circle-check"></i></li>
                 <li class="t-s-item pause"><i class="fa-regular fa-circle-pause"></i></li>
-                <li class="t-s-item important"><i class="fa-solid fa-star"></i></li>
+                <li class="t-s-item star"><i class="fa-solid fa-star"></i></li>
             </ul>
         </div>
         <i class="fa-solid fa-sliders t-s"></i>
     `;
+
     TypeTitleSchedule.classList.add("t-schedule")
     TypeTitlePEle.textContent = typeTitle;
 
@@ -407,7 +424,9 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
     TypeTitleEle.appendChild(TypeTitlePEle)
     TypeTitleEle.appendChild(TypeTitleDate)
     TypeTitleEle.appendChild(TypeTitleSchedule)
-
+    if (important) {
+        TypeTitleEle.querySelector(".star").classList.add("active")
+    }
     let TypeBoxesEle = document.createElement("div");
     TypeBoxesEle.classList.add("boxesCont")
 

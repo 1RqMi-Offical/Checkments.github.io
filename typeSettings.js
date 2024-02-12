@@ -50,4 +50,56 @@ let updateSettingsMenu = function () {
         })
 
     })
+    let delBtn = document.querySelectorAll(".t-type .t-settings-list .del");
+    let impBtn = document.querySelectorAll(".t-type .t-settings-list .star");
+
+    delBtn.forEach(el => {
+        el.addEventListener("click", e => {
+            clearType(el.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute("type-name-element"))
+        })
+    })
+    impBtn.forEach(el => {
+        el.addEventListener("click", e => {
+            let importants = JSON.parse(localStorage.getItem("important"));
+            let type = el.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
+            let cont = type.querySelector(".t-cont-t")
+            if (importants.includes(`${type.getAttribute("type-name-element")}`)) {
+                el.classList.remove("active")
+                cont.removeChild(cont.querySelector(".t-imp"))
+                type.classList.remove("important")
+
+
+                importants = importants.map(function (element) {
+                    return "\"" + element + "\"";
+                });
+
+                var index = importants.indexOf(`"${type.getAttribute("type-name-element")}"`);
+
+                importants.splice(index, 1);
+
+
+                localStorage.setItem("important", `[${importants}]`)
+            } else {
+                el.classList.add("active")
+                type.classList.add("important")
+
+
+
+                let impEle = document.createElement("div")
+                impEle.classList.add("t-imp")
+                impEle.textContent = "Important";
+
+                importants = importants.map(function (element) {
+                    return "\"" + element + "\"";
+                });
+
+                importants.push(`"${type.getAttribute("type-name-element")}"`)
+                localStorage.setItem("important", `[${importants}]`)
+
+                cont.insertBefore(impEle, cont.firstChild);
+
+            }
+        })
+    })
+
 }
