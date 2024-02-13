@@ -85,7 +85,47 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
+    let resSavings = document.querySelector(".dropdown .drop .res-savings");
+    resSavings.addEventListener("click", x => {
 
+        let overlay = document.createElement("div")
+        overlay.classList.add("overlay")
+
+        let warntxtheader = document.createElement("h1")
+        warntxtheader.textContent = "Warning"
+        warntxtheader.classList.add("heading")
+        let btnCont = document.createElement("div")
+        let btn1 = document.createElement("button")
+        btn1.textContent = "Cancel";
+        btn1.classList.add("cancel")
+        let btn2 = document.createElement("button")
+        btn2.textContent = "continue";
+        btn2.classList.add("continue")
+        btnCont.classList.add("btncont")
+        btnCont.appendChild(btn1)
+        btnCont.appendChild(btn2)
+        let warn = document.createElement("div")
+        let warntxt = document.createElement("div")
+        warntxt.classList.add("warn-txt")
+        warntxt.textContent = "By proceeding, you will erase all of your data stored on this website."
+        warn.classList.add("warn")
+        warn.appendChild(warntxtheader)
+        warn.appendChild(warntxt)
+        warn.appendChild(btnCont)
+        overlay.appendChild(warn)
+
+        overlay.addEventListener("click", e => {
+            if (e.target.classList.toString().includes("overlay") || e.target.classList.toString().includes("cancel")) {
+                document.body.removeChild(overlay);
+            } else if (e.target.classList.toString().includes("continue")) {
+                location.reload();
+                localStorage.clear();
+
+            }
+        })
+        document.body.appendChild(overlay)
+
+    })
     var toggleCheckbox = document.getElementById('toggledark');
 
     let checker = localStorage.getItem("dark");
@@ -208,15 +248,7 @@ let clearType = function (id) {
 
 
 }
-let generateRandomId = function () {
-    const baseId = 'task';
-    const randomString = Math.random().toString(36).substring(2, 8); // Generates a random string
 
-    const randomId = baseId + '-' + randomString;
-
-
-    return randomId;
-}
 function secondsToDate(seconds) {
     // Create a new Date object with the input seconds
     let date = new Date(0);
@@ -243,6 +275,7 @@ if (!localStorage.getItem("important")) {
     localStorage.setItem("important", `[]`)
 }
 let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, datesec, dateTimer, tELE, ElementContainer, id, bgs) {
+    typesReStyle();
 
     let important;
     if (localStorage.getItem("important").includes(id)) {
@@ -883,7 +916,7 @@ function parseInput(input, unit) {
 }
 
 function updateTimer(timeDifference, element, intervalId, tELE, ordered) {
-
+    typesReStyle();
     let typeTitle = types[tELE][0];
     let typeColumn = types[tELE][1];
     let typeRow = types[tELE][2];
