@@ -28,12 +28,18 @@ let typeMenu = function (customElement, event, id, intervalId) {
 
 window.onload = function () {
     if (!localStorage.getItem("name")) {
-        location.href = location.origin + "/login.html"
+
+           let x = "";
+    if (location.hostname.toString().toLowerCase() == "1rqmi-offical.github.io") {
+        x = "/checkments.github.io"
+        console.log(location.hash)
+    }
+        location.href = location.origin + x + "/login.html"
 
     }
     let homebtn = document.querySelector(".m-link.home");
     homebtn.addEventListener("click", e => {
-        location.href = location.origin + "/index.html";
+        location.href = location.origin + x + "/index.html";
     })
 };
 
