@@ -48,16 +48,25 @@
         enter.addEventListener("click", e => {
             if (name.value.length > 0) {
 
-
+   let x = "";
+    if (location.hostname.toString().toLowerCase() == "1rqmi-offical.github.io") {
+        x = "/checkments.github.io"
+        console.log(location.hash)
+    }
                 localStorage.setItem("name", name.value)
-                location.href = location.origin + "/index.html"
+                location.href = location.origin + x + "/index.html"
             } else {
                 return
             }
         });
         guest.addEventListener("click", e => {
             localStorage.setItem("name", "guest")
-            location.href = location.origin + "/index.html"
+               let x = "";
+    if (location.hostname.toString().toLowerCase() == "1rqmi-offical.github.io") {
+        x = "/checkments.github.io"
+        console.log(location.hash)
+    }
+            location.href = location.origin + x + "/index.html"
         });
     </script>
 </body>
