@@ -45,14 +45,15 @@
         let enter = document.querySelector(".enter")
         let guest = document.querySelector(".guest")
         let name = document.querySelector(".tname")
+        let x
         enter.addEventListener("click", e => {
             if (name.value.length > 0) {
 
-   let x = "";
-    if (location.hostname.toString().toLowerCase() == "1rqmi-offical.github.io") {
-        x = "/checkments.github.io"
-        console.log(location.hash)
-    }
+                let x = "";
+                if (location.hostname.toString().toLowerCase() == "1rqmi-offical.github.io") {
+                    x = "/checkments.github.io"
+                    console.log(location.hash)
+                }
                 localStorage.setItem("name", name.value)
                 location.href = location.origin + x + "/index.html"
             } else {
@@ -60,12 +61,12 @@
             }
         });
         guest.addEventListener("click", e => {
+            let x = "";
+            if (location.hostname.toString().toLowerCase() == "1rqmi-offical.github.io") {
+                x = "/checkments.github.io"
+                console.log(location.hash)
+            }
             localStorage.setItem("name", "guest")
-               let x = "";
-    if (location.hostname.toString().toLowerCase() == "1rqmi-offical.github.io") {
-        x = "/checkments.github.io"
-        console.log(location.hash)
-    }
             location.href = location.origin + x + "/index.html"
         });
     </script>

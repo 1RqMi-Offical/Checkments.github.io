@@ -1,19 +1,29 @@
 
 document.addEventListener("DOMContentLoaded", e => {
     if (document.querySelector(".t-type")) {
-        updateSettingsMenu()
+        getNewWidth()
+
+
     }
 })
 
-let updateSettingsMenu = function () {
-    let settingsBtn = document.querySelectorAll(".t-type .t-title .t-schedule .t-s")
-    let childrens = document.querySelectorAll(".t-type .t-title .t-schedule .t-settings-list")
-    var children = document.querySelector(".t-type .t-title .t-schedule .t-settings-list");
-    let cloned = children.cloneNode(true);
+
+let getNewWidth = function () {
+
+
+
+
+}
+
+
+let updateSettingsMenu = function (id) {
+    console.log("------------------ ID : " + id + " ---------")
+    let Type = document.querySelector(`.t-type[type-name-element="${id}"]`)
+    let settingsBtn = Type.querySelector(".t-title .t-schedule .t-s")
+    let cloned = settingsBtn.parentElement.firstElementChild.cloneNode(true);
+    console.log(cloned)
     document.body.appendChild(cloned);
 
-    let style = children.computedStyleMap()
-    cloned.style = style;
 
     cloned.style.display = "flex";
     cloned.style.flexWrap = "nowrap";
@@ -27,79 +37,69 @@ let updateSettingsMenu = function () {
 
 
 
-    childrens.forEach(e => { e.style.display = 'none'; });
-    childrens.forEach(e => { e.style.width = '0'; });
+    let width = cloned.offsetWidth;
 
 
-    var totalWidth = cloned.offsetWidth;
-    // document.body.removeChild(cloned);
-    childrens.forEach(e => { e.style.removeProperty('display'); });
-    childrens.forEach(e => { e.style.removeProperty('width'); });
+    Type.style.setProperty("--s-settings-list", width + 'px')
 
-    document.body.removeChild(cloned)
+    settingsBtn.parentElement.classList.add("display")
+    settingsBtn.addEventListener("click", e => {
 
-
-    document.documentElement.style.setProperty("--s-settings-list", totalWidth + 'px')
-    settingsBtn.forEach(ele => {
-        ele.parentElement.classList.toggle("display")
-        ele.addEventListener("click", e => {
-
-            ele.parentElement.classList.toggle("display")
-            console.log("XD")
-
-        })
+        settingsBtn.parentElement.classList.toggle("display")
+        console.log("XD")
 
     })
-    let delBtn = document.querySelectorAll(".t-type .t-settings-list .del");
-    let impBtn = document.querySelectorAll(".t-type .t-settings-list .star");
 
-    delBtn.forEach(el => {
-        el.addEventListener("click", e => {
-            clearType(el.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute("type-name-element"))
-        })
+
+
+    let delBtn = Type.querySelector(".t-settings-list .del");
+    let impBtn = Type.querySelector(".t-settings-list .star");
+
+
+    delBtn.addEventListener("click", e => {
+        clearType(id)
+        console.log(id)
     })
-    impBtn.forEach(el => {
-        el.addEventListener("click", e => {
-            let importants = JSON.parse(localStorage.getItem("important"));
-            let type = el.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
-            let cont = type.querySelector(".t-cont-t")
-            if (importants.includes(`${type.getAttribute("type-name-element")}`)) {
-                el.classList.remove("active")
-                cont.removeChild(cont.querySelector(".t-imp"))
-                type.classList.remove("important")
+
+    impBtn.addEventListener("click", e => {
+        let importants = JSON.parse(localStorage.getItem("important"));
+        let cont = Type.querySelector(".t-cont-t")
+        if (importants.includes(`${Type.getAttribute("type-name-element")}`)) {
+            impBtn.classList.remove("active")
+            cont.removeChild(cont.querySelector(".t-imp"))
+            Type.classList.remove("important")
 
 
-                importants = importants.map(function (element) {
-                    return "\"" + element + "\"";
-                });
+            importants = importants.map(function (element) {
+                return "\"" + element + "\"";
+            });
 
-                var index = importants.indexOf(`"${type.getAttribute("type-name-element")}"`);
+            var index = importants.indexOf(`"${Type.getAttribute("type-name-element")}"`);
 
-                importants.splice(index, 1);
-
-
-                localStorage.setItem("important", `[${importants}]`)
-            } else {
-                el.classList.add("active")
-                type.classList.add("important")
+            importants.splice(index, 1);
 
 
+            localStorage.setItem("important", `[${importants}]`)
+        } else {
+            impBtn.classList.add("active")
+            Type.classList.add("important")
 
-                let impEle = document.createElement("div")
-                impEle.classList.add("t-imp")
-                impEle.textContent = "Important";
 
-                importants = importants.map(function (element) {
-                    return "\"" + element + "\"";
-                });
 
-                importants.push(`"${type.getAttribute("type-name-element")}"`)
-                localStorage.setItem("important", `[${importants}]`)
+            let impEle = document.createElement("div")
+            impEle.classList.add("t-imp")
+            impEle.textContent = "Important";
 
-                cont.insertBefore(impEle, cont.firstChild);
+            importants = importants.map(function (element) {
+                return "\"" + element + "\"";
+            });
 
-            }
-        })
+            importants.push(`"${Type.getAttribute("type-name-element")}"`)
+            localStorage.setItem("important", `[${importants}]`)
+
+            cont.insertBefore(impEle, cont.firstChild);
+
+        }
     })
 
 }

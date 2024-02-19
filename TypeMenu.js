@@ -5,7 +5,9 @@ let typeMenu = function (customElement, event, id, intervalId) {
     customElement.innerHTML = `
     <div class="in">
     <div class="menuCategory"><h1> Settings </h1> <i class="fa-solid fa-gear"></i></div>
-    <button class="deletion">Delete Type</button>
+    <h3 class="item">Type » <button class="deletion">Delete Type</button></h3>
+    <div class="menuCategory"><h1> Information </h1> <i class="fa-solid fa-id-card"></i></div>
+    <h3 class="item">ID » ${id}</h3>
     </div>
     `;
 
@@ -21,25 +23,19 @@ let typeMenu = function (customElement, event, id, intervalId) {
     }
     let btndel = document.querySelector(".deletion")
     customElement.querySelector(".deletion").addEventListener("click", e => {
-        clearType(id, intervalId)
+        clearType(id)
     })
     console.log(type)
 }
 
 window.onload = function () {
     if (!localStorage.getItem("name")) {
-
-           let x = "";
-    if (location.hostname.toString().toLowerCase() == "1rqmi-offical.github.io") {
-        x = "/checkments.github.io"
-        console.log(location.hash)
-    }
-        location.href = location.origin + x + "/login.html"
+        location.href = location.origin + "/login.html"
 
     }
     let homebtn = document.querySelector(".m-link.home");
     homebtn.addEventListener("click", e => {
-        location.href = location.origin + x + "/index.html";
+        location.href = location.origin + "/index.html";
     })
 };
 

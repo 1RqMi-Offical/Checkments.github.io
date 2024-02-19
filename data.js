@@ -236,19 +236,18 @@ window.addEventListener("DOMContentLoaded", e => {
             localStorage.setItem(`types${id}`, `[${updatedArray}]`);
             let tLength = JSON.parse(localStorage.getItem("tLength"));
             tLength = tLength.map(e => { return `"${e}"` })
+
             tLength.push(`"${id}"`);
             localStorage.setItem("tLength", `[${tLength}]`)
 
 
+
+
             let tELE = JSON.parse(localStorage.getItem("tLength")).length - 1;
             console.log("TELE : " + tELE)
-
-
-
             createElementBox(typeTitle, typeColumn, typeRow, typeChecked, datesec, dateTimer, tELE, document.querySelector(".box"), id, bgs)
         }
 
-        updateSettingsMenu();
         console.log(loloyArray)
     })
 

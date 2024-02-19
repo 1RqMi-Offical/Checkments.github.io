@@ -10,6 +10,14 @@ if (localStorage.getItem("sound")) {
     localStorage.setItem("sound", 0.5)
 
 }
+let theme;
+if (localStorage.getItem("theme")) {
+    theme = localStorage.getItem("theme");
+} else {
+    theme = "basic";
+    localStorage.setItem("theme", "basic")
+
+}
 
 
 
@@ -70,7 +78,44 @@ function secondsToHoursMinutes(seconds) {
 }
 
 
+let popup = function (text) {
+    let overlay = document.createElement("div")
+    overlay.classList.add("overlay")
 
+    let warntxtheader = document.createElement("h1")
+    warntxtheader.textContent = "Warning"
+    warntxtheader.classList.add("heading")
+    let btnCont = document.createElement("div")
+    let btn1 = document.createElement("button")
+    btn1.textContent = "Cancel";
+    btn1.classList.add("cancel")
+    let btn2 = document.createElement("button")
+    btn2.textContent = "continue";
+    btn2.classList.add("continue")
+    btnCont.classList.add("btncont")
+    btnCont.appendChild(btn1)
+    btnCont.appendChild(btn2)
+    let warn = document.createElement("div")
+    let warntxt = document.createElement("div")
+    warntxt.classList.add("warn-txt")
+    warntxt.textContent = `${text}`
+    warn.classList.add("warn")
+    warn.appendChild(warntxtheader)
+    warn.appendChild(warntxt)
+    warn.appendChild(btnCont)
+    overlay.appendChild(warn)
+
+    overlay.addEventListener("click", e => {
+        if (e.target.classList.toString().includes("overlay") || e.target.classList.toString().includes("cancel")) {
+            document.body.removeChild(overlay);
+        } else if (e.target.classList.toString().includes("continue")) {
+            location.reload();
+            localStorage.clear();
+
+        }
+    })
+    document.body.appendChild(overlay)
+}
 document.addEventListener('DOMContentLoaded', function () {
     let element = document.querySelectorAll(".dropdown .drop");
     let texts = ["one", "two", "three"]
@@ -88,42 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let resSavings = document.querySelector(".dropdown .drop .res-savings");
     resSavings.addEventListener("click", x => {
 
-        let overlay = document.createElement("div")
-        overlay.classList.add("overlay")
-
-        let warntxtheader = document.createElement("h1")
-        warntxtheader.textContent = "Warning"
-        warntxtheader.classList.add("heading")
-        let btnCont = document.createElement("div")
-        let btn1 = document.createElement("button")
-        btn1.textContent = "Cancel";
-        btn1.classList.add("cancel")
-        let btn2 = document.createElement("button")
-        btn2.textContent = "continue";
-        btn2.classList.add("continue")
-        btnCont.classList.add("btncont")
-        btnCont.appendChild(btn1)
-        btnCont.appendChild(btn2)
-        let warn = document.createElement("div")
-        let warntxt = document.createElement("div")
-        warntxt.classList.add("warn-txt")
-        warntxt.textContent = "By proceeding, you will erase all of your data stored on this website."
-        warn.classList.add("warn")
-        warn.appendChild(warntxtheader)
-        warn.appendChild(warntxt)
-        warn.appendChild(btnCont)
-        overlay.appendChild(warn)
-
-        overlay.addEventListener("click", e => {
-            if (e.target.classList.toString().includes("overlay") || e.target.classList.toString().includes("cancel")) {
-                document.body.removeChild(overlay);
-            } else if (e.target.classList.toString().includes("continue")) {
-                location.reload();
-                localStorage.clear();
-
-            }
-        })
-        document.body.appendChild(overlay)
+        popup("By proceeding, you will erase all of your data stored on this website.");
 
     })
     var toggleCheckbox = document.getElementById('toggledark');
@@ -175,9 +185,10 @@ window.addEventListener("online", e => {
 if (!localStorage.getItem("tLength")) {
     localStorage.setItem("tLength", "[]")
 }
-
-window.addEventListener('scroll', function () {
+let oldY = 0;
+window.addEventListener('scroll', function (e) {
     var navbar = document.querySelector('.nav .navlinks');
+
     var scrollPosition = window.scrollY;
 
     if (scrollPosition > 250) {
@@ -185,6 +196,8 @@ window.addEventListener('scroll', function () {
     } else {
         navbar.classList.remove('navbar-fixed');
     }
+
+
 });
 let box = document.querySelector(".box");
 
@@ -222,6 +235,14 @@ let typesReStyle = function () {
 let clearType = function (id) {
     let elx = document.querySelector(`.t-type[type-name-element="${id}"]`);
     elx.style.height = `${elx.offsetHeight}px`;
+    if (Array.from(box.children).includes(elx)) {
+        console.log("YEPPP")
+    }
+
+    console.log(elx)
+    let audio = new Audio("click.mp3")
+    audio.play();
+    console.log("HEY start DELEtion : " + id)
     intervalId = elx.getAttribute("interval");
     clearInterval(intervalId)
     localStorage.removeItem(`types${id}`)
@@ -244,7 +265,27 @@ let clearType = function (id) {
 
 
     localStorage.setItem("tLength", `[${newArray}]`)
-    setTimeout(function () { elx.classList.add("removeal"); }, 100)
+
+
+    console.log("xd")
+    box = document.querySelector(".box")
+
+    let x = 0;
+
+    setTimeout(function () {
+        console.log("Transition has been end.");
+        elx.classList.add("removeal");
+
+
+        setTimeout(function () {
+            elx.classList.remove("removeal");
+            console.log(elx)
+
+            box.removeChild(elx);
+        }, 600)
+
+    }, 100)
+
 
 
 }
@@ -277,6 +318,7 @@ if (!localStorage.getItem("important")) {
 let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, datesec, dateTimer, tELE, ElementContainer, id, bgs) {
     typesReStyle();
 
+    console.log(tELE)
     let important;
     if (localStorage.getItem("important").includes(id)) {
         important = true;
@@ -351,7 +393,7 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
     let intervalId;
     let finishedBtn = document.createElement("button")
     finishedBtn.classList.add("t-btn");
-    finishedBtn.textContent = "Finished, Delete?"
+    finishedBtn.textContent = "Delete?"
     scheduleTimer.textContent = "Time remaining: Hours » 0, Minutes » 0, Seconds » "
     if (isDate) {
         console.log("IS GREATER: " + (currentDate > endDate))
@@ -399,7 +441,7 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
 
     finishedBtn.addEventListener("click", e => {
 
-        clearType(id, intervalId)
+        clearType(id)
 
     })
 
@@ -638,6 +680,8 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
     TypeEle.appendChild(finishedBtn);
 
     ElementContainer.appendChild(TypeEle)
+
+    updateSettingsMenu(id)
     if (bgs != "transparent") {
 
         if (!bgs.toString().includes("https")) {
@@ -862,8 +906,18 @@ let updateRoles = function () {
 
 
 
+window.addEventListener("DOMContentLoaded", e => {
 
-checktypes();
+    checktypes();
+    let navList = document.querySelector(".nav .navlinks .nav-list")
+    navList.addEventListener("click", ex => {
+
+        navList.parentElement.querySelector(".nav-ul").classList.toggle("show")
+
+    })
+
+})
+
 
 
 
@@ -916,7 +970,6 @@ function parseInput(input, unit) {
 }
 
 function updateTimer(timeDifference, element, intervalId, tELE, ordered) {
-    typesReStyle();
     let typeTitle = types[tELE][0];
     let typeColumn = types[tELE][1];
     let typeRow = types[tELE][2];
@@ -987,3 +1040,9 @@ function calculateTimeDifference(targetDate) {
     };
 }
 
+
+let getTheme = function () {
+
+    return localStorage.getItem("theme")
+
+}
