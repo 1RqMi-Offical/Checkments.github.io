@@ -98,25 +98,24 @@ const activities = [
     ["Study Political Science", 4, 1, "[]", "new Date(Date.now() + " + (1 * 60 * 60 * 1000) + "", "1", "", "work"],
     ["Make Coffee", 5, 1, "[]", "new Date(Date.now() + " + (7 * 24 * 60 * 60 * 1000) + "", "1", "", "work"],
     ["Study Medicine", 1, 1, "[]", "new Date(Date.now() + " + (30 * 24 * 60 * 60 * 1000) + "", "1", "", "work"],
-    ["Exercise Brain", 2, 1, "[]", "new Date(Date.now() + " + (24 * 60 * 60 * 1000) + "", "1", "", "work"],
-    ["Check Mail", 3, 1, "[]", "new Date(Date.now() + " + (30 * 24 * 60 * 60 * 1000) + "", "1", "", "work"],
-    ["Make Tea", 5, 1, "[]", "new Date(Date.now() + " + (7 * 24 * 60 * 60 * 1000) + "", "1", "", "work"],
-    ["Study Law", 1, 1, "[]", "new Date(Date.now() + " + (30 * 24 * 60 * 60 * 1000) + "", "1", "", "work"],
-    ["Stretch", 2, 1, "[]", "new Date(Date.now() + " + (24 * 60 * 60 * 1000) + "", "1", "", "work"],
-    ["Check Messages", 3, 1, "[]", "new Date(Date.now() + " + (30 * 24 * 60 * 60 * 1000) + "", "1", "", "work"],
-    ["Study Astronomy", 4, 1, "[]", "new Date(Date.now() + " + (1 * 60 * 60 * 1000) + "", "1", "", "work"],
-    ["Water Houseplants", 5, 1, "[]", "new Date(Date.now() + " + (7 * 24 * 60 * 60 * 1000) + "", "1", "", "work"],
-    ["Take a Break", 2, 1, "[]", "new Date(Date.now() + " + (24 * 60 * 60 * 1000) + "", "1", "", "work"],
-    ["Check Calendar", 3, 1, "[]", "new Date(Date.now() + " + (30 * 24 * 60 * 60 * 1000) + "", "1", "", "work"],
-    ["Brew Coffee", 5, 1, "[]", "new Date(Date.now() + " + (7 * 24 * 60 * 60 * 1000) + "", "1", "", "work"],
-    ["Go for a Drive", 2, 1, "[]", "new Date(Date.now() + " + (24 * 60 * 60 * 1000) + "", "1", "", "work"],
-    ["Check Notifications", 3, 1, "[]", "new Date(Date.now() + " + (30 * 24 * 60 * 60 * 1000) + "", "1", "", "work"],
-    ["Brew Tea", 5, 1, "[]", "new Date(Date.now() + " + (7 * 24 * 60 * 60 * 1000) + "", "1", "", "work"],
-    ["Browse Internet", 2, 1, "[]", "new Date(Date.now() + " + (24 * 60 * 60 * 1000) + "", "1", "", "work"],
-    ["Check Updates", 3, 1, "[]", "new Date(Date.now() + " + (30 * 24 * 60 * 60 * 1000) + "", "1", "", "work"],
-    ["Drink Water", 5, 1, "[]", "new Date(Date.now() + " + (7 * 24 * 60 * 60 * 1000) + "", "1", "", "work"],
-    ["Check Social Networks", 2, 1, "[]", "new Date(Date.now() + " + (24 * 60 * 60 * 1000) + "", "1", "", "work"],
-    ["Chat with Friends", 4, 1, "[]", "new Date(Date.now() + " + (1 * 60 * 60 * 1000) + "", "1", "", "work"],
+    ["Exercise Brain", 2, 1, "[]", "new Date(Date.now() + " + (24 * 60 * 60 * 1000) + "", "1", "", "https://cdn.cnn.com/cnnnext/dam/assets/131106134340-01-young-brain-restricted-horizontal-large-gallery.jpg"],
+    ["Check Mail", 3, 1, "[]", "new Date(Date.now() + " + (30 * 24 * 60 * 60 * 1000) + "", "1", "", "https://emaillistvalidation.com/blog/content/images/size/w500/2023/03/Untitled-design--11-.png"],
+    ["Study Law", 1, 1, "[]", "new Date(Date.now() + " + (30 * 24 * 60 * 60 * 1000) + "", "1", "", "https://pavaedu.com/wp-content/uploads/2019/08/law-milano-un%C4%B1versitesi-pavaedu-1024x538.jpg"],
+    ["Stretch", 2, 1, "[]", "new Date(Date.now() + " + (24 * 60 * 60 * 1000) + "", "1", "", "https://images.ctfassets.net/hjcv6wdwxsdz/30748WEbOJBfAIZXDVvVMS/681653b4c4ee1c097dd69c36a746f201/iStock-1344890104.jpg?w=1258&h=834&fl=progressive&q=50&fm=jpg"],
+    ["Check Messages", 3, 1, "[]", "new Date(Date.now() + " + (30 * 24 * 60 * 60 * 1000) + "", "1", "", "https://www.techfunnel.com/wp-content/uploads/2019/08/Top-6-Instant-Messaging-Apps-for-Business-and-3-Key-Benefits-1.png"],
+    ["Study Astronomy", 4, 1, "[]", "new Date(Date.now() + " + (1 * 60 * 60 * 1000) + "", "1", "", "https://www.collegeatlas.org/wp-content/uploads/2017/03/student-studying-astronomy.jpg"],
+    ["Water Houseplants", 5, 1, "[]", "new Date(Date.now() + " + (7 * 24 * 60 * 60 * 1000) + "", "1", "", "https://plantperfect.com/wp-content/uploads/2022/10/Plant-Perfect-Garden-Center-Bismarck-How-to-Water-Houseplants-in-the-Winter-watering-can-houseplant.jpg"],
+    ["Take a Break", 2, 1, "[]", "new Date(Date.now() + " + (24 * 60 * 60 * 1000) + "", "1", "", "https://static.businessworld.in/article/article_extra_large_image/1564477703_dlw1n4_coffee_mug_take_a_break_shutterstock_470.jpg"],
+    ["Check Calendar", 3, 1, "[]", "new Date(Date.now() + " + (30 * 24 * 60 * 60 * 1000) + "", "1", "", "https://thumbs.dreamstime.com/b/d-character-standing-calendar-checkmarks-isolated-white-94688983.jpg"],
+    ["Coffee", 5, 1, "[]", "new Date(Date.now() + " + (7 * 24 * 60 * 60 * 1000) + "", "1", "", "https://img.freepik.com/free-photo/fresh-coffee-steams-wooden-table-close-up-generative-ai_188544-8923.jpg?size=626&ext=jpg&ga=GA1.1.1412446893.1708560000&semt=sph"],
+    ["Go for a Drive", 2, 1, "[]", "new Date(Date.now() + " + (24 * 60 * 60 * 1000) + "", "1", "", "https://www.nps.gov/thingstodo/images/Do_Drive_GTSR_JF_2.jpg?maxwidth=1300&autorotate=false"],
+    ["Check Notifications", 3, 1, "[]", "new Date(Date.now() + " + (30 * 24 * 60 * 60 * 1000) + "", "1", "", "https://i0.wp.com/technode.com/wp-content/uploads/2022/03/55363556_l-scaled.jpg?fit=2560%2C1707&ssl=1"],
+    ["Tea", 5, 1, "[]", "new Date(Date.now() + " + (7 * 24 * 60 * 60 * 1000) + "", "1", "", "https://www.saatva.com/blog/wp-content/uploads/2021/04/c68ae959-811e-485f-b5d3-d6b7ae56cea2_beginners-tea-guide-main-4.jpeg"],
+    ["Browse Internet", 2, 1, "[]", "new Date(Date.now() + " + (24 * 60 * 60 * 1000) + "", "1", "", "https://engineering.fb.com/wp-content/uploads/2013/07/internet-browsing-data.jpg"],
+    ["Check Updates", 3, 1, "[]", "new Date(Date.now() + " + (30 * 24 * 60 * 60 * 1000) + "", "1", "", "https://www.state.gov/wp-content/uploads/2022/01/shutterstock_248799484-scaled.jpg"],
+    ["Drink Water", 5, 1, "[]", "new Date(Date.now() + " + (7 * 24 * 60 * 60 * 1000) + "", "1", "", "https://media.post.rvohealth.io/wp-content/uploads/2020/06/glass-drinking-water-1200x628-Facebook-1200x628.jpg"],
+    ["Check Social Networks", 2, 1, "[]", "new Date(Date.now() + " + (24 * 60 * 60 * 1000) + "", "1", "", "https://assets-global.website-files.com/5f22271f4a92a90a8198c6ef/5f581f61563c688743b41aff_best-social-networking-sites.jpg"],
+    ["Chat with Friends", 4, 1, "[]", "new Date(Date.now() + " + (1 * 60 * 60 * 1000) + "", "1", "", "https://freedesignfile.com/upload/2018/07/Chat-online-with-friends-using-laptop-Stock-Photo.jpg"],
 
 ];
 let reID = function (list) {
@@ -143,8 +142,9 @@ let reloadSuggestions = function () {
     suggestions.setAttribute("selected", "0");
 
     suggestions.innerHTML = "";
+    let p = 0;
     for (let y = 0; y < randomActivityarr.length; y++) {
-
+        p++;
         let recommend = document.createElement("div");
         recommend.classList.add("sug-item")
         recommend.textContent = randomActivityarr[y][0];
@@ -180,9 +180,15 @@ let reloadSuggestions = function () {
             }
 
         })
-        suggestions.appendChild(recommend);
+        smoothAddition(recommend, suggestions, p, 100)
 
     }
+}
+
+let smoothAddition = function (element, container, n, speed) {
+
+
+    setTimeout(function () { container.appendChild(element) }, speed * n)
 }
 window.addEventListener("DOMContentLoaded", e => {
     reloadSuggestions()

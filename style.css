@@ -220,6 +220,7 @@ ul {
     .nav .navlinks .nav-ul {
         width: 98%;
         align-items: flex-start !important;
+
         display: none !important;
     }
 
@@ -230,15 +231,30 @@ ul {
 
     .nav .navlinks.navbar-fixed .nav-list {
         top: calc(50% + 15px);
+        position: absolute !important;
+
+    }
+
+    .nav .navlinks.navbar-fixed .nav-list.clicked {
+        top: calc(50% + 15px);
+        position: absolute !important;
+        transform: translate(15px, -50%);
+        left: 15px;
     }
 
     .nav .navlinks .nav-list {
-
         display: flex !important;
-
+        position: relative;
+        z-index: 100000;
 
     }
 
+    .nav .navlinks .nav-list.clicked {
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: fixed;
+    }
 
     .nav .navlinks .nav-ul.show .m-link {
         height: max-content !important;
@@ -252,16 +268,17 @@ ul {
         gap: 10px 0;
         display: flex !important;
         flex-direction: column !important;
-        overflow-y: scroll;
+
 
     }
 
     .nav .navlinks .nav-ul.show .m-link.dropdown .drop {
-        position: relative !important;
+        background-color: transparent !important;
+        border-color: transparent !important;
         top: 0 !important;
         margin: 0 !important;
         left: 0 !important;
-        transform: none;
+        transform: translate(50%, -30%);
         padding: 0 !important;
         height: max-content !important;
     }
@@ -281,7 +298,7 @@ ul {
         position: fixed !important;
         display: flex !important;
         backdrop-filter: grayscale(1);
-        background-color: rgba(0, 0, 0, 0.836);
+        background-color: rgb(0, 0, 0);
         padding-top: 30px !important;
         gap: 10px !important;
         overflow-y: scroll !important;
@@ -289,8 +306,6 @@ ul {
     }
 
     .nav .navlinks.navbar-fixed .nav-ul.show {
-        position: fixed;
-        height: calc(100vh);
 
         top: 60px;
     }

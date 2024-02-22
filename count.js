@@ -779,6 +779,12 @@ typeCreator.addEventListener("click", e => {
 
 });
 window.addEventListener("DOMContentLoaded", e => {
+
+    let listed = document.querySelector(".nav .navlinks .nav-list")
+    listed.addEventListener("click", v => {
+        listed.classList.toggle("clicked")
+    })
+
     let uncheckall = document.querySelector(".nav .navlinks .nav-ul .uncheckall")
 
     uncheckall.addEventListener("click", e => {
