@@ -37,5 +37,6 @@ window.onload = function () {
     homebtn.addEventListener("click", e => {
         location.href = location.origin + "/index.html";
     })
+
 };
 

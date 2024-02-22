@@ -11,7 +11,6 @@ function getRandomActivity(activities) {
     let ran = Math.floor(Math.random() * activities.length);
     while (ran >= 20 || ran <= 2) {
         ran = Math.floor(Math.random() * activities.length / 10);
-        console.log("Fuck " + ran)
     }
     for (let x = 0; x < activities.length; x++) {
         n++
@@ -120,24 +119,36 @@ const activities = [
     ["Chat with Friends", 4, 1, "[]", "new Date(Date.now() + " + (1 * 60 * 60 * 1000) + "", "1", "", "work"],
 
 ];
+let reID = function (list) {
 
+    list.forEach(e => {
+
+        e[6] = `${generateRandomId()}`;
+        console.log("3ndy.")
+        console.log(": " + e)
+    });
+    console.log(list)
+    return list;
+}
 // Get a random activity
-const randomActivitytitles = getRandomActivity(activities).titles;
-const randomActivityarr = getRandomActivity(activities).arr;
+let randomActivityarr;
 
 console.log(randomActivityarr)
+let reloadSuggestions = function () {
+    randomActivityarr = getRandomActivity(activities).arr;
 
-window.addEventListener("DOMContentLoaded", e => {
+
     let suggestions = document.querySelector(".box .suggestions");
 
     suggestions.setAttribute("selected", "0");
 
-
+    suggestions.innerHTML = "";
     for (let y = 0; y < randomActivityarr.length; y++) {
 
         let recommend = document.createElement("div");
         recommend.classList.add("sug-item")
         recommend.textContent = randomActivityarr[y][0];
+        recommend.setAttribute("id", randomActivityarr[y][6]);
 
         recommend.addEventListener("click", ex => {
 
@@ -171,12 +182,20 @@ window.addEventListener("DOMContentLoaded", e => {
         })
         suggestions.appendChild(recommend);
 
-
     }
+}
+window.addEventListener("DOMContentLoaded", e => {
+    reloadSuggestions()
+    let suggestions = document.querySelector(".box .suggestions");
     let sel = document.querySelector(".box .sug-sel .sug-list-item.sel");
     let reset = document.querySelector(".box .sug-sel .sug-list-item.res");
+    let ref = document.querySelector(".box .sug-sel .sug-list-item.ref");
     let create = document.querySelector(".box .sug-sel .sug-list-item.create");
+    ref.addEventListener("click", e => {
 
+        reloadSuggestions()
+
+    })
     sel.addEventListener("click", ex => {
 
         suggestions.querySelectorAll(" .sug-item:not(.active)").forEach(e => {
@@ -197,24 +216,28 @@ window.addEventListener("DOMContentLoaded", e => {
         let secondArray = [];
 
         let loloyArray = [];
-
+        suggestions = document.querySelector(".box .suggestions");
+        if (!suggestions.querySelector(".active")) { return }
         suggestions.querySelectorAll(".sug-item.active").forEach(e => {
-            secondArray.push(`${e.textContent}`)
+            secondArray.push(`${e.getAttribute("id")}`)
 
         })
-        console.log("sarry:" + firstArray)
-        console.log("sarry:" + secondArray)
-        for (let i = 0; i < secondArray.length; i++) {
-            // Check if the element in secondArray exists in the firstArray
-            if (firstArray[i][0] == secondArray[i]) {
-                loloyArray.push(firstArray[i]);
-                console.log("IT MUST BE")
+
+        console.log("sarry 1 :" + firstArray)
+        console.log("sarry 2:" + secondArray)
+        for (let ff = 0; ff < firstArray.length; ff++) {
+            for (let i = 0; i < secondArray.length; i++) {
+                if (firstArray[ff][6] == secondArray[i]) {
+                    loloyArray.push(firstArray[ff]);
+                    console.log("IT MUST BE + " + firstArray[ff] + " " + secondArray[i])
+                }
+
             }
+
         }
         for (let i = 0; i < loloyArray.length; i++) {
             if (loloyArray[i][4].includes("Date.now()")) {
                 loloyArray[i][4] = loloyArray[i][4].replaceAll("Date.now()", Date.now()).replaceAll("new Date(", "");
-                console.log(loloyArray[i][4])
                 let parts = loloyArray[i][4].split('+');
 
                 // Parse each part into a number and perform addition
@@ -246,9 +269,24 @@ window.addEventListener("DOMContentLoaded", e => {
             let tELE = JSON.parse(localStorage.getItem("tLength")).length - 1;
             console.log("TELE : " + tELE)
             createElementBox(typeTitle, typeColumn, typeRow, typeChecked, datesec, dateTimer, tELE, document.querySelector(".box"), id, bgs)
+            window.scrollTo({
+                top: document.querySelector(`div[type-name-element="${id}"]`).offsetTop + document.querySelector(`div[type-name-element="${id}"]`).offsetHeight / 2,
+                behavior: 'smooth'
+            });
+
         }
 
-        console.log(loloyArray)
+
+        randomActivityarr = reID(randomActivityarr);
+
+        suggestions.querySelectorAll(".sug-item.active").forEach(e => { e.click() });
+        let n = 0;
+        suggestions.querySelectorAll(".sug-item").forEach(e => {
+            e.setAttribute("id", `${randomActivityarr[n][6]}`)
+            n++;
+
+
+        })
     })
 
 

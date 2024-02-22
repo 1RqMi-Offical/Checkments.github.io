@@ -42,6 +42,7 @@ let updateSettingsMenu = function (id) {
 
     Type.style.setProperty("--s-settings-list", width + 'px')
 
+    document.body.removeChild(cloned)
     settingsBtn.parentElement.classList.add("display")
     settingsBtn.addEventListener("click", e => {
 

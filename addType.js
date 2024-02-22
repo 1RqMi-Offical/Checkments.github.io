@@ -123,7 +123,7 @@ Ucreate.addEventListener("click", e => {
     updateSettingsMenu()
     typesReStyle();
     window.scrollTo({
-        top: document.querySelector(`div[type-name-element="${id}"]`).offsetTop - 30,
+        top: document.querySelector(`div[type-name-element="${id}"]`).offsetTop - 10,
         behavior: 'smooth'
     });
 
