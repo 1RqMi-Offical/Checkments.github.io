@@ -78,12 +78,13 @@ function secondsToHoursMinutes(seconds) {
 }
 
 
-let popup = function (text) {
+let popup = function (text, state, buttoned, subtitle) {
     let overlay = document.createElement("div")
     overlay.classList.add("overlay")
 
     let warntxtheader = document.createElement("h1")
-    warntxtheader.textContent = "Warning"
+    if (!state) { state = "Warning" }
+    warntxtheader.textContent = `${state}`
     warntxtheader.classList.add("heading")
     let btnCont = document.createElement("div")
     let btn1 = document.createElement("button")
@@ -93,74 +94,101 @@ let popup = function (text) {
     btn2.textContent = "continue";
     btn2.classList.add("continue")
     btnCont.classList.add("btncont")
-    btnCont.appendChild(btn1)
+    if (buttoned == "two") { btnCont.appendChild(btn1) }
+
     btnCont.appendChild(btn2)
     let warn = document.createElement("div")
     let warntxt = document.createElement("div")
     warntxt.classList.add("warn-txt")
     warntxt.textContent = `${text}`
     warn.classList.add("warn")
+    if (subtitle) {
+        let subt = document.createElement("p");
+        subt.textContent = subtitle;
+        warntxt.appendChild(subt);
+    }
     warn.appendChild(warntxtheader)
     warn.appendChild(warntxt)
+
+
     warn.appendChild(btnCont)
+
     overlay.appendChild(warn)
+    if (!buttoned || buttoned == "one") {
+        btn2.setAttribute("state", "access");
+    }
 
+    if (buttoned == "two") {
+        btn2.setAttribute("state", "clear");
+        btn1.setAttribute("state", "clear");
+    }
     overlay.addEventListener("click", e => {
-        if (e.target.classList.toString().includes("overlay") || e.target.classList.toString().includes("cancel")) {
-            document.body.removeChild(overlay);
-        } else if (e.target.classList.toString().includes("continue")) {
-            location.reload();
-            localStorage.clear();
+        if (e.target.classList.toString().includes("overlay") || (e.target.classList.toString().includes("cancel") && e.target.getAttribute("state") == "clear") || (e.target.classList.toString().includes("continue") && e.target.getAttribute("state") == "access")) {
+            overlay.style.setProperty("--animation-name", "end-fade-y 0.3s ease-in-out 1");
+            overlay.style.setProperty("--opacity", "transparent");
+            warn.addEventListener("animationend", x => {
 
+                document.body.removeChild(overlay);
+            })
+
+            document.body.style.overflow = "visible"
+        } else if (e.target.classList.toString().includes("continue")) {
+            if (e.target.getAttribute("state") == "clear") {
+                location.reload();
+                localStorage.clear();
+            }
         }
     })
     document.body.appendChild(overlay)
+    document.body.style.overflow = "hidden"
 }
 document.addEventListener('DOMContentLoaded', function () {
-    let element = document.querySelectorAll(".dropdown .drop");
-    let texts = ["one", "two", "three"]
-    for (let x = 0; x < element.length; x++) {
-        let computedHeight = window.getComputedStyle(element[x]).height;
 
-        setTimeout(function () { element[x].classList.add("zero") }, 100)
+})
 
-        document.documentElement.style.setProperty(`--height-${texts[x]}`, `${computedHeight}`);
-        element[x].setAttribute("height", `${computedHeight}`)
+let element = document.querySelectorAll(".dropdown .drop");
+let texts = ["one", "two", "three"]
+for (let x = 0; x < element.length; x++) {
+    let computedHeight = window.getComputedStyle(element[x]).height;
 
-    }
+    setTimeout(function () { element[x].classList.add("zero") }, 100)
+
+    document.documentElement.style.setProperty(`--height-${texts[x]}`, `${computedHeight}`);
+    element[x].setAttribute("height", `${computedHeight}`)
+
+}
 
 
-    let resSavings = document.querySelector(".dropdown .drop .res-savings");
-    resSavings.addEventListener("click", x => {
+let resSavings = document.querySelector(".dropdown .drop .res-savings");
+resSavings.addEventListener("click", x => {
 
-        popup("By proceeding, you will erase all of your data stored on this website.");
+    popup("By proceeding, you will erase all of your data stored on this website.", "Warning", "two");
 
-    })
-    var toggleCheckbox = document.getElementById('toggledark');
+})
+var toggleCheckbox = document.getElementById('toggledark');
 
-    let checker = localStorage.getItem("dark");
-    if (checker == "white") {
+let checker = localStorage.getItem("dark");
+if (checker == "white") {
+    document.documentElement.style.setProperty(`--bc`, `white`);
+    toggleCheckbox.setAttribute("checked", "true")
+
+} else {
+    document.documentElement.style.setProperty(`--bc`, `rgb(13, 12, 17)`);
+}
+
+toggleCheckbox.addEventListener('change', function () {
+    // When the checkbox state changes (checked or unchecked), this function will be executed
+    if (toggleCheckbox.checked) {
+        // Checkbox is checked
         document.documentElement.style.setProperty(`--bc`, `white`);
-        toggleCheckbox.setAttribute("checked", "true")
-
+        localStorage.setItem("dark", "white")
     } else {
+        // Checkbox is unchecked
         document.documentElement.style.setProperty(`--bc`, `rgb(13, 12, 17)`);
+        localStorage.setItem("dark", "notwhite")
     }
-
-    toggleCheckbox.addEventListener('change', function () {
-        // When the checkbox state changes (checked or unchecked), this function will be executed
-        if (toggleCheckbox.checked) {
-            // Checkbox is checked
-            document.documentElement.style.setProperty(`--bc`, `white`);
-            localStorage.setItem("dark", "white")
-        } else {
-            // Checkbox is unchecked
-            document.documentElement.style.setProperty(`--bc`, `rgb(13, 12, 17)`);
-            localStorage.setItem("dark", "notwhite")
-        }
-    });
-
 });
+
 
 
 window.addEventListener("offline", e => {
@@ -191,10 +219,13 @@ window.addEventListener('scroll', function (e) {
 
     var scrollPosition = window.scrollY;
 
-    if (scrollPosition > 250) {
-        navbar.classList.add('navbar-fixed');
-    } else {
-        navbar.classList.remove('navbar-fixed');
+    if (!document.querySelector(".nav.clicked")) {
+        if (scrollPosition > 250) {
+
+            navbar.classList.add('navbar-fixed');
+        } else {
+            navbar.classList.remove('navbar-fixed');
+        }
     }
 
 
@@ -680,8 +711,8 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
     TypeEle.appendChild(finishedBtn);
 
     ElementContainer.appendChild(TypeEle)
+    setTimeout(function () { updateSettingsMenu(id) }, 100)
 
-    updateSettingsMenu(id)
     if (bgs != "transparent") {
 
         if (!bgs.toString().includes("https")) {
@@ -765,26 +796,63 @@ resetPtsBtn.addEventListener("click", e => {
 
 
 });
+let toggleListed = function () {
+    document.querySelector(".nav").classList.toggle("clicked")
+    if (document.querySelector(".nav").classList.toString().includes("clicked")) {
+        document.body.style.overflowY = "scroll"
+        document.body.querySelectorAll("*").forEach(e => {
+            e.style.setProperty('display', 'none', 'important');
+            document.querySelector(".nav .navlinks").classList.remove('navbar-fixed');
+            document.querySelector(".nav").style.display = "flex";
+            document.querySelectorAll(".nav *").forEach(v => { v.style.removeProperty("display"); })
+        })
+    } else {
+        document.body.querySelectorAll("*").forEach(e => { e.style.removeProperty('display'); });
 
+        document.body.style.overflowY = "scroll"
+    }
+}
 let boxBackup = box;
-typeCreator.addEventListener("click", e => {
 
-    window.scrollTo({
-        top: document.querySelector(`.createType`).offsetTop,
-        behavior: 'smooth'
-    });
+typeCreator.addEventListener("click", e => {
+    if (document.querySelector(".clicked.nav")) { toggleListed(); }
+
+    setTimeout(function () {
+        window.scrollTo({
+            top: document.querySelector(`.createType`).offsetTop - document.querySelector(`.createType`).offsetHeight / 2,
+            behavior: 'smooth'
+        });
+    }, 100)
+
 
 
 
 
 });
+
 window.addEventListener("DOMContentLoaded", e => {
 
     let listed = document.querySelector(".nav .navlinks .nav-list")
     listed.addEventListener("click", v => {
-        listed.classList.toggle("clicked")
-    })
 
+
+        toggleListed();
+
+    })
+    let linkers = document.querySelectorAll(".nav .navlinks .nav-ul .m-link.dropdown")
+    linkers.forEach(element => {
+        element.addEventListener("click", e => {
+            if (document.querySelector(".nav").classList.toString().includes("clicked")) {
+                if (e.target.classList.toString().includes("m-link")) {
+                    (element.querySelector(".drop")).classList.toggle("cl-visible")
+                    window.scrollTo({
+                        top: element.offsetTop + 10 + (element.offsetHeight / 2),
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        })
+    })
     let uncheckall = document.querySelector(".nav .navlinks .nav-ul .uncheckall")
 
     uncheckall.addEventListener("click", e => {

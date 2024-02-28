@@ -30,17 +30,23 @@
 <body>
 
     <div class="nav">
-        <div class="bac"></div>
+        <div class="bac">
+            <video loop autoplay>
+                <source src="bc.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
         <div class="title">
             <h3>Checkments</h3> <span><img src="logo.png" alt=""
                     style="filter:grayscale(1) brightness(2); object-fit: contain; width: 100px; height: 100px;"></span>
         </div>
         <div class="navlinks">
             <i class="fa-solid fa-list nav-list"></i>
+            <div class="pts">Points »<span class="pts-num sp-style">0</span></div>
             <ul class="nav-ul">
                 <li class="dropdown m-link">Settings <ul class="drop d-one">
-                        <ul class="category">
-                            <span class="type">Apperance</span>
+                        <ul class="category ">
+                            <span class="type ">Apperance</span>
                             <label class="mode labe" id="x">Mode <input type="checkbox" name="x" id="toggledark"
                                     class="toggle-checkbox"></label>
                             <label class="vol labe" id="y">Sound » <div class="val"></div><input type="range" min="0"
@@ -64,8 +70,8 @@
                         </ul>
                     </ul>
                 </li>
-                <li class="dropdown  m-link">Timing<ul class="drop d-two">
-                        <ul class="category">
+                <li class="dropdown  m-link">Timing<ul class="drop disabled d-two ">
+                        <ul class="category ">
                             <span class="type">Type</span>
                             <li class="active type-btn ty-y">Yearly</li>
                             <li class="type-btn ty-m">Monthly</li>
@@ -137,7 +143,6 @@
 
 
             </ul>
-            <div class="pts">Points »<span class="pts-num sp-style">0</span></div>
         </div>
     </div>
     <div class="box" id="box">

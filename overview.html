@@ -19,14 +19,23 @@
 
 <body>
     <div class="nav">
+        <div class="bac">
+            <video loop autoplay>
+                <source src="bc.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
         <div class="title">
-            <h3>Checkments</h3> <span><i class="fa-regular fa-calendar-days"></i></span>
+            <h3>Checkments</h3> <span><img src="logo.png" alt=""
+                    style="filter:grayscale(1) brightness(2); object-fit: contain; width: 100px; height: 100px;"></span>
         </div>
         <div class="navlinks">
+            <i class="fa-solid fa-list nav-list"></i>
+            <div class="pts">Points »<span class="pts-num sp-style">0</span></div>
             <ul class="nav-ul">
                 <li class="dropdown m-link">Settings <ul class="drop d-one">
-                        <ul class="category">
-                            <span class="type">Apperance</span>
+                        <ul class="category ">
+                            <span class="type ">Apperance</span>
                             <label class="mode labe" id="x">Mode <input type="checkbox" name="x" id="toggledark"
                                     class="toggle-checkbox"></label>
                             <label class="vol labe" id="y">Sound » <div class="val"></div><input type="range" min="0"
@@ -36,7 +45,7 @@
                         </ul>
                         <ul class="category">
                             <span class="type">Main settings</span>
-                            <li>Reset savings</li>
+                            <li class="res-savings">Reset savings</li>
                             <li class="create">Create Type</li>
                             <li class="overview">Overview</li>
                             <li>Rollete Tasks <span class="new">» new</span></li>
@@ -50,8 +59,8 @@
                         </ul>
                     </ul>
                 </li>
-                <li class="dropdown  m-link">Timing<ul class="drop d-two">
-                        <ul class="category">
+                <li class="dropdown  m-link">Timing<ul class="drop disabled d-two ">
+                        <ul class="category ">
                             <span class="type">Type</span>
                             <li class="active type-btn ty-y">Yearly</li>
                             <li class="type-btn ty-m">Monthly</li>
@@ -61,64 +70,67 @@
                 </li>
                 <li class="m-link uncheckall">Uncheck All</li>
                 <li class="m-link home">Home</li>
-                <li class="dropdown m-link">Role »<span class="role sp-style">Ⅰ</span>
+                <li class="m-link Tutorial">Tutorial</li>
+                <li class="dropdown m-link">Role »<span class="role sp-style">Sovereign</span>
                     <ul class="drop d-two">
                         <ul class="category roles">
                             <span class="type">Tiers</span>
-                            <li class="active" status="unlocked" role="Ⅰ" pointed="0">Ⅰ <span>
+                            <li class="active" status="unlocked" role="Sovereign" pointed="0">Sovereign<span>
                                     <i class="fa-solid fa-lock"></i>
                                     <i class="fa-solid fa-key"></i>
-                                    » 100
+                                    » 0
                                     <i class="fa-solid fa-coins"></i></span></li>
-                            <li status="locked" role="ⅠⅠ" pointed="200">ⅠⅠ<span>
+                            <li status="locked" role="Premier" pointed="1000">Premier<span>
                                     <i class="fa-solid fa-lock"></i>
                                     <i class="fa-solid fa-key"></i>
-                                    » 200
+                                    » 1000
                                     <i class="fa-solid fa-coins"></i></span></li>
-                            <li status="locked" role="ⅠⅠⅠ" pointed="300">ⅠⅠⅠ<span>
-                                    <i class="fa-solid fa-lock"></i>
-                                    <i class="fa-solid fa-key"></i>
-                                    » 300
-                                    <i class="fa-solid fa-coins"></i></span></li>
-                            <li status="locked" role="Ⅳ" pointed="600">Ⅳ<span>
-                                    <i class="fa-solid fa-lock"></i>
-                                    <i class="fa-solid fa-key"></i>
-                                    » 600
-                                    <i class="fa-solid fa-coins"></i></span></li>
-                            <li status="locked" role="Ⅴ" pointed="900">Ⅴ<span>
-                                    <i class="fa-solid fa-lock"></i>
-                                    <i class="fa-solid fa-key"></i>
-                                    » 900
-                                    <i class="fa-solid fa-coins"></i></span></li>
-                            <li status="locked" role="ⅤⅠ" pointed="1200">ⅤⅠ<span>
-                                    <i class="fa-solid fa-lock"></i>
-                                    <i class="fa-solid fa-key"></i>
-                                    » 1200
-                                    <i class="fa-solid fa-coins"></i></span></li>
-                            <li status="locked" role="ⅤⅠⅠ" pointed="1500">ⅤⅠⅠ<span>
-                                    <i class="fa-solid fa-lock"></i>
-                                    <i class="fa-solid fa-key"></i>
-                                    »
-                                    1500 <i class="fa-solid fa-coins"></i></span></li>
-                            <li status="locked" role="ⅤⅠⅠⅠ" pointed="2000">ⅤⅠⅠⅠ<span>
-                                    <i class="fa-solid fa-lock"></i>
-                                    <i class="fa-solid fa-key"></i>
-                                    »
-                                    2000 <i class="fa-solid fa-coins"></i></span></li>
-                            <li status="locked" role="ⅠⅩ" pointed="2500">ⅠⅩ<span>
+                            <li status="locked" role="Majesty" pointed="2500">Majesty<span>
                                     <i class="fa-solid fa-lock"></i>
                                     <i class="fa-solid fa-key"></i>
                                     » 2500
                                     <i class="fa-solid fa-coins"></i></span></li>
-                            <li class="legend" status="locked" role="Ⅹ" card="rainbow" pointed="5000">Ⅹ<span>
+                            <li status="locked" role="Laureate" pointed="4000">Laureate<span>
                                     <i class="fa-solid fa-lock"></i>
                                     <i class="fa-solid fa-key"></i>
-                                    » 5000
+                                    » 4000
+                                    <i class="fa-solid fa-coins"></i></span></li>
+                            <li status="locked" role="Pontiff" pointed="9000">Pontiff<span>
+                                    <i class="fa-solid fa-lock"></i>
+                                    <i class="fa-solid fa-key"></i>
+                                    » 9000
+                                    <i class="fa-solid fa-coins"></i></span></li>
+                            <li status="locked" role="Excellency" pointed="12000">Excellency<span>
+                                    <i class="fa-solid fa-lock"></i>
+                                    <i class="fa-solid fa-key"></i>
+                                    » 12000
+                                    <i class="fa-solid fa-coins"></i></span></li>
+                            <li status="locked" role="Ambassador" pointed="15000">Ambassador<span>
+                                    <i class="fa-solid fa-lock"></i>
+                                    <i class="fa-solid fa-key"></i>
+                                    »
+                                    15000 <i class="fa-solid fa-coins"></i></span></li>
+                            <li status="locked" role="General" pointed="20000">General<span>
+                                    <i class="fa-solid fa-lock"></i>
+                                    <i class="fa-solid fa-key"></i>
+                                    »
+                                    20000 <i class="fa-solid fa-coins"></i></span></li>
+                            <li status="locked" role="CEO" pointed="250000">CEO<span>
+                                    <i class="fa-solid fa-lock"></i>
+                                    <i class="fa-solid fa-key"></i>
+                                    » 250000
+                                    <i class="fa-solid fa-coins"></i></span></li>
+                            <li class="legend" status="locked" role="BOSS" card="rainbow" pointed="500000">BOSS<span>
+                                    <i class="fa-solid fa-lock"></i>
+                                    <i class="fa-solid fa-key"></i>
+                                    » 500000
                                     <i class="fa-solid fa-coins"></i></span></li>
                         </ul>
+
                     </ul>
                 </li>
-                <div class="pts">Points »<span class="pts-num sp-style">0</span></div>
+
+
             </ul>
         </div>
     </div>

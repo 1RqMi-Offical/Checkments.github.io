@@ -1,19 +1,29 @@
 
 document.addEventListener("DOMContentLoaded", e => {
-    if (document.querySelector(".t-type")) {
-        getNewWidth()
+    setTimeout(function () {
+        if (!localStorage.getItem("udate")) {
+            localStorage.setItem("udate", "2024/28/2")
+            popup("We've added [Suggestions] section check it out", `Welcome Back ${localStorage.getItem("name").toUpperCase()} To Checkments!`, "one", `Update Date | ${localStorage.getItem("udate")}`)
 
+        }
 
+    }, 100)
+
+    var video = document.querySelector("video");
+    function playVideo() {
+        video.play();
+
+        // Remove event listener to prevent multiple plays
+        document.removeEventListener("click", playVideo);
+        document.removeEventListener("keydown", playVideo);
     }
+
+    // Listen for any interaction events (click or key press)
+    document.addEventListener("click", playVideo);
+    document.addEventListener("keydown", playVideo);
+
 })
 
-
-let getNewWidth = function () {
-
-
-
-
-}
 
 
 let updateSettingsMenu = function (id) {

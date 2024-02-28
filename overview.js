@@ -23,7 +23,7 @@ overviewBtn.addEventListener("click", e => {
 if (back)
     back.addEventListener("click", e => {
         let x = "";
-        if (location.hostname.toLocaleLowerCase() = "1rqmi-offical.github.io") {
+        if (location.hostname.toString().toLowerCase() == "1rqmi-offical.github.io") {
             x = "/checkments.github.io"
         }
         location.href = location.origin + x + "/index.html"
