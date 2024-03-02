@@ -128,6 +128,7 @@ Ucreate.addEventListener("click", e => {
             top: document.querySelector(`[type-name-element="${id}"]`).offsetTop + (document.querySelector(`[type-name-element="${id}"]`).offsetHeight / 2),
             behavior: 'smooth'
         });
+        glowFor(document.querySelector(`[type-name-element="${id}"]`));
     }, 100)
 
 

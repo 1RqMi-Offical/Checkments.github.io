@@ -1108,6 +1108,68 @@
 
 }
 
+.glow-for-while {
+    position: relative;
+    background-color: var(--bc);
+    animation: glows 2s linear 1;
+    overflow: hidden;
+
+}
+
+@keyframes glows {
+    0% {
+        opacity: 0;
+    }
+
+    100%,
+    50% {
+        opacity: 1;
+    }
+}
+
+.glow-for-while::before {
+    content: "";
+    z-index: -80;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--bc);
+    width: calc(100% - 3px);
+    height: calc(100% - 3px);
+
+}
+
+.glow-for-while::after {
+    content: "";
+    z-index: -100;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center center;
+    background-image: conic-gradient(transparent, var(--border), rgb(233, 147, 255), transparent, transparent);
+    width: 1300px;
+    height: 1300px;
+    animation: glowsr 2s linear 1;
+}
+
+@keyframes glowsr {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+        opacity: 0;
+
+    }
+}
+
+.t-type.hidden[reveal] {
+    display: none !important;
+}
+
 .t-type[reveal] {
     display: none !important;
 }

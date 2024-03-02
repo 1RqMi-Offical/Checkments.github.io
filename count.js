@@ -957,7 +957,7 @@ window.addEventListener("DOMContentLoaded", e => {
 
         for (let x = 0; x < IDS.length; x++) {
 
-            clearType(IDS[x]);
+            clearType(IDS[x])
         }
 
     })
@@ -1270,5 +1270,29 @@ function calculateTimeDifference(targetDate) {
 let getTheme = function () {
 
     return localStorage.getItem("theme")
+
+}
+
+let glowFor = function (e) {
+    let el = e;
+    function glow(event) {
+
+        if (event.animationName === "glows") {
+            el.classList.remove("glow-for-while")
+            el.removeEventListener("animationend", glow)
+        }
+
+
+
+
+
+
+    }
+
+    e.classList.add("glow-for-while")
+
+    e.addEventListener("animationend", glow)
+
+
 
 }
