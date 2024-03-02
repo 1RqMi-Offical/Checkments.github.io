@@ -1,6 +1,7 @@
 
 let setUpSelector = function (container) {
 
+    let selector = document.querySelector(`.${container}.selector`);
     let placeholder = document.querySelector(`.${container}.selector .placeholder`);
     let optionCont = document.querySelector(`.${container}.selector .option-cont`);
     let options = document.querySelectorAll(`.${container}.selector .option-cont .option`);
@@ -8,10 +9,13 @@ let setUpSelector = function (container) {
     if (!placeholder) {
         return
     }
+
+
     let animateUnit = function (element, ele) {
         console.log(element.textContent.toString().replaceAll(" ", "").replaceAll(/\n/g, ""))
         let eleText = element.textContent.toString().replaceAll(" ", "").replaceAll(/\n/g, "").split("");
-        ele.textContent = ""; let c = 0;
+        ele.textContent = "";
+        let c = 0;
         eleText.forEach(char => {
             c++;
 
@@ -20,10 +24,10 @@ let setUpSelector = function (container) {
                 ele.innerHTML = ele.innerHTML.replace(`</span>`, "")
                 ele.innerHTML = ele.innerHTML + `<span style="color: gray; transition: 0.3s; padding: 5px;">${char}</span>`;
 
-                if (eleText.indexOf(char) == eleText.length - 1) {
+
+                if (ele.textContent.length == eleText.length) {
                     ele.innerHTML = ele.innerHTML.replace(`<span style="color: gray; transition: 0.3s; padding: 5px;">`, "")
                     ele.innerHTML = ele.innerHTML.replace(`</span>`, "")
-
                 }
 
 
@@ -71,6 +75,7 @@ let setUpSelector = function (container) {
     }
     placeholder.addEventListener("click", e => {
 
+
         for (let x = 0; x < options.length; x++) {
             options[x].classList.remove("active")
             if (placeholder.textContent.toString().replaceAll(" ", "").replaceAll(/\n/g, "") == options[x].textContent.toString().replaceAll(" ", "").replaceAll(/\n/g, "")) {
@@ -85,8 +90,20 @@ let setUpSelector = function (container) {
 
 
     });
-}
 
-setUpSelector("unit")
-setUpSelector("bground")
-setUpSelector("typeBoxes")
+    optionCont.style.display = "block";
+
+    setTimeout(function () {
+        selector.style.width = optionCont.getBoundingClientRect().width + "px";
+
+        optionCont.style.display = "none";
+    }, 100)
+
+
+}
+window.addEventListener("DOMContentLoaded", e => {
+    setUpSelector("unit")
+    setUpSelector("bground")
+    setUpSelector("typeBoxes")
+    setUpSelector("type")
+})

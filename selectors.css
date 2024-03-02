@@ -30,13 +30,16 @@
     display: none;
     top: 100%;
     left: 0;
-    width: 100%;
-    border-radius: 5px;
+    width: max-content;
+    border-radius: 0 10px 0 10px;
     border: 1px solid rgba(255, 255, 255, 0.281);
+
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.158);
+    padding-top: 20px;
+    background-color: rgba(43, 43, 43, 0.767);
     background-image: linear-gradient(to left, rgba(255, 255, 255, 0.096), rgba(255, 255, 255, 0));
     height: max-content;
+    transition: 0.2s;
     backdrop-filter: blur(10px);
     color: rgb(182, 182, 182);
 }

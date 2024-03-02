@@ -144,8 +144,70 @@ let popup = function (text, state, buttoned, subtitle) {
 }
 document.addEventListener('DOMContentLoaded', function () {
 
-})
+    let typeArrange = document.querySelector(".selector.type")
+    let pc = typeArrange.querySelector(".placeholder");
+    pc.addEventListener("click", e => {
+        setTimeout(function () { changes(pc) }, 100)
 
+
+    })
+    typeArrange.querySelectorAll(".option").forEach(e => {
+
+        e.addEventListener("click", ev => {
+            changes(e)
+        })
+
+    });
+
+})
+let changes = function (e) {
+
+    if (e.getAttribute("unit").toString().toLowerCase() == "all") {
+        document.querySelectorAll(".t-type").forEach(v => {
+            v.setAttribute("reveal", "all")
+        })
+    } else if ((e.getAttribute("unit").toString().toLowerCase() == "important")) {
+        document.querySelectorAll(".t-type").forEach(v => {
+            v.setAttribute("reveal", "important")
+        })
+
+    } else if ((e.getAttribute("unit").toString().toLowerCase() == "failed")) {
+        document.querySelectorAll(".t-type").forEach(v => {
+            v.setAttribute("reveal", "failed")
+        })
+
+    } else if ((e.getAttribute("unit").toString().toLowerCase() == "success")) {
+        document.querySelectorAll(".t-type").forEach(v => {
+            v.setAttribute("reveal", "success")
+        })
+
+    } else if ((e.getAttribute("unit").toString().toLowerCase() == "finished")) {
+        document.querySelectorAll(".t-type").forEach(v => {
+            v.setAttribute("reveal", "finished")
+        })
+
+    } else if ((e.getAttribute("unit").toString().toLowerCase() == "nfinished")) {
+        document.querySelectorAll(".t-type").forEach(v => {
+            v.setAttribute("reveal", "nfinished")
+        })
+
+    } else if ((e.getAttribute("unit").toString().toLowerCase() == "hasbc")) {
+        document.querySelectorAll(".t-type").forEach(v => {
+            if (v.querySelector(".t-title").classList.toString().includes("bc")) {
+                v.setAttribute("reveal", "hasbc")
+            } else {
+                v.setAttribute("reveal", "none")
+            }
+        })
+
+    } else if ((e.getAttribute("unit").toString().toLowerCase() == "none")) {
+        document.querySelectorAll(".t-type").forEach(v => {
+            v.setAttribute("reveal", "none")
+        })
+
+    }
+
+}
 let element = document.querySelectorAll(".dropdown .drop");
 let texts = ["one", "two", "three"]
 for (let x = 0; x < element.length; x++) {
@@ -214,7 +276,15 @@ if (!localStorage.getItem("tLength")) {
     localStorage.setItem("tLength", "[]")
 }
 let oldY = 0;
-window.addEventListener('scroll', function (e) {
+let closestc = false;
+document.addEventListener("mousemove", e => {
+    if (e.target.closest(".nav")) {
+        closestc = true;
+    } else {
+        closestc = false;
+    }
+})
+window.addEventListener('scroll', ev => {
     var navbar = document.querySelector('.nav .navlinks');
 
     var scrollPosition = window.scrollY;
@@ -222,14 +292,41 @@ window.addEventListener('scroll', function (e) {
     if (!document.querySelector(".nav.clicked")) {
         if (scrollPosition > 250) {
 
-            navbar.classList.add('navbar-fixed');
+            var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (!closestc) {
+                if (currentScroll > lastScrollTop) {
+                    if (!navbar.classList.contains("merge"))
+                        navbar.classList.add("merge");
+                } else {
+                    if (navbar.classList.contains("merge"))
+                        navbar.classList.remove("merge");
+
+                }
+            }
+            if (!navbar.classList.contains("navbar-fixed"))
+                navbar.classList.add('navbar-fixed');
+
         } else {
-            navbar.classList.remove('navbar-fixed');
+            if (navbar.classList.contains("navbar-fixed"))
+                navbar.classList.remove('navbar-fixed');
         }
     }
 
 
-});
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+})
+
+
+
+var lastScrollTop = 0;
+
+window.addEventListener("scroll", function () {
+
+}, false);
+
+
 let box = document.querySelector(".box");
 
 let typesLength = localStorage.getItem("tLength");
@@ -360,6 +457,7 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
 
 
     TypeEle.setAttribute(`type-name-element`, id);
+    TypeEle.setAttribute(`reveal`, "all");
 
 
 
@@ -382,7 +480,6 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
 
     let TypeTitlePEle = document.createElement("h3");
     let TypeTitleDate = document.createElement("div");
-
 
     TypeTitleDate.classList.add("date", "hoverUp")
 
@@ -819,7 +916,7 @@ typeCreator.addEventListener("click", e => {
 
     setTimeout(function () {
         window.scrollTo({
-            top: document.querySelector(`.createType`).offsetTop - document.querySelector(`.createType`).offsetHeight / 2,
+            top: document.querySelector(`.createType`).offsetTop + (document.querySelector(`.createType`).offsetHeight / 2) - (window.innerHeight / 2),
             behavior: 'smooth'
         });
     }, 100)
@@ -839,6 +936,61 @@ window.addEventListener("DOMContentLoaded", e => {
         toggleListed();
 
     })
+
+    let searcher = document.querySelector(".nav-box .input-nav");
+    let create = document.querySelector(".nav-box .create");
+    let clear = document.querySelector(".nav-box .clear");
+
+    clear.addEventListener("click", e => {
+
+        let types = document.querySelectorAll(".t-type");
+
+        let IDS = [];
+        let intervals = []
+        types.forEach(e => {
+
+            IDS.push(e.getAttribute("type-name-element"));
+            intervals.push(e.getAttribute("interval"));
+
+        })
+
+
+        for (let x = 0; x < IDS.length; x++) {
+
+            clearType(IDS[x]);
+        }
+
+    })
+    create.addEventListener("click", e => {
+        setTimeout(function () {
+            window.scrollTo({
+                top: document.querySelector(`.createType`).offsetTop + (document.querySelector(`.createType`).offsetHeight / 2) - (window.innerHeight / 2),
+                behavior: 'smooth'
+            });
+        }, 100)
+    })
+    searcher.addEventListener("input", v => {
+
+        let allTypes = document.querySelectorAll(".t-type")
+
+        allTypes.forEach(type => {
+            if (searcher.value.length >= 1) {
+                type.classList.add("hidden");
+            } else {
+                type.classList.remove("hidden")
+            }
+            if (type.getAttribute("type-name-element").includes(searcher.value)) {
+
+                type.classList.remove("hidden")
+
+            } else if (type.textContent.toString().toLowerCase().includes(searcher.value.toString().toLowerCase())) {
+                type.classList.remove("hidden")
+            }
+
+        })
+
+    })
+
     let linkers = document.querySelectorAll(".nav .navlinks .nav-ul .m-link.dropdown")
     linkers.forEach(element => {
         element.addEventListener("click", e => {

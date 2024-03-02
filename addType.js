@@ -51,7 +51,7 @@ Upreview.addEventListener("click", e => {
     let id = generateRandomId();
 
     createElementBox(typeTitle, typeColumn, typeRow, typeChecked, datesec, dateTimer, 0, preview, id, bgs)
-    updateSettingsMenu()
+    updateSettingsMenu(id)
 })
 
 Ucreate.addEventListener("click", e => {
@@ -120,12 +120,15 @@ Ucreate.addEventListener("click", e => {
     localStorage.setItem(`types${id}`, `["${typeTitle}",${typeColumn},${typeRow},"[${typeChecked}]", "${datesec}", "${dateTimer}","${id}","${bgs}"]`)
 
     createElementBox(typeTitle, typeColumn, typeRow, typeChecked, datesec, dateTimer, tlx.length - 1, box, id, bgs)
-    updateSettingsMenu()
+    updateSettingsMenu(id)
     typesReStyle();
-    window.scrollTo({
-        top: document.querySelector(`div[type-name-element="${id}"]`).offsetTop - 10,
-        behavior: 'smooth'
-    });
+
+    setTimeout(function () {
+        window.scrollTo({
+            top: document.querySelector(`[type-name-element="${id}"]`).offsetTop + (document.querySelector(`[type-name-element="${id}"]`).offsetHeight / 2),
+            behavior: 'smooth'
+        });
+    }, 100)
 
 
 })

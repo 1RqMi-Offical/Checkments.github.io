@@ -16,7 +16,6 @@
     flex-direction: column;
     transition: 0.5s;
     position: relative;
-    overflow: hidden;
     animation: move-top 0.3s linear 1;
 }
 
@@ -297,10 +296,30 @@
 
 }
 
+.t-type {
+    position: relative;
+}
+
+
+@keyframes appears {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
 
 .t-type .t-cont-t .t-title h3 {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.164), rgba(0, 0, 0, 0));
-    padding: 5px;
+
+}
+
+.navbar-fixed.merge {
+    opacity: 0;
+    transform: translate(0, -90%) scale(1.1);
+    filter: blur(15px);
 }
 
 .t-type .boxesCont {
@@ -1086,5 +1105,138 @@
         height: 150px !important;
     }
 
+
+}
+
+.t-type[reveal] {
+    display: none !important;
+}
+
+.t-type[reveal="all"] {
+    display: flex !important;
+}
+
+.t-type.sad[reveal="failed"] {
+    display: flex !important;
+}
+
+.t-type.happy[reveal="success"] {
+    display: flex !important;
+}
+
+.t-type.happy[reveal="finished"],
+.t-type.sad[reveal="finished"] {
+    display: flex !important;
+}
+
+.t-type[reveal="nfinished"] {
+    display: flex !important;
+}
+
+
+.t-type.happy[reveal="nfinished"],
+.t-type.sad[reveal="nfinished"] {
+    display: none !important;
+}
+
+.t-type[reveal="hasbc"] {
+    display: flex !important;
+}
+
+.t-type[reveal="none"] {
+    display: none !important;
+}
+
+.nav-box {
+    width: 100%;
+    height: max-content;
+    padding: 7px;
+    background-color: #1f1f1f;
+    border: rgba(255, 255, 255, 0.082) 1px solid;
+    margin: 15px 0;
+    border-radius: 3px;
+    z-index: 100;
+    gap: 15px;
+
+}
+
+.concat {
+
+    color: white;
+    gap: 10px;
+}
+
+
+
+.t-type.important[reveal="important"] {
+    display: flex !important;
+}
+
+
+.concat label {
+    width: max-content;
+    height: max-content;
+    font-weight: 600;
+}
+
+.nav-box .type.selector {
+    width: max-content;
+    height: 50px;
+    border: rgba(255, 255, 255, 0.082) 1px solid;
+}
+
+.flexy-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.nav-box .nav-box-ul {
+    justify-content: flex-start;
+    gap: 5px;
+    background-color: #11111156;
+    padding: 5px;
+    width: 100%;
+    color: white;
+    border-radius: 3px;
+}
+
+.nav-box .nav-box-ul .input-nav {
+
+    background-color: rgb(56, 39, 80);
+    border-radius: 3px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    outline: none;
+    border: none;
+    opacity: 1;
+    color: white;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.nav-box .nav-box-ul li {
+    background-color: rgb(56, 39, 80);
+    border-radius: 3px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.c-green {}
+
+
+@media only screen and (max-width: 600px) {
+
+    .nav-box {
+
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
 
 }
