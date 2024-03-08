@@ -316,11 +316,6 @@
 
 }
 
-.navbar-fixed.merge {
-    opacity: 0;
-    transform: translate(0, -90%) scale(1.1);
-    filter: blur(15px);
-}
 
 .t-type .boxesCont {
 
@@ -1110,7 +1105,6 @@
 
 .glow-for-while {
     position: relative;
-    background-color: var(--bc);
     animation: glows 2s linear 1;
     overflow: hidden;
 
@@ -1266,7 +1260,7 @@
 
 .nav-box .nav-box-ul .input-nav {
 
-    background-color: rgb(56, 39, 80);
+    background-color: rgb(56, 49, 63);
     border-radius: 3px;
     padding: 10px;
     cursor: pointer;
@@ -1282,11 +1276,12 @@
 }
 
 .nav-box .nav-box-ul li {
-    background-color: rgb(56, 39, 80);
+    background-color: rgb(56, 49, 63);
     border-radius: 3px;
     padding: 10px;
     cursor: pointer;
     font-weight: 600;
+    color: var(--border);
 }
 
 .c-green {}
@@ -1300,5 +1295,64 @@
         justify-content: flex-start;
         align-items: flex-start;
     }
+
+}
+
+.box .boxesCont.bCont-marks {
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100% !important;
+
+}
+
+.box .boxesCont .t-Box.b-marks {
+    --history: "";
+    width: 100% !important;
+    height: max-content;
+    padding: 10px;
+    justify-content: flex-start;
+    border-radius: 5px;
+    background-color: rgb(23, 21, 26) !important;
+}
+
+.box .boxesCont .t-Box.b-marks.t-Box-checked::before {
+    position: absolute;
+    content: "✔";
+    right: 0;
+    top: 50%;
+    transform: translate(-100%, -50%);
+    color: lime;
+    font-weight: 600;
+    transition: 0.2s;
+
+}
+
+.box .boxesCont .t-Box.b-marks.t-Box-checked:hover,
+.box .boxesCont .t-Box.b-marks:hover {
+    border-color: var(--border);
+    box-shadow: 0 0 3px 1px rgba(255, 255, 255, 0.226);
+    background-color: rgba(255, 255, 255, 0.068);
+}
+
+.box .boxesCont .t-Box.b-marks.t-Box-checked {
+    background-color: rgb(13, 11, 17) !important;
+    position: relative;
+
+}
+
+.box .boxesCont .t-Box.b-marks.t-Box-checked::after {
+    position: absolute;
+    content: var(--history);
+    left: 50%;
+    top: 50%;
+    padding: 5px;
+    font-size: 14px;
+    transform: translate(-50%, -50%);
+    background-color: rgb(13, 11, 17);
+    color: rgb(221, 221, 221);
+    font-weight: 600;
+    transition: 0.2s;
 
 }
