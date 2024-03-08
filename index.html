@@ -189,8 +189,20 @@
         </div>
     </div>
 
-    <div class="createType" style="opacity: 1; display: flex;">
+    <div class="createType numbers" style="opacity: 1; display: flex;">
         <div class="inputs t-cont"><span class="title">Create</span>
+
+            <div class="in-put-cont  " style="user-select: none;">
+                <label for="" class=" tlabel">Type of Boxes</label>
+                <div class="selector typeBoxes t-title-place">
+                    <div class="placeholder" unit="Numbers">Numbers</div>
+                    <ul class="option-cont">
+                        <li class="option active" unit="Numbers">Numbers</li>
+                        <li class="option" unit="Checkmarks">Checkmarks</li>
+                    </ul>
+                </div>
+            </div>
+
             <div class="in-put-cont ">
                 <label for="" class="t-title-label tlabel">Title</label>
                 <input type="text" name="" id="" class="t-in t-t" placeholder="Studying...">
@@ -229,11 +241,11 @@
                     </ul>
                 </div>
             </div>
-            <div class="in-put-cont t-half-small">
-                <label for="" class=" tlabel">Row</label>
+            <div class="in-put-cont t-half-small m-1">
+                <label for="" class=" tlabel ">Row</label>
                 <input type="number" name="" id="" class="t-in center t-row" min="1" value="2" placeholder="5">
             </div>
-            <div class="in-put-cont t-half-small">
+            <div class="in-put-cont t-half-small m-1">
                 <label for="" class=" tlabel">Column</label>
                 <input type="number" name="" id="" class="t-in center t-column" min="1" value="2" placeholder="5">
             </div>
@@ -241,22 +253,13 @@
                 <label for="" class=" tlabel">Checked</label>
                 <input type="number" name="" id="" class="t-in center t-checked" min="1" placeholder="5">
             </div>
-            <div class="in-put-cont t-disabled">
-                <label for="" class="t-title-label tlabel ">Note</label>
-                <input type="text" name="" id="" class="t-in t-note" placeholder="Note...">
-            </div>
+            <div class="in-put-cont m-2">
+                <label for="" class="t-title-label tlabel ">Write Line</label>
+                <input type="text" name="" id="" class="t-in t-line" placeholder="Study first page...">
+                <span class="adder">+</span>
 
-            <div class="in-put-cont t-disabled " style="user-select: none;">
-                <label for="" class=" tlabel">Type of Boxex</label>
-                <div class="selector typeBoxes t-title-place">
-                    <div class="placeholder">Numbers</div>
-                    <ul class="option-cont">
-                        <li class="option" num="1">soon</li>
-                        <li class="option active" num="2">soon</li>
-                        <li class="option" num="3">soon</li>
-                    </ul>
-                </div>
             </div>
+            <div class="t-add-cont m-2"></div>
             <button class="createTypePreview t-btn-p ">Preview</button>
             <button class="createTypeBox t-btn-p ">Create</button>
         </div>
