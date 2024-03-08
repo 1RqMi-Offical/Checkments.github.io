@@ -244,6 +244,14 @@ ul {
     cursor: pointer;
 }
 
+.navbar-fixed.merge {
+    opacity: 0;
+    transform: translate(0, -100%) scale(1.1);
+
+}
+
+.navbar-fixed.merge .nav-ul li {}
+
 @media only screen and (max-width: 600px) {
 
     .nav .navlinks {
