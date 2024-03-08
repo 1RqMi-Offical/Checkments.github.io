@@ -222,3 +222,92 @@ option {
     }
 
 }
+
+.createType.marks .m-1 {
+    display: none;
+}
+
+.createType.marks .m-2 {
+    display: flex;
+}
+
+.createType.numbers .m-1 {
+    display: flex;
+}
+
+.createType.numbers .m-2 {
+    display: none;
+}
+
+.adder {
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    transform: translate(-100%, 0);
+    color: white;
+    font-weight: 800;
+    background-color: rgb(44, 44, 44);
+    border-radius: 3px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.adder:hover {
+    background-color: rgb(29, 29, 29);
+
+}
+
+.t-add-cont {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    border: rgba(255, 255, 255, 0.048) 1px solid;
+    padding: 10px;
+    border-radius: 3px;
+    flex-wrap: nowrap;
+}
+
+.t-add-cont .line:hover {
+    background-color: rgba(0, 0, 0, 0.185);
+    opacity: 0.8;
+    padding: 10px 15px;
+}
+
+.t-add-cont .line {
+    padding: 10px;
+    border: rgba(255, 255, 255, 0.027) 1px solid;
+    border-radius: 3px;
+    color: white;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.t-add-cont .line:hover::before {
+    transform: translate(-100%, -50%);
+    opacity: 1;
+    filter: blur(0px);
+    color: red;
+}
+
+.t-add-cont .line::before {
+    position: absolute;
+    content: "✖";
+    right: 0;
+    top: 50%;
+    opacity: 0;
+    filter: blur(15px);
+    transform: translate(150%, -50%);
+    color: var(--border);
+    font-weight: 600;
+    transition: 0.2s;
+
+}
