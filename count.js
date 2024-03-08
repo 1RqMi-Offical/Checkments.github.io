@@ -443,10 +443,31 @@ let animates = function (element, speed) {
 if (!localStorage.getItem("important")) {
     localStorage.setItem("important", `[]`)
 }
-let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, datesec, dateTimer, tELE, ElementContainer, id, bgs) {
+function getNumberPattern(text) {
+
+    // Regular expression to match the pattern [number/number/number]
+    const regex = /\[(\d+\/\d+\/\d+)\]/;
+
+    // Search for the pattern in the text
+    const match = text.match(regex);
+
+    // If a match is found, return the captured group (the numbers)
+    if (match) {
+        return match[1];
+    }
+
+    // Otherwise, return null
+    return null;
+}
+let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, datesec, dateTimer, tELE, ElementContainer, id, bgs, boxType, listMarks) {
     typesReStyle();
 
-    console.log(tELE)
+    console.log("------------listmarks")
+    console.log(listMarks)
+
+
+
+    console.log("------------listmarks")
     let important;
     if (localStorage.getItem("important").includes(id)) {
         important = true;
@@ -543,7 +564,7 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
 
 
             animates(scheduleTimer, 20)
-            TypeTitleDate.textContent = `${isDate.getFullYear()}/${isDate.getMonth() + 1}/${isDate.getDate()}`;
+            TypeTitleDate.textContent = `${endDate.getFullYear()}/${endDate.getMonth() + 1}/${endDate.getDate()}`;
 
 
             intervalId = setInterval(() => {
@@ -631,9 +652,17 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
         TypeTitleEle.querySelector(".star").classList.add("active")
     }
     let TypeBoxesEle = document.createElement("div");
+
+    if (boxType == "numbers" || !boxType) {
+
+        TypeBoxesEle.style.gridTemplateColumns = `repeat(${Number.parseInt(typeColumn)}, 1fr)`;
+    } else if (boxType == "marks") {
+
+        TypeBoxesEle.classList.add("bCont-marks");
+
+    }
     TypeBoxesEle.classList.add("boxesCont")
 
-    TypeBoxesEle.style.gridTemplateColumns = `repeat(${Number.parseInt(typeColumn)}, 1fr)`;
 
 
 
@@ -659,6 +688,11 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
 
         // Remove event listeners when the dragging stops
     });
+    TypeBoxesEle.addEventListener('mouseleave', function () {
+        isDragging = false;
+
+        // Remove event listeners when the dragging stops
+    });
 
     TypeBoxesEle.addEventListener('mousedown', function () {
         isDragging = true;
@@ -669,15 +703,33 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
 
     TypeBoxesEle.setAttribute("checks", 0)
 
-    boxesL = Number.parseInt(typeRow) * Number.parseInt(typeColumn);
-    console.log("boxesL: " + boxesL)
-    console.log("trowL: " + typeRow)
-    console.log("tcolumnL: " + typeColumn)
-    console.log("tL: " + types)
+    if (boxType == "numbers" || !boxType) {
+        boxesL = Number.parseInt(typeRow) * Number.parseInt(typeColumn);
+        console.log("boxesL: " + boxesL)
+        console.log("trowL: " + typeRow)
+        console.log("tcolumnL: " + typeColumn)
+        console.log("tL: " + types)
+    } else if (boxType == "marks") {
+        boxesL = listMarks.length;
+    }
+
     for (let b = 0; b < boxesL; b++) {
         let tBox = document.createElement("div");
-        tBox.classList.add("t-Box")
-        tBox.textContent = `${b + 1}`;
+        let dating;
+        if (boxType == "numbers" || !boxType) {
+            tBox.classList.add("b-num")
+            tBox.textContent = `${b + 1}`
+        } else if (boxType == "marks") {
+            tBox.classList.add("b-marks")
+            tBox.textContent = `${listMarks[b].toString().slice(0, listMarks[b].indexOf("[")).replaceAll(`"`, "")}`
+            dating = `${listMarks[b].toString().slice(listMarks[b].indexOf("[") + 1, listMarks[b].indexOf("]"))}`
+            console.log("datingg: " + dating)
+
+            tBox.style.setProperty("--history", `"${dating}"`)
+
+
+        }
+        tBox.classList.add("t-Box");
         tBox.setAttribute("checked", "false")
 
         for (let bX = 0; bX < typeChecked.length; bX++) {
@@ -700,6 +752,21 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
             // Play the audio
             audio.play();
             typesReStyle();
+
+            if (boxType == "numbers" || !boxType) {
+            } else if (boxType == "marks") {
+                let n = new Date(Date.now())
+                if (dating) {
+                    listMarks[b] = listMarks[b].slice(0, listMarks[b].indexOf("["))
+                    types[tELE][9] = listMarks;
+                }
+                tBox.style.setProperty("--history", `"${n.getFullYear()}` + "/" + `${n.getMonth() + 1}` + "/" + `${n.getDate()}"`)
+                console.log(listMarks.indexOf(tBox.textContent))
+                let editlistmarks = listMarks;
+                editlistmarks[listMarks.indexOf(tBox.textContent)] = `${tBox.textContent}[${n.getFullYear()}` + "/" + `${n.getMonth() + 1}` + "/" + `${n.getDate()}]`
+                types[tELE][9] = editlistmarks;
+            }
+
             tBox.classList.toggle("t-Box-checked")
             if (tBox.getAttribute("checked") == "true") {
 
@@ -746,7 +813,9 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
             dateTimer = Number.parseInt(types[tELE][5]);
             let id = (types[tELE][6]);
             let bgs = (types[tELE][7]);
-            let updatedArray = [`"${typeTitle}"`, typeColumn, typeRow, `"[${typeChecked}]"`, `"${datesec}"`, `"${dateTimer}", "${id}", "${bgs}"`]
+            boxType = types[tELE][8];
+            listMarks = (types[tELE][9]);;
+            let updatedArray = [`"${typeTitle}"`, typeColumn, typeRow, `"[${typeChecked}]"`, `"${datesec}"`, `"${dateTimer}", "${id}", "${bgs}"`, `"${boxType}"`, `${JSON.stringify(listMarks)}`]
 
 
 
@@ -782,7 +851,7 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
             TypeBoxesEle.style.height = newHeight + 'px';
 
             if (b == (typeRow * typeColumn) - 1) {
-                TypeBoxesEle.style.height = `max-content`;
+                TypeBoxesEle.style.height = `max - content`;
             }
         }, (10 + (b / 8)) * b)
 
@@ -817,7 +886,7 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
         } else {
             console.log("Bxxx")
             TypeTitleEle.classList.add("bc")
-            TypeTitleEle.style.backgroundImage = `linear-gradient(to top, rgba(0, 0, 0, 0.733), rgba(0, 0, 0, 0)), url(${bgs})`
+            TypeTitleEle.style.backgroundImage = `linear - gradient(to top, rgba(0, 0, 0, 0.733), rgba(0, 0, 0, 0)), url(${bgs})`
         }
 
 
@@ -866,8 +935,12 @@ let checktypes = function () {
             let dateTimer = Number.parseInt(types[tELE][5]);
             let id = (types[tELE][6]);
             let bgs = (types[tELE][7]);
-
-            createElementBox(typeTitle, typeColumn, typeRow, typeChecked, dateSec, dateTimer, tELE, box, id, bgs)
+            let boxType = types[tELE][8];
+            console.log(types[tELE][9])
+            let listMarks = (types[tELE][9]);
+            console.log("HERe ----------------------x")
+            console.log(listMarks)
+            createElementBox(typeTitle, typeColumn, typeRow, typeChecked, dateSec, dateTimer, tELE, box, id, bgs, boxType, listMarks)
 
 
 
@@ -928,6 +1001,47 @@ typeCreator.addEventListener("click", e => {
 });
 
 window.addEventListener("DOMContentLoaded", e => {
+
+
+    let createtype = document.querySelector(".createType")
+    let sselector = document.querySelector(".createType .selector.typeBoxes")
+
+    sselector.addEventListener("click", e => {
+        let x = sselector.querySelector(".placeholder").getAttribute("unit").toString().toLowerCase();
+        console.log(x)
+        if (x == "checkmarks") {
+            createtype.classList.remove("numbers")
+            createtype.classList.add("marks")
+        } else if (x == "numbers") {
+            createtype.classList.add("numbers")
+            createtype.classList.remove("marks")
+
+        }
+
+    })
+    let inadd = document.querySelector(".createType .t-line")
+    let adder = document.querySelector(".createType .adder");
+
+    let additionCont = document.querySelector(".createType .t-add-cont")
+
+    adder.addEventListener("click", e => {
+        if (!inadd.value.length > 0) {
+            inadd.focus();
+            return
+        }
+        let line = document.createElement("div")
+        line.classList.add("line")
+        line.textContent = inadd.value;
+        inadd.value = "";
+        additionCont.appendChild(line);
+
+        line.addEventListener("click", e => {
+            additionCont.removeChild(line);
+        })
+
+
+
+    })
 
     let listed = document.querySelector(".nav .navlinks .nav-list")
     listed.addEventListener("click", v => {
@@ -1038,10 +1152,12 @@ window.addEventListener("DOMContentLoaded", e => {
             let typeChecked = `[]`;
             let datesec = Number.parseInt(types[y][4]);
             let dateTimer = Number.parseInt(types[y][5]);
-            let id = (types[tELE][6]);
-            let bgs = (types[tELE][7]);
+            let id = (types[y][6]);
+            let bgs = (types[y][7]);
             typeChecked = JSON.parse(typeChecked);
-            let updatedArray = [`"${typeTitle}"`, typeColumn, typeRow, `"[${typeChecked}]"`, `"${datesec}"`, `"${dateTimer}", "${id}, "${bgs}"`]
+            let boxType = types[y][8];
+            let listMarks = (types[y][9]);
+            let updatedArray = [`"${typeTitle}"`, typeColumn, typeRow, `"[${typeChecked}]"`, `"${datesec}"`, `"${dateTimer}", "${id}", "${bgs}"`, `"${boxType}"`, `${JSON.stringify(listMarks)}`]
 
             localStorage.setItem(`types${typesLength[y]}`, `[${updatedArray}]`)
 
@@ -1194,21 +1310,20 @@ function parseInput(input, unit) {
             return NaN;
     }
 }
+window.addEventListener('beforeunload', function (event) {
+    // Set a variable or perform any action before the page unloads
+    localStorage.setItem('closingTime', new Date());
+    // The message returned here will be displayed in the confirmation dialog
 
+
+});
 function updateTimer(timeDifference, element, intervalId, tELE, ordered) {
-    let typeTitle = types[tELE][0];
-    let typeColumn = types[tELE][1];
-    let typeRow = types[tELE][2];
-    let typeChecked = `[${ordered}]`;
-    let datesec = Number.parseInt(types[tELE][4])
-    typeChecked = JSON.parse(typeChecked);
-    let id = (types[tELE][6]);
-    let bgs = (types[tELE][7]);
-    let updatedArray = [`"${typeTitle}"`, typeColumn, typeRow, `"[${typeChecked}]"`, `"${datesec}"`, `"${timeDifference / 1000}", "${id}", "${bgs}"`]
+
+    let id = types[tELE][6];
 
     intervalId = document.querySelector(`.t-type[type-name-element=${id}]`).getAttribute("interval")
 
-    localStorage.setItem(`types${id}`, `[${updatedArray}]`)
+
 
 
     // Update the timer display
@@ -1230,7 +1345,7 @@ function updateTimer(timeDifference, element, intervalId, tELE, ordered) {
         audio.play();
         let finishedBtn = document.querySelector(".t-btn")
         finishedBtn.setAttribute("finished", "true")
-        emojiFix(typeRow, typeColumn, typeChecked, element.parentNode.parentNode);
+        emojiFix(types[tELE][1], types[tELE][2], types[tELE][3], element.parentNode.parentNode);
     }
 
     element.setAttribute("timeDifference", timeDifference -= 1000)
