@@ -117,9 +117,29 @@ Ucreate.addEventListener("click", e => {
             bgs = bground.getAttribute("link");
         }
     }
-    localStorage.setItem(`types${id}`, `["${typeTitle}",${typeColumn},${typeRow},"[${typeChecked}]", "${datesec}", "${dateTimer}","${id}","${bgs}"]`)
 
-    createElementBox(typeTitle, typeColumn, typeRow, typeChecked, datesec, dateTimer, tlx.length - 1, box, id, bgs)
+    let selecteType = document.querySelector(".createType .selector.typeBoxes .placeholder")
+    let boxType = "numbers";
+    let listMarks = [];
+    if (selecteType.getAttribute("unit").toString().toLowerCase() == "numbers") {
+        boxType = "numbers"
+        listMarks = "";
+    } else if (selecteType.getAttribute("unit").toString().toLowerCase() == "checkmarks") {
+        boxType = "marks";
+        let lines = document.querySelectorAll(".createType .t-add-cont .line");
+        if (lines.length <= 0) {
+            listMarks.push(`"hi"`)
+        } else {
+            lines.forEach(e => {
+                listMarks.push(`"${e.textContent}"`);
+            })
+
+        }
+    }
+    localStorage.setItem(`types${id}`, `["${typeTitle}",${typeColumn},${typeRow},"[${typeChecked}]", "${datesec}", "${dateTimer}","${id}","${bgs}", "${boxType}", ${JSON.stringify(listMarks)} ]`)
+
+    console.log(JSON.parse(`["de"]`))
+    createElementBox(typeTitle, typeColumn, typeRow, typeChecked, datesec, dateTimer, tlx.length - 1, box, id, bgs, boxType, listMarks)
     updateSettingsMenu(id)
     typesReStyle();
 
