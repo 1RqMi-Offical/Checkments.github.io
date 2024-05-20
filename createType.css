@@ -1,5 +1,5 @@
 .createType {
-    border: 1px solid rgba(255, 255, 255, 0.123);
+    border: 1px solid rgba(255, 255, 255, 0.048);
     width: 80%;
     height: max-content;
     padding: 30px;
@@ -23,6 +23,18 @@
         border-color: rgba(255, 255, 255, 0.041);
     }
 
+    .createType .t-cont .in-put-cont.t-half-medium {
+        width: 100% !important;
+    }
+
+    .createType .t-cont .in-put-cont.t-half-small {
+        width: 100% !important;
+    }
+
+    .createType .t-cont .in-put-cont.t-half-big {
+        width: 100% !important;
+
+    }
 
 }
 
@@ -36,17 +48,41 @@
     border: 1px solid rgba(255, 255, 255, 0.123);
     width: calc(50% - 40px);
     padding: 15px;
-    background-color: rgba(255, 255, 255, 0.048);
+    background-color: rgba(255, 255, 255, 0);
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.034));
     border-radius: 5px;
     padding-top: 35px;
     gap: 10px;
 
 }
 
+.createType .t-cont span.title .txt {
+    animation: animateGradient 3s linear infinite;
+    background-image: linear-gradient(to right, #ffffff, #ffffff, #ffffff00, #ffffff, #ffffff);
+    transition: background-position 9s linear;
+    background-size: 400% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+
+.createType .selector {
+    width: 100% !important;
+}
+
+.createType .t-cont .in-put-cont:hover {
+
+    border-color: rgba(255, 255, 255, 0.616);
+    box-shadow: 0 0 15px 1px rgba(255, 255, 255, 0.116);
+    cursor: pointer;
+}
+
+
 .createType .t-cont span.title {
     position: absolute;
-    background-color: rgb(46, 46, 46);
-    border: 1px solid rgba(255, 255, 255, 0.123);
+    background-color: rgb(22, 22, 22);
+    border: 1px solid rgba(255, 255, 255, 0.233);
+    box-shadow: 5px 0 15px 1px rgba(0, 0, 0, 0.267);
     width: max-content;
     height: max-content;
     border-radius: 5px;
@@ -57,6 +93,17 @@
     top: 0;
     left: 0;
     transform: translate(10%, -50%);
+}
+
+@keyframes animateGradient {
+    0% {
+        background-position: 0 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
+
 }
 
 .createType .preview {}
@@ -88,9 +135,11 @@
     width: 100%;
     padding: 1px;
     justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.185);
     flex-wrap: nowrap;
     border: 1px rgba(255, 255, 255, 0.151) solid;
     border-radius: 3px;
+    transition: 0.3s;
 
 }
 
@@ -110,20 +159,28 @@
 
 }
 
+
+
 .createType .t-cont .tlabel {
     font-size: 16px;
     color: white;
     border-radius: 0;
     position: relative;
-    background-color: rgb(58, 58, 58);
+    background-color: rgba(58, 58, 58, 0.329);
     background-image: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.384));
     height: 100%;
     width: max-content;
     padding: 0 10px;
+    font-weight: 600;
+    border-right-color: rgba(255, 255, 255, 0.123);
+    border-right-width: 2px;
+    box-shadow: 5px 0 15px 1px rgba(0, 0, 0, 0.267);
+    border-radius: 0 3px 3px 0;
+    border-right-style: solid;
+    transition: 0.3s;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-right: none;
     white-space: nowrap;
     z-index: -1;
 }
@@ -169,6 +226,7 @@ option {
     outline: none;
     height: 50px;
     color: white;
+    text-shadow: 0 0 7px rgba(0, 0, 0, 0.384);
     width: 48%;
     transition: 0.5s;
     border-radius: 5px;
@@ -177,6 +235,7 @@ option {
     font-weight: 600;
     cursor: pointer;
     box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0);
+    letter-spacing: 3px;
 }
 
 .createType .t-cont .t-btn-p:hover {

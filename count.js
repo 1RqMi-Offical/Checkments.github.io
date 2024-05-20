@@ -235,7 +235,7 @@ if (checker == "white") {
     toggleCheckbox.setAttribute("checked", "true")
 
 } else {
-    document.documentElement.style.setProperty(`--bc`, `rgb(13, 12, 17)`);
+
 }
 
 toggleCheckbox.addEventListener('change', function () {
@@ -246,7 +246,7 @@ toggleCheckbox.addEventListener('change', function () {
         localStorage.setItem("dark", "white")
     } else {
         // Checkbox is unchecked
-        document.documentElement.style.setProperty(`--bc`, `rgb(13, 12, 17)`);
+
         localStorage.setItem("dark", "notwhite")
     }
 });
@@ -879,6 +879,7 @@ let createElementBox = function (typeTitle, typeColumn, typeRow, typeChecked, da
     ElementContainer.appendChild(TypeEle)
     setTimeout(function () { updateSettingsMenu(id) }, 100)
 
+
     if (bgs != "transparent") {
 
         if (!bgs.toString().includes("https")) {
@@ -992,6 +993,7 @@ typeCreator.addEventListener("click", e => {
             top: document.querySelector(`.createType`).offsetTop + (document.querySelector(`.createType`).offsetHeight / 2) - (window.innerHeight / 2),
             behavior: 'smooth'
         });
+        glowFor(document.querySelector(`.createType`))
     }, 100)
 
 

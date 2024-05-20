@@ -271,7 +271,7 @@
     flex-wrap: nowrap;
     border-radius: 5px;
     transition: 0.3s;
-    border: 1px solid rgba(255, 255, 255, 0.205);
+    border: 1px solid var(--border-opacity);
 }
 
 .t-type .t-cont-t .t-title {
@@ -281,13 +281,13 @@
     font-weight: 700;
 
     color: white;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.589), 0 0 15px rgba(0, 0, 0, 0.336);
-    background-color: rgb(102, 102, 102);
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.205), 0 0 15px rgba(0, 0, 0, 0.336);
+    background-color: var(--t-title);
     height: 70px;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    background-image: linear-gradient(to left, rgba(0, 0, 0, 0.616), rgba(0, 0, 0, 0));
+    align-items: center;
+    background-image: linear-gradient(to left, rgba(0, 0, 0, 0.151), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.151));
 
     width: calc(100%);
     padding: 10px 10px;
@@ -325,8 +325,8 @@
 
     width: max-content;
 
-    border: 1px solid rgba(255, 255, 255, 0.226);
-    background-color: rgba(255, 255, 255, 0.055);
+    border: 1px solid var(--border-opacity);
+    background-color: var(--t-title);
 
     display: grid;
 
@@ -417,7 +417,7 @@
     padding: 10px;
     width: 100%;
     height: max-content;
-    background-color: rgba(255, 255, 255, 0.048);
+    background-color: rgba(7, 0, 15, 0.199);
     color: white;
     font-weight: 500;
 
@@ -474,7 +474,7 @@
     font-weight: 700;
     font-size: 16px;
 
-    color: var(--border);
+    color: var(--button-suggest-color);
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
@@ -555,16 +555,15 @@
 }
 
 .t-btn[finished=true] {
-
+    background-color: var(--t-title);
 
     height: 40px !important;
-    border: 1px solid rgba(255, 255, 255, 0.158);
+    border: 1px solid var(--border-opacity);
 
 }
 
 .t-btn[finished=true]:hover {
-
-    background-color: rgba(255, 255, 255, 0.082);
+    background-color: var(--t-title-hover);
     letter-spacing: 1px;
     border: rgba(102, 102, 102, 0) 1px solid;
 
@@ -778,7 +777,7 @@
 }
 
 .overlay .warn .heading {
-    color: var(--border);
+    color: var(--button-suggest-color);
     width: 100%;
     height: 20%;
     background-color: #1a1a1a;
@@ -900,7 +899,7 @@
 }
 
 .sug-cont .suggestions-box h3 span {
-    color: var(--border);
+    color: var(--button-suggest-color);
     text-transform: capitalize;
     padding: 5px;
     background-color: #1f1f1f;
@@ -908,7 +907,7 @@
 }
 
 .sug-cont .sug-sel {
-    background-color: #1f1f1f;
+    background-color: var(--back-suggest-color);
     padding: 10px;
     font-weight: 800;
     color: white;
@@ -932,16 +931,16 @@
 }
 
 .sug-cont .sug-sel .sug-list-item:hover:active {
-    background-color: var(--border2);
+    background-color: var(--sug-back-normal);
 }
 
 .sug-cont .sug-sel .sug-list-item {
-    background-color: #38313f;
+    background-color: var(--sug-back-normal);
     padding: 10px;
     font-weight: 800;
-    color: var(--border);
+    color: var(--button-suggest-color);
     border-radius: 3px;
-    border: 1px solid rgba(255, 255, 255, 0.048);
+    border: 1px solid var(--button-suggest-color);
     width: max-content;
     display: flex;
     justify-content: space-between;
@@ -953,10 +952,9 @@
 }
 
 .sug-cont .sug-sel .sug-list-item:hover {
-    background-color: #1a1a1a;
+    background-color: var(--sug-back-hover);
     text-shadow: 0 0 3px black;
-    border: rgba(255, 255, 255, 0.274) 1px solid;
-    box-shadow: 0 0 3px 1px rgba(132, 0, 255, 0.336);
+    box-shadow: 0 0 3px 1px var(--sug-back-normal);
 
 
 }
@@ -979,7 +977,7 @@
 .suggestions .sug-item {
     color: white;
     font-weight: 700;
-    background-color: rgb(26, 21, 31);
+    background-color: var(--button-suggest-color-3);
     border: 1px solid rgba(255, 255, 255, 0.144);
     border-radius: 5px;
     padding: 10px;
@@ -1005,7 +1003,7 @@
 
 
 .suggestions .sug-item.active {
-    background-color: rgb(68, 45, 92);
+    background-color: var(--button-suggest-color-3);
     background-image: linear-gradient(to left, rgba(111, 0, 255, 0.295), rgba(0, 68, 255, 0.322));
 }
 
@@ -1029,7 +1027,7 @@
 
     padding: 2px 6px;
     content: var(--num);
-    border: rgba(140, 0, 255, 0.178) 1px solid;
+    border: var(--button-suggest-color) 1px solid;
     color: white;
     position: absolute;
     display: inline-block;
@@ -1090,7 +1088,7 @@
         height: max-content;
         flex-direction: row;
         align-content: flex-start;
-        align-items: flex-start;
+        align-items: center;
         justify-content: center;
 
 
@@ -1100,6 +1098,10 @@
         height: 150px !important;
     }
 
+
+    .sug-cont .sug-sel .sug-list-item {
+        font-size: 13px;
+    }
 
 }
 
@@ -1142,7 +1144,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
     transform-origin: center center;
-    background-image: conic-gradient(transparent, var(--border), rgb(233, 147, 255), transparent, transparent);
+    background-image: conic-gradient(transparent, var(--button-suggest-color), var(--button-suggest-color-2), transparent, transparent);
     width: 1300px;
     height: 1300px;
     animation: glowsr 2s linear 1;
@@ -1207,7 +1209,7 @@
     width: 100%;
     height: max-content;
     padding: 7px;
-    background-color: #1f1f1f;
+    background-color: var(--back-suggest-color);
     border: rgba(255, 255, 255, 0.082) 1px solid;
     margin: 15px 0;
     border-radius: 3px;
@@ -1251,8 +1253,9 @@
 .nav-box .nav-box-ul {
     justify-content: flex-start;
     gap: 5px;
-    background-color: #11111156;
-    padding: 5px;
+    background-color: var(--back-suggest-color-2);
+    border-radius: 5px;
+    padding: 10px;
     width: 100%;
     color: white;
     border-radius: 3px;
@@ -1260,8 +1263,12 @@
 
 .nav-box .nav-box-ul .input-nav {
 
-    background-color: rgb(56, 49, 63);
-    border-radius: 3px;
+    background-color: var(--sug-back-normal);
+    height: 100%;
+    max-width: 100%;
+    width: 25%;
+    border-radius: 30px;
+    font-size: 16px;
     padding: 10px;
     cursor: pointer;
     font-weight: 600;
@@ -1269,6 +1276,14 @@
     border: none;
     opacity: 1;
     color: white;
+    height: 100%;
+    transition: 0.3s;
+}
+
+.nav-box .nav-box-ul .input-nav:hover,
+.nav-box .nav-box-ul .input-nav:focus {
+    background-color: var(--sug-back-search-hover);
+    width: 60%;
 }
 
 .hidden {
@@ -1276,12 +1291,15 @@
 }
 
 .nav-box .nav-box-ul li {
-    background-color: rgb(56, 49, 63);
+    background-color: var(--sug-back-normal);
     border-radius: 3px;
     padding: 10px;
+    height: 100%;
+    width: max-content;
     cursor: pointer;
     font-weight: 600;
-    color: var(--border);
+    transition: 0.5s;
+    color: var(--button-suggest-color);
 }
 
 .c-green {}
@@ -1331,7 +1349,7 @@
 
 .box .boxesCont .t-Box.b-marks.t-Box-checked:hover,
 .box .boxesCont .t-Box.b-marks:hover {
-    border-color: var(--border);
+    border-color: var(--button-suggest-color);
     box-shadow: 0 0 3px 1px rgba(255, 255, 255, 0.226);
     background-color: rgba(255, 255, 255, 0.068);
 }

@@ -105,16 +105,14 @@ body {
 
 }
 
-.nav .bac video {
+.nav .bac video,
+iframe {
     position: absolute;
 
-    background-size: cover;
 
-    background-position: 50%;
 
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: 110vh;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
