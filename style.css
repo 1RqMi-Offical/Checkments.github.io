@@ -10,16 +10,36 @@ body {
 }
 
 :root {
-    --bc: rgb(13, 12, 17);
-    --bc-light: rgb(29, 27, 36);
-    --bc-btns-light: rgb(31, 30, 36);
-    --pink: rgb(26, 22, 34);
+    --nav-fixed: rgb(13, 17, 31);
+    --nav-color: rgb(0, 18, 39);
+    --bc: rgb(0, 0, 10);
+    --bc-light: rgb(27, 28, 36);
+    --bc-btns-light: rgb(25, 23, 32);
+    --bottom-nav: rgb(0, 12, 26);
     --btn-active: rgb(104, 87, 136);
     --btn-new: rgba(255, 255, 255, 0.075);
-    --nav: rgba(18, 16, 22, 0.568);
-    --border: rgb(206, 121, 255);
-    --border2: rgb(119, 67, 150);
-    --fill: rgb(48, 36, 68);
+    --nav: rgb(2, 0, 20);
+
+    --sug-back-hover: rgb(5, 8, 31);
+    --sug-back-search-hover: rgb(21, 29, 51);
+    --sug-back-normal: rgb(27, 32, 48);
+
+    --button-suggest-color: rgb(0, 110, 255);
+    --button-suggest-color-3: rgba(0, 119, 255, 0.219);
+    --button-suggest-color-2: rgb(0, 255, 64);
+
+
+    --back-suggest-color-2: rgba(0, 0, 0, 0.397);
+    --back-suggest-color: rgb(9, 16, 27);
+
+    --search-color: rgb(0, 27, 43);
+
+    --border: rgba(19, 57, 180, 0.479);
+    --border2: rgb(19, 57, 180);
+
+
+    --fill: rgba(0, 48, 136, 0.473);
+
     --black-gradient-to-left: linear-gradient(to left, rgba(0, 0, 0, 0.4), transparent);
     --black-gradient-to-right: linear-gradient(to right, rgba(0, 0, 0, 0.4), transparent);
     --black-gradient-to-bottom: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent);
@@ -30,6 +50,9 @@ body {
     --white-gradient-to-bottom: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), transparent);
     --white-gradient-to-top: linear-gradient(to top, rgba(255, 255, 255, 0.1), transparent);
 
+    --t-title: rgb(14, 19, 34);
+    --t-title-hover: rgb(21, 29, 51);
+    --border-opacity: rgb(27, 33, 54);
     --black-gradient-fade-in-out: linear-gradient(to left, rgba(0, 0, 0, 0.4) 0%, transparent 10%, transparent 90%, rgba(0, 0, 0, 0.4) 100%);
     --nor-radius: 5px;
     --med-radius: 10px;
@@ -78,6 +101,7 @@ body {
     overflow: hidden;
     width: 100%;
     height: 100%;
+    opacity: 0.4;
 
 }
 
@@ -122,7 +146,7 @@ body {
 .nav .navlinks {
     width: 100%;
     height: 50px;
-    background-color: var(--pink);
+    background-color: var(--bottom-nav);
     position: absolute;
     bottom: -50px;
     transition: 0.3s;
@@ -137,13 +161,18 @@ body {
 
     overflow: visible !important;
 
-    background-color: rgb(26, 22, 34) !important;
+    background-color: var(--nav-fixed) !important;
     border-bottom: var(--border2) 1px solid;
     height: 60px !important;
 
     z-index: 600;
 }
 
+.navbar-fixed .nav-ul .m-link::before {
+    position: absolute;
+    content: ""
+    ;
+}
 
 .navbar-fixed .nav-ul .m-link {
     z-index: 800;
@@ -209,7 +238,7 @@ body {
     content: "";
     width: calc(100% - 30px);
     height: calc(100%);
-    background-color: rgb(26, 22, 34) !important;
+    background-color: var(--nav-color) !important;
     background-image: var(--black-gradient-fade-in-out);
     position: absolute;
     z-index: 700;
@@ -492,7 +521,7 @@ body {
 .dropdown .drop {
     position: absolute;
     top: 100%;
-    background-color: var(--pink);
+    background-color: var(--bottom-nav);
     margin: 0px 0;
     background-image: linear-gradient(to top, rgba(255, 255, 255, 0.116), rgba(0, 0, 0, 0));
     display: none;
@@ -731,7 +760,7 @@ body {
     content: "This feature added from a while, explore it!";
     color: white;
     position: absolute;
-    background-color: var(--pink);
+    background-color: var(--bottom-nav);
 
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.055), rgba(255, 255, 255, 0.068), rgba(255, 255, 255, 0));
     border: 1px solid var(--border);

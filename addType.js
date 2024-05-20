@@ -11,7 +11,7 @@ let Uchecked = document.querySelector(".createType .in-put-cont .t-checked");
 
 Upreview.addEventListener("click", e => {
 
-    preview.innerHTML = "<span class=\"title\">Preview</span>"
+    preview.innerHTML = "<span class=\"title\"><div class=\"txt\">Preview</div></span>"
 
     let typeTitle = `${Utitle.value}`;
     let typeColumn = +Ucolumn.value;
@@ -59,7 +59,7 @@ Ucreate.addEventListener("click", e => {
     audio.volume = volume;
     // Play the audio
     audio.play();
-    preview.innerHTML = "<span class=\"title\">Preview</span>"
+    preview.innerHTML = "<span class=\"title\"><div class=\"txt\">Preview</div></span>"
 
     let typeTitle = `${Utitle.value}`;
     let typeColumn = +Ucolumn.value;
@@ -140,7 +140,7 @@ Ucreate.addEventListener("click", e => {
 
     console.log(JSON.parse(`["de"]`))
     createElementBox(typeTitle, typeColumn, typeRow, typeChecked, datesec, dateTimer, tlx.length - 1, box, id, bgs, boxType, listMarks)
-    updateSettingsMenu(id)
+
     typesReStyle();
 
     setTimeout(function () {

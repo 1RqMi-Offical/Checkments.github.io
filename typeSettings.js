@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", e => {
     }, 100)
 
     var video = document.querySelector("video");
+    video.volume = 0;
+
     function playVideo() {
         video.play();
 

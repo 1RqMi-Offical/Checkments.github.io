@@ -42,6 +42,7 @@
     transition: 0.2s;
     backdrop-filter: blur(10px);
     color: rgb(182, 182, 182);
+    z-index: 10;
 }
 
 .selector .option-cont .option.active {
