@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="footer.css">
     <link rel="stylesheet" href="volume.css">
     <link rel="stylesheet" href="typeSettings.css">
+    <link rel="stylesheet" href="playlist.css">
 </head>
 
 <body>
@@ -151,22 +152,45 @@
         </div>
     </div>
     <div class="box" id="box">
-        <div class="sug-cont">
+        <div class="pair pl-sug-cont">
+            <div class="sug-cont">
 
-            <div class="sug-sel">
+                <div class="sug-sel">
 
-                <div class="pair">
-                    <div class="sel sug-list-item">Select ALL</div>
-                    <div class="res sug-list-item">Reset</div>
-                    <div class="ref sug-list-item"><i class="fa-solid fa-arrow-rotate-right"></i></div>
+                    <div class="pair">
+                        <div class="sel sug-list-item">Select ALL</div>
+                        <div class="res sug-list-item">Reset</div>
+                        <div class="ref sug-list-item"><i class="fa-solid fa-arrow-rotate-right"></i></div>
+                    </div>
+                    <div class="pair">
+                        <div class="create sug-list-item">Create</div>
+                        <div class="expand sug-list-item "><span>❰</span> <span>❱</span> </div>
+                    </div>
+
                 </div>
-                <div class="create sug-list-item">Create</div>
+                <div class="suggestions-box">
+                    <h3>Dont know what to create today? check these <span>suggestions</span> they may help.</h1>
+                        <p>Ai Powered | GPT</p>
+                </div>
+                <div class="suggestions"></div>
             </div>
-            <div class="suggestions-box">
-                <h3>Dont know what to create today? check these <span>suggestions</span> they may help.</h1>
-                    <p>Ai Powered | GPT</p>
+            <div class="playlist-cont">
+                <div class="music">
+                    <div class="heading">Listen to Lofi PlayList</div>
+                </div>
+                <div class="column-box">
+                    <div class="video">
+                        <div class="pair">
+                            <div class="icon"><img
+                                    src="https://i.redd.it/lofi-boy-confirmed-v0-ha2225iheata1.jpg?width=1079&format=pjpg&auto=webp&s=9834672d37dd7e600e2a6bbda89dd1597b95bdad"
+                                    alt=""></div>
+                            <div class="v-title">Lofi Study</div>
+                        </div>
+                        <div class="pause"><span>◀︎</span></div>
+                    </div>
+                </div>
             </div>
-            <div class="suggestions"></div>
+
         </div>
         <div class="nav-box flexy-nav">
             <ul class="nav-box-ul flexy-nav">
@@ -325,6 +349,7 @@
     <script src="data.js"></script>
     <script src="typeSettings.js"></script>
     <script src="count.js"></script>
+    <script src="playlist.js"></script>
     <script src="TypeMenu.js"></script>
     <script src="points.js"></script>
     <script src="addType.js"></script>

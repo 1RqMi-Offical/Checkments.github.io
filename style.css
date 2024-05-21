@@ -11,12 +11,12 @@ body {
 
 :root {
     --nav-fixed: rgb(13, 17, 31);
-    --nav-color: rgb(0, 18, 39);
+    --nav-color: rgb(9, 16, 27);
     --bc: rgb(0, 0, 10);
     --bc-light: rgb(27, 28, 36);
     --bc-btns-light: rgb(25, 23, 32);
     --bottom-nav: rgb(0, 12, 26);
-    --btn-active: rgb(104, 87, 136);
+    --btn-active: rgb(87, 108, 136);
     --btn-new: rgba(255, 255, 255, 0.075);
     --nav: rgb(2, 0, 20);
 
@@ -24,7 +24,8 @@ body {
     --sug-back-search-hover: rgb(21, 29, 51);
     --sug-back-normal: rgb(27, 32, 48);
 
-    --button-suggest-color: rgb(0, 110, 255);
+    --button-suggest-color: rgb(69, 105, 151);
+    --button-suggest-color-text: rgb(152, 187, 233);
     --button-suggest-color-3: rgba(0, 119, 255, 0.219);
     --button-suggest-color-2: rgb(0, 255, 64);
 
@@ -35,7 +36,7 @@ body {
     --search-color: rgb(0, 27, 43);
 
     --border: rgba(19, 57, 180, 0.479);
-    --border2: rgb(19, 57, 180);
+    --border2: rgb(11, 32, 104);
 
 
     --fill: rgba(0, 48, 136, 0.473);
@@ -193,7 +194,7 @@ iframe {
     z-index: 1000;
     opacity: 1;
     animation: moving-imp 3s linear alternate-reverse infinite, shadows 3s linear infinite;
-    background-color: rgba(45, 27, 56, 0.671);
+    background-color: var(--nav-color);
     height: 100%;
     width: 100%;
     padding: 10px;
