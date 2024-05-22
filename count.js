@@ -27,6 +27,7 @@ slider.addEventListener("input", e => {
     volume = slider.value / 100;
     vol.textContent = slider.value;
     localStorage.setItem("sound", volume)
+    changeAudio(volume);
 })
 
 function separateText(text) {

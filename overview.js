@@ -5,7 +5,7 @@ overviewBtn.addEventListener("click", e => {
 
     console.log(location.pathname)
     let x = "";
-    if (location.hostname.toString().toLowerCase() == "1rqmi-offical.github.io") {
+    if (location.hostname.toString().toLowerCase() == "1rqmi-official.github.io") {
         x = "/checkments.github.io"
         console.log(location.hash)
     }
@@ -23,7 +23,7 @@ overviewBtn.addEventListener("click", e => {
 if (back)
     back.addEventListener("click", e => {
         let x = "";
-        if (location.hostname.toString().toLowerCase() == "1rqmi-offical.github.io") {
+        if (location.hostname.toString().toLowerCase() == "1rqmi-official.github.io") {
             x = "/checkments.github.io"
         }
         location.href = location.origin + x + "/index.html"

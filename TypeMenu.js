@@ -32,7 +32,7 @@ window.onload = function () {
     let x = "";
 
     if (!localStorage.getItem("name")) {
-        if (location.hostname.toString().toLowerCase() == "1rqmi-offical.github.io") {
+        if (location.hostname.toString().toLowerCase() == "1rqmi-official.github.io") {
             x = "/checkments.github.io"
             console.log(location.hash)
         }
@@ -41,7 +41,7 @@ window.onload = function () {
     }
     let homebtn = document.querySelector(".m-link.home");
     homebtn.addEventListener("click", e => {
-        if (location.hostname.toString().toLowerCase() == "1rqmi-offical.github.io") {
+        if (location.hostname.toString().toLowerCase() == "1rqmi-official.github.io") {
             x = "/checkments.github.io"
             console.log(location.hash)
         }

@@ -56,7 +56,7 @@
 
 }
 
-.createType .t-cont span.title .txt {
+.txt {
     animation: animateGradient 3s linear infinite;
     background-image: linear-gradient(to right, #ffffff, #ffffff, #ffffff00, #ffffff, #ffffff);
     transition: background-position 9s linear;

@@ -6,7 +6,7 @@ window.addEventListener("DOMContentLoaded", e => {
 
     let nVideo = 5;
 
-    let urls = ["rEdXTgXdlwM", "l8kdWzs09K8"];
+    let urls = ["1P5BSm_oFJg", "1fueZCTYkpA", "BTYAsjAVa3I", "lTRiuFIWV54", "TURbeWK2wwg", "n61ULEU7CO0"];
 
     for (let x = 0; x < urls.length; x++) {
         requestData(urls[x]).then(data => {
@@ -20,11 +20,12 @@ window.addEventListener("DOMContentLoaded", e => {
             videoPause.textContent = "◀︎";
             videoPause.classList.add("pause");
             let videoImg = document.createElement("img");
-            videoImg.setAttribute("src", data.videoDetails.thumbnails[4].url);
+            videoImg.setAttribute("src", data.videoDetails.thumbnails[1].url);
             let videoBack = document.createElement("img");
             videoEl.appendChild(videoBack);
             videoBack.classList.add("videobc")
-            videoBack.setAttribute("src", data.videoDetails.thumbnails[4].url);
+            let len = data.videoDetails.thumbnails.length;
+            videoBack.setAttribute("src", data.videoDetails.thumbnails[len - 1].url);
 
 
             let videoIcon = document.createElement("div");
@@ -40,6 +41,7 @@ window.addEventListener("DOMContentLoaded", e => {
             audio.innerHTML = `<source src="${"https://tabby-quilled-bronze.glitch.me/?key=" + urls[x]}" type="audio/mpeg">`
             audio.classList.add("vaudio")
             videoEl.appendChild(audio);
+            audio.volume = localStorage.getItem("sound");
 
             console.log("title: " + data.videoDetails.title);
             videoTitle.textContent = data.videoDetails.title;
@@ -66,7 +68,12 @@ window.addEventListener("DOMContentLoaded", e => {
 
 
 })
-
+let changeAudio = function (volume) {
+    let audios = document.querySelectorAll("audio");
+    audios.forEach(v => {
+        v.volume = volume;
+    })
+}
 let checkPause = function (element) {
     let audio = element.parentElement.querySelector("audio")
     if (element.textContent == "◀︎") {
