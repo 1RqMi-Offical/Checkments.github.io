@@ -1,3 +1,8 @@
+function getExcludedElements(bigArray, keysArray) {
+    const keysSet = new Set(keysArray);
+    return bigArray.filter(element => !keysSet.has(element));
+}
+
 window.addEventListener("DOMContentLoaded", e => {
     let expand = document.querySelector(".sug-sel .expand.sug-list-item");
     let container = document.querySelector(".box");
@@ -8,10 +13,42 @@ window.addEventListener("DOMContentLoaded", e => {
     })
 
 
-
+    let seemore = document.querySelector(".pl-sug-cont .playlist-cont .scroll  .expandvid")
     let urls = ["K5ldLDf_G6Q", "pdYJtRBPlTw", "qVZ1DU_ZE_4", "d3ivPRg8XfI", "htXY770KDdk", "wdG8Y-UI7Ls", "WVbB7PRTvpM"];
+
+    seemore.addEventListener("click", ev => {
+        let videos = document.querySelectorAll(".playlist-cont .column-box .video");
+        let urlsCurrent = [];
+        videos.forEach(el => {
+            urlsCurrent.push(el.getAttribute("ID"));
+
+        })
+
+        let excluded = getExcludedElements(urls, urlsCurrent)
+        addVideos(excluded.splice(0, 4), urls);
+        seemore.classList.add("hide")
+    })
+    seemore.addEventListener("transitionend", x => {
+        if (seemore.classList.contains("hide")) {
+            setTimeout(function () {
+                seemore.classList.remove("hide");
+            }, 2000)
+
+        }
+    })
+
     let urlsR = urlRandomize(urls);
+
     console.log("randomized: " + Math.floor(Math.random() * urls.length))
+
+
+
+    addVideos(urlsR, urls);
+
+
+})
+
+let addVideos = function (urlsR, urls) {
     for (let x = 0; x < urlsR.length; x++) {
         requestData(urlsR[x]).then(data => {
             console.log(data)
@@ -30,7 +67,7 @@ window.addEventListener("DOMContentLoaded", e => {
             videoBack.classList.add("videobc")
             let len = data.videoDetails.thumbnails.length;
             videoBack.setAttribute("src", data.videoDetails.thumbnails[len - 1].url);
-
+            videoEl.setAttribute("ID", urlsR[x])
 
             let videoIcon = document.createElement("div");
             videoIcon.classList.add("icon")
@@ -59,25 +96,22 @@ window.addEventListener("DOMContentLoaded", e => {
 
             cont.appendChild(videoEl);
             console.log("x: " + x + " length: " + urls.length)
-            if ((document.querySelectorAll(".playlist-cont .column-box .video").length == 1)) {
+            console.log("BUILT????????????????????????????????")
+            build(videoEl);
+            console.log("BUILT????????????????????????????????")
+            if ((document.querySelectorAll(".playlist-cont .scroll .column-box .video").length <= 1 && document.querySelector(".playlist-cont").classList.contains("loading"))) {
                 document.querySelector(".playlist-cont").classList.remove("loading")
+                console.log("HELLO therE??????????????")
             }
-            if (document.querySelectorAll(".playlist-cont .column-box .video").length >= urlsR.length) {
-                build();
-                console.log("DONE BUILT!")
+            if (document.querySelectorAll(".playlist-cont .column-box .video").length == urls.length) {
+                document.querySelector(".playlist-cont .column-box .expandvid").classList.add("hidden")
             }
-
-
         })
 
 
     }
+}
 
-
-
-
-
-})
 let urlRandomize = function (urls) {
     let randomizedNum = Math.floor(Math.random() * urls.length) + 1
     let poo = urls.slice(Math.floor(Math.random() * randomizedNum), randomizedNum)
@@ -107,36 +141,33 @@ let getPause = function (element) {
         return false;
     }
 }
-let build = function () {
+let build = function (e) {
 
 
-    let video = document.querySelectorAll(".column-box .video");
-    video.forEach((e, i) => {
-        e.addEventListener("click", ev => {
-            console.log("CLICKED " + i)
-            let yes = e.classList.contains("active");
-            if (yes) {
-                e.classList.remove("contains");
-                checkPause(e.querySelector(".pause"));
-                return
-            }
-            video.forEach(v => {
-                if (v.classList.toString().includes("active")) {
-                    v.classList.remove("active")
-                    let paused = getPause(v.querySelector(".pause"))
+    e.addEventListener("click", ev => {
+        let video = document.querySelectorAll(".column-box .video");
+        let yes = e.classList.contains("active");
+        if (yes) {
+            e.classList.remove("contains");
+            checkPause(e.querySelector(".pause"));
+            return
+        }
 
-                    if (!paused) {
-                        checkPause(v.querySelector(".pause"));
-                    }
+        video.forEach(v => {
+            if (v.classList.toString().includes("active")) {
+                v.classList.remove("active")
+                let paused = getPause(v.querySelector(".pause"))
 
+                if (!paused) {
+                    checkPause(v.querySelector(".pause"));
                 }
-            })
-            checkPause(e.querySelector(".pause"))
-            e.classList.toggle("active")
 
+            }
         })
+        checkPause(e.querySelector(".pause"))
+        e.classList.toggle("active")
+
     })
-    let pause = document.querySelectorAll(".column-box .video .pause");
 
 
 }
