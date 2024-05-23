@@ -74,7 +74,8 @@
     overflow: hidden;
     border-radius: 3px;
     width: 60%;
-    height: 400px;
+    height: auto;
+    max-height: 400px;
     overflow-y: scroll !important;
     transition: 0.5s;
     border: 1px solid rgba(255, 255, 255, 0.048);
@@ -96,7 +97,7 @@
     height: max-content;
     overflow: hidden;
     background-color: var(--back-suggest-color);
-    padding: 20px 0;
+    padding: 30px 0;
 
     transition: 0.5s;
     display: flex;
@@ -257,6 +258,67 @@
     filter: blur(0px);
     opacity: 0.5;
     z-index: 0;
+}
+
+.playlist-cont.loading .music,
+.playlist-cont.loading .column-box {
+    display: none;
+}
+
+.playlist-cont.loading .loadDiv {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.playlist-cont .loadDiv {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.playlist-cont .loadDiv h3 {
+    color: white;
+}
+
+.playlist-cont .loadDiv .pair {
+    height: 40px;
+}
+
+.playlist-cont .loadDiv span {
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 10px;
+    animation: loading 1s linear infinite;
+
+}
+
+.playlist-cont .loadDiv span:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.playlist-cont .loadDiv span:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes loading {
+    0% {
+        margin-bottom: 20px;
+        opacity: 1;
+    }
+
+    100% {
+        margin-bottom: 0px;
+        opacity: 0;
+    }
+
 }
 
 .playlist-cont .column-box .video.active .v-title,

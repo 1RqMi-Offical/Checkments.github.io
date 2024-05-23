@@ -1,14 +1,19 @@
 window.addEventListener("DOMContentLoaded", e => {
+    let expand = document.querySelector(".sug-sel .expand.sug-list-item");
+    let container = document.querySelector(".box");
+    expand.addEventListener("click", ev => {
+
+        container.classList.toggle("full");
+
+    })
 
 
 
-
-
-
-    let urls = ["1P5BSm_oFJg", "1fueZCTYkpA", "BTYAsjAVa3I", "lTRiuFIWV54", "TURbeWK2wwg", "n61ULEU7CO0"];
-
-    for (let x = 0; x < urls.length; x++) {
-        requestData(urls[x]).then(data => {
+    let urls = ["K5ldLDf_G6Q", "pdYJtRBPlTw", "qVZ1DU_ZE_4", "d3ivPRg8XfI", "htXY770KDdk", "wdG8Y-UI7Ls", "WVbB7PRTvpM"];
+    let urlsR = urlRandomize(urls);
+    console.log("randomized: " + Math.floor(Math.random() * urls.length))
+    for (let x = 0; x < urlsR.length; x++) {
+        requestData(urlsR[x]).then(data => {
             console.log(data)
 
             let cont = document.querySelector(".playlist-cont .column-box");
@@ -54,8 +59,10 @@ window.addEventListener("DOMContentLoaded", e => {
 
             cont.appendChild(videoEl);
             console.log("x: " + x + " length: " + urls.length)
-
-            if (document.querySelectorAll(".playlist-cont .column-box .video").length >= urls.length) {
+            if ((document.querySelectorAll(".playlist-cont .column-box .video").length == 1)) {
+                document.querySelector(".playlist-cont").classList.remove("loading")
+            }
+            if (document.querySelectorAll(".playlist-cont .column-box .video").length >= urlsR.length) {
                 build();
                 console.log("DONE BUILT!")
             }
@@ -71,6 +78,12 @@ window.addEventListener("DOMContentLoaded", e => {
 
 
 })
+let urlRandomize = function (urls) {
+    let randomizedNum = Math.floor(Math.random() * urls.length) + 1
+    let poo = urls.slice(Math.floor(Math.random() * randomizedNum), randomizedNum)
+    console.log("RURL = " + poo)
+    return poo;
+}
 let changeAudio = function (volume) {
     let audios = document.querySelectorAll("audio");
     audios.forEach(v => {
@@ -95,8 +108,8 @@ let getPause = function (element) {
     }
 }
 let build = function () {
-    let expand = document.querySelector(".sug-sel .expand.sug-list-item");
-    let container = document.querySelector(".box");
+
+
     let video = document.querySelectorAll(".column-box .video");
     video.forEach((e, i) => {
         e.addEventListener("click", ev => {
@@ -125,11 +138,7 @@ let build = function () {
     })
     let pause = document.querySelectorAll(".column-box .video .pause");
 
-    expand.addEventListener("click", ev => {
 
-        container.classList.toggle("full");
-
-    })
 }
 
 
