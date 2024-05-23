@@ -4,7 +4,6 @@ window.addEventListener("DOMContentLoaded", e => {
 
 
 
-    let nVideo = 5;
 
     let urls = ["1P5BSm_oFJg", "1fueZCTYkpA", "BTYAsjAVa3I", "lTRiuFIWV54", "TURbeWK2wwg", "n61ULEU7CO0"];
 
@@ -54,12 +53,16 @@ window.addEventListener("DOMContentLoaded", e => {
             videoEl.appendChild(videoPause)
 
             cont.appendChild(videoEl);
-            if (x >= urls.length - 1) {
+            console.log("x: " + x + " length: " + urls.length)
+
+            if (document.querySelectorAll(".playlist-cont .column-box .video").length >= urls.length) {
                 build();
-                console.log("YES")
+                console.log("DONE BUILT!")
             }
 
+
         })
+
 
     }
 
@@ -84,12 +87,20 @@ let checkPause = function (element) {
         audio.pause();
     }
 }
+let getPause = function (element) {
+    if (element.textContent == "◀︎") {
+        return true;
+    } else {
+        return false;
+    }
+}
 let build = function () {
     let expand = document.querySelector(".sug-sel .expand.sug-list-item");
     let container = document.querySelector(".box");
     let video = document.querySelectorAll(".column-box .video");
-    video.forEach(e => {
+    video.forEach((e, i) => {
         e.addEventListener("click", ev => {
+            console.log("CLICKED " + i)
             let yes = e.classList.contains("active");
             if (yes) {
                 e.classList.remove("contains");
@@ -99,8 +110,11 @@ let build = function () {
             video.forEach(v => {
                 if (v.classList.toString().includes("active")) {
                     v.classList.remove("active")
+                    let paused = getPause(v.querySelector(".pause"))
 
-                    checkPause(v.querySelector(".pause"));
+                    if (!paused) {
+                        checkPause(v.querySelector(".pause"));
+                    }
 
                 }
             })
