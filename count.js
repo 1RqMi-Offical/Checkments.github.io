@@ -143,7 +143,205 @@ let popup = function (text, state, buttoned, subtitle) {
     document.body.appendChild(overlay)
     document.body.style.overflow = "hidden"
 }
+let clockBuild = function () {
+    let stopwatch = document.querySelector(".clock-section .container .navigator ul li.stopwatch")
+    let stage = document.querySelector(".clock-section .container")
+    stopwatch.addEventListener("click", v => {
+        stage.classList.toggle("stopwatch")
+
+    })
+    let clockLinks = document.querySelectorAll(".clock-section .container .navigator .group ul li")
+    clockLinks.forEach(cLink => {
+        cLink.addEventListener("click", e => {
+            cLink.classList.toggle("active")
+
+
+        })
+    })
+    let pausingbtn = document.querySelector(".clock-section .container .stopwatch-section .pausing")
+    let textBtn = document.querySelector(".clock-section .container .stopwatch-section .played");
+    let resetBtn = document.querySelector(".clock-section .container .stopwatch-section .reset");
+
+
+    textBtn.textContent = "The stop watch was saved for: " + getElapsedTime();
+
+    resetBtn.addEventListener("click", e => {
+        resetStopwatch()
+        if (!pausingbtn.textContent == "◀︎") {
+            pauseStopwatch();
+            textBtn.classList.remove("active")
+            pausingbtn.textContent = "◀︎"
+            textBtn.textContent = "The stopwatch has been reseted."
+        } else {
+            textBtn.textContent = "The stopwatch has been reseted."
+        }
+    })
+
+    pausingbtn.addEventListener("click", v => {
+        let intervalPause;
+        if (pausingbtn.textContent == "◀︎") {
+            pausingbtn.textContent = "❙❙"
+            textBtn.classList.add("active")
+            startStopwatch();
+        } else {
+            pauseStopwatch();
+            textBtn.classList.remove("active")
+            pausingbtn.textContent = "◀︎"
+        }
+    })
+
+}
+
+// Get elements
+
+
+let timer; // To hold the interval
+let startTime; // To track when the stopwatch started
+let elapsedTime = 0; // To track elapsed time
+
+// Function to display time in format hh:mm:ss
+function displayTime(time) {
+    let display = document.querySelector(".container .stopwatch-section .played")
+    const hours = Math.floor(time / 3600);
+    const minutes = Math.floor((time % 3600) / 60);
+    const seconds = Math.floor(time % 60);
+    display.textContent =
+        `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+
+function saveElapsedTime() {
+    localStorage.setItem('elapsedTime', elapsedTime);
+}
+
+// Function to get elapsed time from localStorage
+function getElapsedTime() {
+    return localStorage.getItem('elapsedTime') ? parseInt(localStorage.getItem('elapsedTime')) : 0;
+}
+// Function to start the stopwatch
+function startStopwatch() {
+    startTime = Date.now() - getElapsedTime() * 1000; // Adjust start time
+    timer = setInterval(() => {
+        const currentTime = Date.now();
+        elapsedTime = (currentTime - startTime) / 1000;
+        displayTime(elapsedTime);
+    }, 1000);
+}
+// Function to pause the stopwatch
+function pauseStopwatch() {
+    clearInterval(timer);
+    saveElapsedTime();
+}
+
+// Function to reset the stopwatch
+function resetStopwatch() {
+    clearInterval(timer);
+    elapsedTime = 0;
+    displayTime(elapsedTime);
+    localStorage.removeItem('elapsedTime');
+}
+
+// Event listeners
+
 document.addEventListener('DOMContentLoaded', function () {
+    let clock = document.querySelector(".clock .clocknow")
+    function updateClock(clock) {
+        console.log("Done edited")
+
+        let now = new Date(); // Create a new Date object
+        let hoursx = now.getHours(); // Get the current hours
+        let minutes = now.getMinutes(); // Get the current minutes
+        let secondsx = now.getSeconds();
+        // Format hours and minutes to always be two digits
+        hoursx = hoursx % 12;
+        hoursx = hoursx ? hoursx : 12;
+        hoursx = hoursx < 10 ? '0' + hoursx : hoursx;
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        secondsx = secondsx < 10 ? '0' + secondsx : secondsx;
+
+        // Set the clock element's text content
+        if (clock.classList.contains("second")) {
+            clock.textContent = `${minutes}:${secondsx}`;
+        } else {
+            clock.textContent = `${hoursx}:${minutes}`;
+        }
+
+    }
+
+    // Update the clock immediately
+    updateClock(clock);
+
+    // Update the clock every minute
+
+    clock.addEventListener("mousemove", v => {
+        updateClock(clock);
+    })
+    clock.addEventListener("click", e => {
+        let allEl = document.querySelectorAll('body > *')
+        allEl.forEach(element => {
+            if (!element.classList.contains("clock-section")) {
+                element.style.display = "none"
+            } else {
+                element.classList.add("clicked")
+            }
+
+
+        })
+
+
+        fetch('clock.html')
+            .then(response => response.text())
+            .then(data => {
+                // Insert the fetched content into the placeholder
+                document.querySelector('.clock-section').innerHTML = data;
+                let hrEl = document.querySelector(".clock-section .clocks .hour");
+                let seEl = document.querySelector(".clock-section .clocks .second");
+                updateClock(hrEl)
+                updateClock(document.querySelector(".clock-section .clocks .second"))
+                let hourUpdater = setInterval(function () { updateClock(hrEl) }, 60000);
+                let secondUpdater = setInterval(function () { updateClock(seEl) }, 1000);
+                let allEl = document.querySelectorAll('body > *')
+                clockBuild();
+                document.querySelector(".clock-section .navigator .backtohome").addEventListener("click", e => {
+                    allEl.forEach(element => {
+                        if (!element.classList.contains("clock-section")) {
+                            element.style.removeProperty("display");
+                        } else {
+                            element.classList.remove("clicked")
+                            element.innerHTML = "";
+                            clearInterval(hourUpdater);
+                            clearInterval(secondUpdater);
+                        }
+
+
+                    })
+                })
+            })
+            .catch(error => console.error('Error loading content:', error));
+
+    })
+    setInterval(function () { updateClock(clock) }, 60000);
+    let element = document.querySelectorAll(".dropdown .drop");
+    let texts = ["one", "two", "three", "four", "five"]
+    for (let x = 0; x < element.length; x++) {
+        console.log("X = " + x)
+        let cloneEl = element[x].cloneNode(true);
+
+        cloneEl.style.height = "max-content";
+        cloneEl.style.display = "flex";
+        cloneEl.style.padding = "10px";
+        element[x].parentElement.appendChild(cloneEl);
+
+        let computedHeight = cloneEl.getBoundingClientRect().height;
+        console.log("importancy: " + computedHeight)
+        element[x].classList.add("zero")
+
+        document.documentElement.style.setProperty(`--height-${texts[x]}`, `${computedHeight + "px"}`);
+        element[x].setAttribute("height", `${computedHeight + "px"}`)
+
+        element[x].parentElement.removeChild(cloneEl)
+
+    }
 
     let typeArrange = document.querySelector(".selector.type")
     let pc = typeArrange.querySelector(".placeholder");
@@ -209,17 +407,7 @@ let changes = function (e) {
     }
 
 }
-let element = document.querySelectorAll(".dropdown .drop");
-let texts = ["one", "two", "three"]
-for (let x = 0; x < element.length; x++) {
-    let computedHeight = window.getComputedStyle(element[x]).height;
 
-    setTimeout(function () { element[x].classList.add("zero") }, 100)
-
-    document.documentElement.style.setProperty(`--height-${texts[x]}`, `${computedHeight}`);
-    element[x].setAttribute("height", `${computedHeight}`)
-
-}
 
 
 let resSavings = document.querySelector(".dropdown .drop .res-savings");

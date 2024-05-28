@@ -2,7 +2,13 @@ function getExcludedElements(bigArray, keysArray) {
     const keysSet = new Set(keysArray);
     return bigArray.filter(element => !keysSet.has(element));
 }
+function arrayContainsArray(array1, array2) {
+    console.log(array1)
+    console.log(array2)
+    return array2.every(element => array1.includes(element));
 
+}
+let currAdded = [];
 window.addEventListener("DOMContentLoaded", e => {
     let expand = document.querySelector(".sug-sel .expand.sug-list-item");
     let container = document.querySelector(".box");
@@ -14,8 +20,7 @@ window.addEventListener("DOMContentLoaded", e => {
 
 
     let seemore = document.querySelector(".pl-sug-cont .playlist-cont .scroll  .expandvid")
-    let urls = ["K5ldLDf_G6Q", "pdYJtRBPlTw", "qVZ1DU_ZE_4", "d3ivPRg8XfI", "htXY770KDdk", "wdG8Y-UI7Ls", "WVbB7PRTvpM"];
-
+    let urls = ["K5ldLDf_G6Q", "pdYJtRBPlTw", "qVZ1DU_ZE_4", "aVP4fbI0UzY", "bPG7tV8doxA", "Rkd2atLhJkA", "9ZsxyrhpBw0", "sBaW1bDwVvU", "d3ivPRg8XfI", "htXY770KDdk", "wdG8Y-UI7Ls", "WVbB7PRTvpM"];
     seemore.addEventListener("click", ev => {
         let videos = document.querySelectorAll(".playlist-cont .column-box .video");
         let urlsCurrent = [];
@@ -25,14 +30,25 @@ window.addEventListener("DOMContentLoaded", e => {
         })
 
         let excluded = getExcludedElements(urls, urlsCurrent)
-        addVideos(excluded.splice(0, 4), urls);
+        let excludedv2 = excluded.splice(0, 4)
+        currAdded = excludedv2;
+        addVideos(excludedv2, urls);
         seemore.classList.add("hide")
+
     })
     seemore.addEventListener("transitionend", x => {
         if (seemore.classList.contains("hide")) {
-            setTimeout(function () {
-                seemore.classList.remove("hide");
-            }, 2000)
+            let showUntilend = setInterval(function () {
+                let arr = [];
+                document.querySelectorAll(".playlist-cont .column-box .video").forEach(e => {
+                    arr.push(e.getAttribute("ID"))
+                });
+
+                if (arrayContainsArray(arr, currAdded)) {
+                    seemore.classList.remove("hide");
+                    clearInterval(showUntilend)
+                }
+            }, 1000)
 
         }
     })
@@ -79,7 +95,7 @@ let addVideos = function (urlsR, urls) {
 
             let audio = document.createElement("audio");
             audio.setAttribute("controls", true);
-            audio.innerHTML = `<source src="${"https://tabby-quilled-bronze.glitch.me/?key=" + urls[x]}" type="audio/mpeg">`
+            audio.innerHTML = `<source src="${"https://tabby-quilled-bronze.glitch.me/?key=" + urlsR[x]}" type="audio/mpeg">`
             audio.classList.add("vaudio")
             videoEl.appendChild(audio);
             audio.volume = localStorage.getItem("sound");
@@ -96,9 +112,8 @@ let addVideos = function (urlsR, urls) {
 
             cont.appendChild(videoEl);
             console.log("x: " + x + " length: " + urls.length)
-            console.log("BUILT????????????????????????????????")
             build(videoEl);
-            console.log("BUILT????????????????????????????????")
+
             if ((document.querySelectorAll(".playlist-cont .scroll .column-box .video").length <= 1 && document.querySelector(".playlist-cont").classList.contains("loading"))) {
                 document.querySelector(".playlist-cont").classList.remove("loading")
                 console.log("HELLO therE??????????????")
@@ -113,7 +128,7 @@ let addVideos = function (urlsR, urls) {
 }
 
 let urlRandomize = function (urls) {
-    let randomizedNum = Math.floor(Math.random() * urls.length) + 1
+    let randomizedNum = Math.floor(Math.random() * urls.length);
     let poo = urls.slice(Math.floor(Math.random() * randomizedNum), randomizedNum)
     console.log("RURL = " + poo)
     return poo;
@@ -125,12 +140,29 @@ let changeAudio = function (volume) {
     })
 }
 let checkPause = function (element) {
+    let wave;
+    let video = element.parentElement;
+    if (!video.querySelector(".wave")) {
+        wave = document.createElement("div")
+        wave.classList.add("wave");
+        for (let x = 0; x < 25; x++) {
+            let waveSpan = document.createElement("span");
+            wave.appendChild(waveSpan);
+        }
+        video.appendChild(wave);
+        console.log(element)
+        console.log("Done")
+    } else {
+        wave = video.querySelector(".wave")
+    }
     let audio = element.parentElement.querySelector("audio")
     if (element.textContent == "◀︎") {
         element.textContent = "❙❙"
+        wave.classList.remove("psd")
         audio.play();
     } else {
         element.textContent = "◀︎"
+        wave.classList.add("psd")
         audio.pause();
     }
 }
@@ -150,6 +182,7 @@ let build = function (e) {
         if (yes) {
             e.classList.remove("contains");
             checkPause(e.querySelector(".pause"));
+
             return
         }
 
@@ -157,6 +190,10 @@ let build = function (e) {
             if (v.classList.toString().includes("active")) {
                 v.classList.remove("active")
                 let paused = getPause(v.querySelector(".pause"))
+                if (v != e) {
+                    if (v.querySelector(".wave"))
+                        v.removeChild(v.querySelector(".wave"));
+                }
 
                 if (!paused) {
                     checkPause(v.querySelector(".pause"));
@@ -166,6 +203,7 @@ let build = function (e) {
         })
         checkPause(e.querySelector(".pause"))
         e.classList.toggle("active")
+
 
     })
 

@@ -6,7 +6,7 @@
 
     border-radius: 5px;
     margin: 105px auto;
-    display: flex !important;
+    display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
     transition: 1s;
