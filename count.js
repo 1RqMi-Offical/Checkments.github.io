@@ -144,8 +144,17 @@ let popup = function (text, state, buttoned, subtitle) {
     document.body.style.overflow = "hidden"
 }
 let clockBuild = function () {
+
+
     let stopwatch = document.querySelector(".clock-section .container .navigator ul li.stopwatch")
     let stage = document.querySelector(".clock-section .container")
+    let animations = document.querySelector(".clock-section .container .navigator ul li.animations")
+    animations.addEventListener("click", e => {
+        stage.classList.toggle("animation-sec")
+    })
+    stage.querySelector(".clock-section .container .navigator .close").addEventListener("click", v => {
+        stage.classList.toggle("nav-colapse")
+    })
     stopwatch.addEventListener("click", v => {
         stage.classList.toggle("stopwatch")
 
@@ -244,6 +253,7 @@ function resetStopwatch() {
 // Event listeners
 
 document.addEventListener('DOMContentLoaded', function () {
+    let clockbutton = document.querySelector(".clock")
     let clock = document.querySelector(".clock .clocknow")
     function updateClock(clock) {
         console.log("Done edited")
@@ -262,6 +272,9 @@ document.addEventListener('DOMContentLoaded', function () {
         // Set the clock element's text content
         if (clock.classList.contains("second")) {
             clock.textContent = `${minutes}:${secondsx}`;
+        } else if (clock.querySelector(".s-hr")) {
+            clock.querySelector(".s-hr").textContent = `${hoursx}`;
+            clock.querySelector(".s-m").textContent = `${minutes}`;
         } else {
             clock.textContent = `${hoursx}:${minutes}`;
         }
@@ -273,10 +286,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Update the clock every minute
 
-    clock.addEventListener("mousemove", v => {
+    clockbutton.addEventListener("mousemove", v => {
         updateClock(clock);
     })
-    clock.addEventListener("click", e => {
+
+    clockbutton.addEventListener("click", e => {
         let allEl = document.querySelectorAll('body > *')
         allEl.forEach(element => {
             if (!element.classList.contains("clock-section")) {
