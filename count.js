@@ -143,12 +143,48 @@ let popup = function (text, state, buttoned, subtitle) {
     document.body.appendChild(overlay)
     document.body.style.overflow = "hidden"
 }
+function enterFullscreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) { // Firefox
+        element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) { // Chrome, Safari and Opera
+        element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) { // IE/Edge
+        element.msRequestFullscreen();
+    }
+}
+
+// Function to exit full screen
+function exitFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) { // Firefox
+        document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { // IE/Edge
+        document.msExitFullscreen();
+    }
+}
 let clockBuild = function () {
 
 
+    let c_section = document.querySelector(".clock-section")
     let stopwatch = document.querySelector(".clock-section .container .navigator ul li.stopwatch")
     let stage = document.querySelector(".clock-section .container")
     let animations = document.querySelector(".clock-section .container .navigator ul li.animations")
+    let clockFScreen = document.querySelector(".clock-section .fullscreen");
+    clockFScreen.addEventListener("click", e => {
+        clockFScreen.classList.toggle("active")
+        clockFScreen.toggleAttribute("active")
+
+        if (clockFScreen.hasAttribute("active")) {
+            enterFullscreen(c_section)
+        } else {
+            exitFullscreen();
+        }
+    })
     animations.addEventListener("click", e => {
         stage.classList.toggle("animation-sec")
     })
